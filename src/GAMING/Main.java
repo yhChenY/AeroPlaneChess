@@ -28,12 +28,14 @@ public class Main {
     nowRank++;
   }
   
+  static {
+    MapSystem.loadBlocks();
+  }
   public static void main(String[] args) {
     players[0] = new Player(Color.RED);
     players[1] = new Player(Color.YELLOW);
     players[2] = new Player(Color.BLUE);
     players[3] = new Player(Color.GREEN);
-    
     System.setProperty("sun.java2d.win.uiScaleX", "96dpi");
     System.setProperty("sun.java2d.win.uiScaleY", "96dpi");
     MainMenu mainMenu = new MainMenu();
@@ -67,6 +69,21 @@ public class Main {
           while (!hasGotOpe) {
             //等待
             hasGotOpe = false;
+            //更新chosenStep
+            switch (ope) {
+              case '+':
+                chosenStep=sum;
+                break;
+              case '-':
+                chosenStep=sub;
+                break;
+              case '*':
+                chosenStep=product;
+                break;
+              case '/':
+                chosenStep=quotient;
+                break;
+            }
           }
           
           while (!hasGotPlane) {
@@ -74,20 +91,8 @@ public class Main {
             hasGotPlane = false;
           }
           //获取plane 鼠标点击
-          switch (ope) {
-            case '+':
-              chosenStep=sum;
-              break;
-            case '-':
-              chosenStep=sub;
-              break;
-            case '*':
-              chosenStep=product;
-              break;
-            case '/':
-              chosenStep=quotient;
-              break;
-          }
+          
+          
         }
         //whether the game has finished
       } while (nowRank != 4);

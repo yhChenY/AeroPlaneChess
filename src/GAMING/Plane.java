@@ -22,6 +22,8 @@ public class Plane {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
+        System.out.println("clicked");
+        setPosition(MapSystem.getBlocks().get(0));
         run(Main.getChosenStep());
       }
     });
