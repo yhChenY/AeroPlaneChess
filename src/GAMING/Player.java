@@ -77,4 +77,8 @@ public class Player {
   public boolean isHuman() {
     return isHuman;
   }
+
+  public Plane[] getPlanes() {
+    return planes;
+  }
 }

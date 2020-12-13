@@ -1,15 +1,20 @@
 package gui;
 
 import GAMING.Main;
+import GAMING.Plane;
 import GAMING.Player;
 import chatroom.ChatRoom;
 import chatroom.User;
 import gui.playerbase.BasePanel;
 import gui.playerbase.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,7 +35,7 @@ public class Game extends JFrame {
   private BasePanel yellowBase = new BasePanel(Color.YELLOW);
   private BasePanel redBase = new BasePanel(Color.RED);
   private BasePanel blueBase = new BasePanel(Color.BLUE);
-  private JButton surrenderButton = new JButton("Surrender");
+  private JButton surrenderButton;
   private JButton saveGameButton = new JButton("Save game");
   private JButton rollDiceButton = new JButton("Roll dice");
   private JButton toggleCheatingModeButton = new JButton("Cheating Mode");
@@ -60,11 +65,14 @@ public class Game extends JFrame {
     createComponent(ifOnline);
 
     if (ifOnline) {
+      surrenderButton = new JButton("Surrender");
       try {
         addChatPanel(user);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
+    } else {
+      surrenderButton = new JButton("Restart");
     }
   }
 
@@ -113,7 +121,11 @@ public class Game extends JFrame {
         super.mouseClicked(e);
         dispose();
         //resetServer();
-        new MainMenu();
+        if (ifOnline) {
+          new MainMenu();
+        } else {
+          new Game(ifOnline, new User());
+        }
       }
     });
 
@@ -196,6 +208,29 @@ public class Game extends JFrame {
   }
 
   public void flushGameFrame() {
+    Map<Player, Plane[]> planes = new HashMap<>(0);
+    for (Player p : players) {
+      ArrayList<Plane> planeArrayList = new ArrayList<>(0);
+      for (Plane plane : p.getPlanes()) {
+        planeArrayList.add(plane);
+      }
+      planes.put(p, planeArrayList.toArray(new Plane[0]));
+    }
+    clearDragLayer();
+    for (Player p : players) {
+      for (Plane plane : planes.get(p)) {
+        JButton planeButton = plane.getButton();
+        planeButton.setBounds(plane.getPosition().getX(), plane.getPosition().getY(),
+            planeButton.getWidth(), planeButton.getHeight());
+        layeredPane.add(planeButton, JLayeredPane.DRAG_LAYER);
+      }
+    }
+  }
 
+  private void clearDragLayer() {
+    Component[] components = layeredPane.getComponentsInLayer(JLayeredPane.DRAG_LAYER);
+    for(Component c: components) {
+      layeredPane.remove(c);
+    }
   }
 }
