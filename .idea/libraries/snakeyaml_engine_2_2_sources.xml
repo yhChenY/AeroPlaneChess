@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="snakeyaml-engine-2.2-sources">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/snakeyaml-engine-2.2.jar!/" />
+      <root url="file://$PROJECT_DIR$" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/snakeyaml-engine-2.2-sources.jar!/" />
+      <root url="file://$PROJECT_DIR$/src" />
+    </SOURCES>
+  </library>
+</component>
