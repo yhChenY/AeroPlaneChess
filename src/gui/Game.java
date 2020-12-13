@@ -1,14 +1,22 @@
 package gui;
 
+import GAMING.Main;
 import chatroom.ChatRoom;
 import chatroom.User;
 import gui.playerbase.BasePanel;
 import gui.playerbase.Color;
-import GAMING.*;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * Game frame.
@@ -24,11 +32,14 @@ public class Game extends JFrame {
   private JButton surrenderButton = new JButton("Surrender");
   private JButton saveGameButton = new JButton("Save game");
   private JButton rollDiceButton = new JButton("Roll dice");
+  private JButton toggleCheatingModeButton = new JButton("Cheating Mode");
+  private boolean cheatingMode = false;
 
   /**
    * Start a new game.
+   *
    * @param ifOnline Indicates if the game is in online mode.
-   * @param user Indicates the player.
+   * @param user     Indicates the player.
    */
   public Game(boolean ifOnline, User user) {
     Main.setIsOnLineGame(ifOnline);
@@ -57,8 +68,9 @@ public class Game extends JFrame {
 
   /**
    * Make a JLabel display an image.
+   *
    * @param label The JLabel that is going to display an image.
-   * @param url Location of the image.
+   * @param url   Location of the image.
    */
   public static void setImage(JLabel label, String url) {
     ImageIcon image = new ImageIcon(url);
@@ -67,6 +79,7 @@ public class Game extends JFrame {
 
   /**
    * Create components of a game frame.
+   *
    * @param ifOnline Indicates if the game is in online mode.
    */
   public void createComponent(boolean ifOnline) {
@@ -75,7 +88,7 @@ public class Game extends JFrame {
     ImageIcon laneImage = new ImageIcon(laneImageUrl);
     lane.setIcon(laneImage);
 
-    if(ifOnline) {
+    if (ifOnline) {
       lane.setBounds(430, 15, 780, 750);
       greenBase.setBounds(430, 15, 175, 165);
       blueBase.setBounds(430, 593, 175, 165);
@@ -121,7 +134,19 @@ public class Game extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        new RollDiceDialog(Main.getRoll1(),Main.getRoll2(),Main.isAbleToProduct(),Main.isAbleToQuotient());
+        new RollDiceDialog(Main.getRoll1(), Main.getRoll2(), Main.isAbleToProduct(),
+            Main.isAbleToQuotient(), cheatingMode);
+      }
+    });
+
+    toggleCheatingModeButton.setBounds(1250, 440, 150, 50);
+    toggleCheatingModeButton.setFont(font);
+    toggleCheatingModeButton.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        super.mouseClicked(e);
+        cheatingMode = !cheatingMode;
+        toggleCheatingModeButton.setText(cheatingMode ? "Normal Mode" : "Cheating Mode");
       }
     });
 
@@ -130,6 +155,7 @@ public class Game extends JFrame {
     layeredPane.add(greenBase, JLayeredPane.MODAL_LAYER);
     layeredPane.add(redBase, JLayeredPane.MODAL_LAYER);
     layeredPane.add(yellowBase, JLayeredPane.MODAL_LAYER);
+    layeredPane.add(toggleCheatingModeButton, JLayeredPane.MODAL_LAYER);
     layeredPane.add(rollDiceButton, JLayeredPane.MODAL_LAYER);
     layeredPane.add(surrenderButton, JLayeredPane.MODAL_LAYER);
     layeredPane.add(saveGameButton, JLayeredPane.MODAL_LAYER);
@@ -138,8 +164,9 @@ public class Game extends JFrame {
 
   /**
    * Change the status of an apron.
-   * @param apron The apron whose status is changing.
-   * @param color The color of the apron. (Apron class does not include color attribute)
+   *
+   * @param apron      The apron whose status is changing.
+   * @param color      The color of the apron. (Apron class does not include color attribute)
    * @param isOccupied Whether the apron will be occupied. Indicates the next status.
    */
   public void toggleApron(JLabel apron, Color color, boolean isOccupied) {
@@ -152,6 +179,7 @@ public class Game extends JFrame {
 
   /**
    * Add a chat panel to the game frame. DO NOT call it outside the Game class.
+   *
    * @param user The player.
    * @throws InterruptedException Thread related problems. Don't know how to handle.
    */
