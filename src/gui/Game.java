@@ -31,6 +31,7 @@ public class Game extends JFrame {
    * @param user Indicates the player.
    */
   public Game(boolean ifOnline, User user) {
+    Main.setIsOnLineGame(ifOnline);
     try {
       UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
     } catch (IllegalAccessException | UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException e) {
