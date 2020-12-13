@@ -69,4 +69,12 @@ public class Player {
   public void addScore(int add) {
     score += add;
   }
+  
+  public void setHuman(){
+    isHuman=true;
+  }
+  
+  public boolean isHuman() {
+    return isHuman;
+  }
 }

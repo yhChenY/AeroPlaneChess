@@ -12,14 +12,18 @@ public class Main {
   static int quotient;
   static int sub;
   static int product;
-  static boolean able;
+  static boolean ableToProduct;
+  static boolean ableToQuotient;
+  static boolean isOnLineGame=false;
   static Player[] players = new Player[4];
   public static void main(String[] args) {
-    
     players[0] = new Player(Color.RED);
     players[1] = new Player(Color.GREEN);
     players[2] = new Player(Color.YELLOW);
     players[3] = new Player(Color.BLUE);
+    if(!isOnLineGame){
+      players[0].setHuman();
+    }
     System.setProperty("sun.java2d.win.uiScaleX", "96dpi");
     System.setProperty("sun.java2d.win.uiScaleY", "96dpi");
     MainMenu mainMenu = new MainMenu();
@@ -35,10 +39,10 @@ public class Main {
         small = Math.min(roll1, roll2);
         sum = roll1 + roll2;
         product = roll1 * roll2;
-        product=product>12?product:0;
+        ableToProduct=product>12;
         sub = big - small;
-        able = big % small == 0;
-        quotient = able ? big / small : 0;
+        ableToQuotient = big % small == 0;
+        quotient = ableToQuotient ? big / small : 0;
         if ((roll1 == 6 || roll2 == 6) && p.getToBeSetOff() > 0) {
           // 是否选择上飞机？
           if(p.getToBeSetOff()>0)
@@ -48,6 +52,7 @@ public class Main {
           //如果选择否
         }
         char ope = '+';
+        
         //获取操作
         //此处考虑操作的不可行性
         Plane plane = null;
@@ -108,8 +113,12 @@ public class Main {
     return product;
   }
   
-  public static boolean isAble() {
-    return able;
+  public static boolean isAbleToProduct() {
+    return ableToProduct;
+  }
+  
+  public static boolean isAbleToQuotient() {
+    return ableToQuotient;
   }
   
   public static Player[] getPlayers() {

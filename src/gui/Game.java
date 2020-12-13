@@ -120,7 +120,7 @@ public class Game extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        new RollDiceDialog(Main.getRoll1(),Main.getRoll2());
+        new RollDiceDialog(Main.getRoll1(),Main.getRoll2(),Main.isAbleToProduct(),Main.isAbleToQuotient());
       }
     });
 

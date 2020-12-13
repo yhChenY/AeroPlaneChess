@@ -22,7 +22,9 @@ public class RollDiceDialog extends JDialog {
   GridBagConstraints constraints = new GridBagConstraints();
   Font font = new Font("Arial", Font.PLAIN, 16);
 
-  public RollDiceDialog(int r1,int r2) {
+  public RollDiceDialog(int r1,int r2,boolean ableToProduct,boolean ableToQuotient) {
+    //如果ableToProduct true那么 * 可以点击
+    //  /
     setLayout(layout);
 
     randomNumbers.setFont(font);
