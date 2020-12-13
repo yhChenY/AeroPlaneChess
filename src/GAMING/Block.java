@@ -10,16 +10,22 @@ public class Block {
   private Block afterCornerBlock;
   private Block nextFlyBlock;
   private int distance=0;
-  
+  private int id;
+  private int nextId;
+  private int preId;
   public enum Type {
     COMMON(),
     CORNER(),
     FLY(),
-    SPRINT();
+    FINAL(),
+    SPRINT(),
+    WAIT();
     public static Type getType(String s){
       if(s.equals("COMMON"))return COMMON;
       if(s.equals("CONNER"))return CORNER;
       if(s.equals("FLY"))return FLY;
+      if(s.equals("FINAL"))return FINAL;
+      if(s.equals("WAIT"))return WAIT;
       return SPRINT;
     }
   }
@@ -33,11 +39,14 @@ public class Block {
     this.type = type;
   }
   
-  public Block(Color c, Type type,int x,int y) {
+  public Block(Color c, Type type,int x,int y,int id,int nextId,int preId) {
     this.color = c;
     this.type = type;
     this.x=x;
     this.y=y;
+    this.id=id;
+    this.nextId=nextId;
+    this.preId=preId;
   }
   public Block getPreBlock() {
     return preBlock;
@@ -127,6 +136,9 @@ public class Block {
         " blockType: " + type + " \n" +
         " blockColor: " + color + " \n" +
         " x: " + x + " \n" +
-        " y: " + y + " ";
+        " y: " + y + " \n" +
+        " id: " + id + " \n" +
+        " nextId: " + nextId + " \n" +
+        " preId: " + preId + " ";
   }
 }

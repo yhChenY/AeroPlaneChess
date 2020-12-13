@@ -30,9 +30,9 @@ public class Main {
   
   public static void main(String[] args) {
     players[0] = new Player(Color.RED);
-    players[1] = new Player(Color.GREEN);
-    players[2] = new Player(Color.YELLOW);
-    players[3] = new Player(Color.BLUE);
+    players[1] = new Player(Color.YELLOW);
+    players[2] = new Player(Color.BLUE);
+    players[3] = new Player(Color.GREEN);
     
     System.setProperty("sun.java2d.win.uiScaleX", "96dpi");
     System.setProperty("sun.java2d.win.uiScaleY", "96dpi");

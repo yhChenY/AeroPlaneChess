@@ -24,7 +24,10 @@ public class MapSystem {
         Block.Type type = Block.Type.getType(l.get("blockType").toString());
         int x = Integer.parseInt(l.get("x").toString());
         int y = Integer.parseInt(l.get("y").toString());
-        Block b=new Block(color,type,x,y);
+        int id = Integer.parseInt(l.get("id").toString());
+        int nid = Integer.parseInt(l.get("nextId").toString());
+        int pid = Integer.parseInt(l.get("preId").toString());
+        Block b=new Block(color,type,x,y,id,nid,pid);
         blocks.add(b);
       }
       file.close();
@@ -41,7 +44,6 @@ public class MapSystem {
       FileWriter fw = new FileWriter(file);
       for (Block b:blocks) {
         fw.write(b.toString());
-        System.out.println(b.toString());
       }
       fw.close();
     } catch (Exception ignored) {
