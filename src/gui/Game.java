@@ -1,6 +1,7 @@
 package gui;
 
 import GAMING.Main;
+import GAMING.Player;
 import chatroom.ChatRoom;
 import chatroom.User;
 import gui.playerbase.BasePanel;
@@ -34,6 +35,7 @@ public class Game extends JFrame {
   private JButton rollDiceButton = new JButton("Roll dice");
   private JButton toggleCheatingModeButton = new JButton("Cheating Mode");
   private boolean cheatingMode = false;
+  private Player[] players = Main.getPlayers();
 
   /**
    * Start a new game.
@@ -191,5 +193,9 @@ public class Game extends JFrame {
     chatRoomPanel.setOpaque(true);
     chatRoomPanel.setVisible(true);
     layeredPane.add(chatRoomPanel, JLayeredPane.MODAL_LAYER);
+  }
+
+  public void flushGameFrame() {
+
   }
 }
