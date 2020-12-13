@@ -59,10 +59,12 @@ public class Main {
           //获取操作//此处考虑操作的不可行性
           while (!hasGotOpe) {
             //等待
+            hasGotOpe=false;
           }
       
           while (!hasGotPlane) {
             //等待
+            hasGotPlane=false;
           }
           //获取plane 鼠标点击
           switch (ope) {
@@ -88,6 +90,10 @@ public class Main {
       //关闭当前游戏界面
       //重启新的游戏界面
     }
+  }
+  
+  private void flyOneTime(Player player,int time){
+  
   }
   
   public static int getRoll1() {

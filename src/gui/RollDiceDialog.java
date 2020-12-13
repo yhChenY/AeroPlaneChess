@@ -1,5 +1,7 @@
 package gui;
 
+import GAMING.Main;
+
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -32,8 +34,8 @@ public class RollDiceDialog extends JDialog {
     
     setLayout(layout);
     
-    randomNumbers.setFont(font);
-    randomNumbers.addMouseListener(new MouseAdapter() {
+    divideButton.setFont(font);
+    divideButton.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
@@ -45,6 +47,8 @@ public class RollDiceDialog extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
+        Main.setOpe('+');
+        Main.setHasGotOpe(true);
         dispose();
       }
     });
@@ -53,6 +57,8 @@ public class RollDiceDialog extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
+        Main.setOpe('-');
+        Main.setHasGotOpe(true);
         dispose();
       }
     });
@@ -61,6 +67,8 @@ public class RollDiceDialog extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
+        Main.setOpe('*');
+        Main.setHasGotOpe(true);
         dispose();
       }
     });
