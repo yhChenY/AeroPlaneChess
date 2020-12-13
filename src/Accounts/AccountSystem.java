@@ -60,7 +60,7 @@ public class AccountSystem {
     LoadSettings loadSettings = LoadSettings.builder().build();
     Load load = new Load(loadSettings);
     try {
-      FileReader file = new FileReader("C:\\Users\\HCOOH\\Desktop\\Accounts.yaml");
+      FileReader file = new FileReader("resources/Accounts.yaml");
       List<LinkedHashMap> hashMaps = (List<LinkedHashMap>) load.loadFromReader(file);
       for (LinkedHashMap l : hashMaps) {
         addAccount(new Account(Integer.parseInt(l.get("uid").toString()),
@@ -88,7 +88,7 @@ public class AccountSystem {
   
   public static void saveAccounts() {
     try {
-      File file = new File("Accounts.yaml");
+      File file = new File("resources/Accounts.yaml");
       if (!file.exists()) {
         file.createNewFile();
       }
