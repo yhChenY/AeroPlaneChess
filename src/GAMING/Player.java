@@ -1,6 +1,6 @@
 package GAMING;
 
-import sun.java2d.pipe.AAShapePipe;
+//import sun.java2d.pipe.AAShapePipe;
 
 public class Player {
   Color color;
