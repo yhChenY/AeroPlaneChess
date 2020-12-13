@@ -62,8 +62,6 @@ public class Game extends JFrame {
     this.setVisible(true);
     this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-    createComponent(ifOnline);
-
     if (ifOnline) {
       surrenderButton = new JButton("Surrender");
       try {
@@ -74,6 +72,8 @@ public class Game extends JFrame {
     } else {
       surrenderButton = new JButton("Restart");
     }
+
+    createComponent(ifOnline);
   }
 
   /**

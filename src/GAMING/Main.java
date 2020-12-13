@@ -4,7 +4,7 @@ import gui.MainMenu;
 import utils.*;
 
 public class Main {
-  static int nowRank=1;
+  static int nowRank = 1;
   static int roll1;
   static int roll2;
   static int big;
@@ -21,6 +21,7 @@ public class Main {
   static boolean hasGotPlane = false;
   static Player[] players = new Player[4];
   static Plane plane = null;
+  static int chosenStep;
   
   public static void playerWin(Player player) {
     player.setRank(nowRank);
@@ -58,33 +59,33 @@ public class Main {
             // 是否选择上飞机？
             if (p.getToBeSetOff() > 0)
               //如果选择 是  上飞机
-          
+              
               continue;
             //如果选择否
           }
           //获取操作//此处考虑操作的不可行性
           while (!hasGotOpe) {
             //等待
-            hasGotOpe=false;
+            hasGotOpe = false;
           }
-      
+          
           while (!hasGotPlane) {
             //等待
-            hasGotPlane=false;
+            hasGotPlane = false;
           }
           //获取plane 鼠标点击
           switch (ope) {
             case '+':
-              plane.run(sum);
+              chosenStep=sum;
               break;
             case '-':
-              plane.run(sub);
+              chosenStep=sub;
               break;
             case '*':
-              plane.run(product);
+              chosenStep=product;
               break;
             case '/':
-              plane.run(quotient);
+              chosenStep=quotient;
               break;
           }
         }
@@ -92,13 +93,13 @@ public class Main {
       } while (nowRank != 4);
       //显示结算框
       //更新 存储 账户数据
-  
+      
       //关闭当前游戏界面
       //重启新的游戏界面
     }
   }
   
-  private void flyOneTime(Player player,int time){
+  private void flyOneTime(Player player, int time) {
   
   }
   
@@ -179,5 +180,7 @@ public class Main {
     Main.hasGotPlane = hasGotPlane;
   }
   
-  
+  public static int getChosenStep() {
+    return chosenStep;
+  }
 }
