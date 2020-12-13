@@ -13,7 +13,7 @@ import java.awt.event.MouseEvent;
 /**
  * Game frame.
  */
-public class FGame extends JFrame {
+public class Game extends JFrame {
 
   JLayeredPane layeredPane = new JLayeredPaneWithBackground();
   private JLabel lane = new JLabel();
@@ -120,7 +120,7 @@ public class FGame extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        new RollDiceDialog();
+        new RollDiceDialog(Main.getRoll1(),Main.getRoll2());
       }
     });
 
