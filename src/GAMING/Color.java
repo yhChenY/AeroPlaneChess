@@ -11,7 +11,10 @@ public enum Color {
     this.color = color;
   }
   
-  public String getColor() {
-    return color;
+  public static Color getColor(String s) {
+   if(s.equals("RED"))return RED;
+   if(s.equals("GREEN"))return GREEN;
+   if(s.equals("YELLOW"))return YELLOW;
+   return BLUE;
   }
 }

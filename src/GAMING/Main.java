@@ -4,6 +4,7 @@ import gui.MainMenu;
 import utils.*;
 
 public class Main {
+  static int nowRank=1;
   static int roll1;
   static int roll2;
   static int big;
@@ -20,6 +21,11 @@ public class Main {
   static boolean hasGotPlane = false;
   static Player[] players = new Player[4];
   static Plane plane = null;
+  
+  public static void playerWin(Player player) {
+    player.setRank(nowRank);
+    nowRank++;
+  }
   
   public static void main(String[] args) {
     players[0] = new Player(Color.RED);
@@ -83,7 +89,7 @@ public class Main {
           }
         }
         //whether the game has finished
-      } while (MapSystem.getNowRank() != 4);
+      } while (nowRank != 4);
       //显示结算框
       //更新 存储 账户数据
   

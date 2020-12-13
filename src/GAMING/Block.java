@@ -11,11 +11,17 @@ public class Block {
   private Block nextFlyBlock;
   private int distance=0;
   
-  enum Type {
+  public enum Type {
     COMMON(),
     CORNER(),
     FLY(),
-    SPRINT()
+    SPRINT();
+    public static Type getType(String s){
+      if(s.equals("COMMON"))return COMMON;
+      if(s.equals("CONNER"))return CORNER;
+      if(s.equals("FLY"))return FLY;
+      return SPRINT;
+    }
   }
   
   public void setDistance(int distance) {
@@ -27,6 +33,12 @@ public class Block {
     this.type = type;
   }
   
+  public Block(Color c, Type type,int x,int y) {
+    this.color = c;
+    this.type = type;
+    this.x=x;
+    this.y=y;
+  }
   public Block getPreBlock() {
     return preBlock;
   }
@@ -106,5 +118,15 @@ public class Block {
   
   public void killPlane(){
   
+  }
+  
+  @Override
+  public String toString(){
+    return "\n" +
+        "- \n" +
+        " blockType: " + type + " \n" +
+        " blockColor: " + color + " \n" +
+        " x: " + x + " \n" +
+        " y: " + y + " ";
   }
 }
