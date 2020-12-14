@@ -28,7 +28,6 @@ import javax.swing.UnsupportedLookAndFeelException;
  * Game frame.
  */
 public class Game extends JFrame {
-
   JLayeredPane layeredPane = new JLayeredPaneWithBackground();
   private JLabel lane = new JLabel();
   private BasePanel greenBase = new BasePanel(Color.GREEN);
@@ -49,6 +48,7 @@ public class Game extends JFrame {
    * @param user     Indicates the player.
    */
   public Game(boolean ifOnline, User user) {
+    setTitle("Rick and Morty's Gamble");
     Main.setIsOnLineGame(ifOnline);
     try {
       UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -60,7 +60,7 @@ public class Game extends JFrame {
     this.setResizable(false);
     this.setSize(new Dimension(1440, 810));
     this.setVisible(true);
-    this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     if (ifOnline) {
       surrenderButton = new JButton("Surrender");

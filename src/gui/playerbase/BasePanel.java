@@ -1,5 +1,8 @@
 package gui.playerbase;
 
+import GAMING.Main;
+import GAMING.Plane;
+import GAMING.Player;
 import javax.swing.*;
 import java.awt.*;
 
@@ -12,6 +15,8 @@ public final class BasePanel extends JPanel {
   Base base;
   JLabel backgroundLabel = new JLabel();
   ApronLabel[] apronLabels;
+  Plane[] planes;
+  JButton[] planeButtons;
   GridBagLayout layout = new GridBagLayout();
   GridBagConstraints constraints = new GridBagConstraints();
 
@@ -21,6 +26,20 @@ public final class BasePanel extends JPanel {
     this.color = color;
     this.base = new Base(color);
     this.setBounds(0, 0, 175, 165);
+
+    Player[] players = Main.getPlayers();
+    int index = -1;
+    for(int i = 0; i < players.length; i++) {
+      if(players[i].getColor().getColor().equals(this.getColor().getColorName())) {
+        index = i;
+      }
+    }
+    planes = players[index].getPlanes();
+    planeButtons = new JButton[planes.length];
+    for(int i = 0; i < planeButtons.length; i++) {
+      planeButtons[i] = planes[i].getButton();
+    }
+
     initApronLabels();
     String backgroundImageLocation = "resources/" + color.getColorName() + "Base.png";
     ImageIcon backgroundImage = new ImageIcon(backgroundImageLocation);
@@ -36,24 +55,24 @@ public final class BasePanel extends JPanel {
     constraints.gridy = 0;
     constraints.gridwidth = 1;
     constraints.gridheight = 1;
-    layout.setConstraints(apronLabels[1], constraints);
+    layout.setConstraints(planeButtons[0], constraints);
     constraints.gridx = 0;
     constraints.gridy = 1;
     constraints.gridwidth = 1;
     constraints.gridheight = 1;
-    layout.setConstraints(apronLabels[2], constraints);
+    layout.setConstraints(planeButtons[1], constraints);
     constraints.gridx = 1;
     constraints.gridy = 0;
     constraints.gridwidth = 1;
     constraints.gridheight = 1;
-    layout.setConstraints(apronLabels[3], constraints);
+    layout.setConstraints(planeButtons[2], constraints);
     constraints.gridx = 1;
     constraints.gridy = 1;
     constraints.gridwidth = 1;
     constraints.gridheight = 1;
-    layout.setConstraints(apronLabels[4], constraints);
-    for (int i = 1; i < base.getApronQuantity(); i++) {
-      add(apronLabels[i]);
+    layout.setConstraints(planeButtons[3], constraints);
+    for (int i = 0; i < planeButtons.length; i++) {
+      add(planeButtons[i]);
     }
     setVisible(true);
     add(backgroundLabel);
@@ -67,6 +86,7 @@ public final class BasePanel extends JPanel {
   }
 
   /**
+   * @deprecated
    * Set the status of an apron.
    *
    * @param index   Determine the index of the apron. 0 is the arrow block. 1~4 are in garage.

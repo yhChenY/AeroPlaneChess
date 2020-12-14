@@ -29,7 +29,7 @@ public class MainMenu extends JFrame {
   GridBagConstraints constraints = new GridBagConstraints();
 
   public MainMenu() {
-
+    setTitle("Rick and Morty's Gamble");
 
     createComponent();
 
