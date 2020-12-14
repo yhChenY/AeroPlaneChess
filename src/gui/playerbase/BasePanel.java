@@ -3,6 +3,7 @@ package gui.playerbase;
 import GAMING.Main;
 import GAMING.Plane;
 import GAMING.Player;
+import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,16 +12,18 @@ import java.awt.*;
  */
 public final class BasePanel extends JPanel {
 
-  Color color;
-  Base base;
-  JLabel backgroundLabel = new JLabel();
-  ApronLabel[] apronLabels;
-  Plane[] planes;
-  JButton[] planeButtons;
-  GridBagLayout layout = new GridBagLayout();
-  GridBagConstraints constraints = new GridBagConstraints();
+  private Color color;
+  private Base base;
+  private JLabel backgroundLabel = new JLabel();
+  private ApronLabel[] apronLabels;
+  private Plane[] planes;
+  private JButton[] planeButtons;
+  private GridBagLayout layout = new GridBagLayout();
+  private GridBagConstraints constraints = new GridBagConstraints();
+  private static ArrayList<BasePanel> basePanels = new ArrayList<>(0);
 
   public BasePanel(Color color) {
+    basePanels.add(this);
     this.setLayout(layout);
     //constraints.fill = GridBagConstraints.BOTH;
     this.color = color;
@@ -40,7 +43,7 @@ public final class BasePanel extends JPanel {
       planeButtons[i] = planes[i].getButton();
     }
 
-    initApronLabels();
+    //initApronLabels();
     String backgroundImageLocation = "resources/" + color.getColorName() + "Base.png";
     ImageIcon backgroundImage = new ImageIcon(backgroundImageLocation);
     backgroundLabel.setIcon(backgroundImage);
@@ -82,6 +85,12 @@ public final class BasePanel extends JPanel {
     apronLabels = new ApronLabel[base.getApronQuantity()];
     for (int i = 0; i < base.getApronQuantity(); i++) {
       apronLabels[i] = new ApronLabel(color, base.getApron(i));
+    }
+  }
+
+  public static void flushBasePanel() {
+    for(int i = basePanels.size() - 1; i > basePanels.size() - 4; i--) {
+      basePanels.get(i).updateUI();
     }
   }
 

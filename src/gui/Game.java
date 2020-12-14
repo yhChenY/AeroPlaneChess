@@ -177,6 +177,7 @@ public class Game extends JFrame {
   }
 
   /**
+   * @deprecated
    * Change the status of an apron.
    *
    * @param apron      The apron whose status is changing.
@@ -208,6 +209,7 @@ public class Game extends JFrame {
   }
 
   public void flushGameFrame() {
+    BasePanel.flushBasePanel();
     Map<Player, Plane[]> planes = new HashMap<>(0);
     for (Player p : players) {
       ArrayList<Plane> planeArrayList = new ArrayList<>(0);
