@@ -1,9 +1,10 @@
 package GAMING;
 
 import gui.MainMenu;
-import utils.*;
+import utils.util;
 
 public class Main {
+
   static int nowRank = 1;
   static int roll1;
   static int roll2;
@@ -22,15 +23,16 @@ public class Main {
   static Player[] players = new Player[4];
   static Plane plane = null;
   static int chosenStep;
-  
+
+  static {
+    MapSystem.loadBlocks();
+  }
+
   public static void playerWin(Player player) {
     player.setRank(nowRank);
     nowRank++;
   }
-  
-  static {
-    MapSystem.loadBlocks();
-  }
+
   public static void main(String[] args) {
     players[0] = new Player(Color.RED);
     players[1] = new Player(Color.YELLOW);
@@ -60,109 +62,106 @@ public class Main {
           if ((roll1 == 6 || roll2 == 6) && p.getToBeSetOff() > 0) {
             // 是否选择上飞机？
             if (p.getToBeSetOff() > 0)
-              //如果选择 是  上飞机
-              
+            //如果选择 是  上飞机
+
+            {
               continue;
+            }
             //如果选择否
           }
           //获取操作//此处考虑操作的不可行性
+          hasGotOpe = false;
           while (!hasGotOpe) {
             //等待
-            hasGotOpe = false;
-            //更新chosenStep
-            switch (ope) {
-              case '+':
-                chosenStep=sum;
-                break;
-              case '-':
-                chosenStep=sub;
-                break;
-              case '*':
-                chosenStep=product;
-                break;
-              case '/':
-                chosenStep=quotient;
-                break;
-            }
           }
-          
+          //更新chosenStep
+          switch (ope) {
+            case '+':
+              chosenStep = sum;
+              break;
+            case '-':
+              chosenStep = sub;
+              break;
+            case '*':
+              chosenStep = product;
+              break;
+            case '/':
+              chosenStep = quotient;
+              break;
+          }
+
           while (!hasGotPlane) {
             //等待
             hasGotPlane = false;
           }
           //获取plane 鼠标点击
-          
-          
+
         }
         //whether the game has finished
       } while (nowRank != 4);
       //显示结算框
       //更新 存储 账户数据
-      
+
       //关闭当前游戏界面
       //重启新的游戏界面
     }
   }
-  
-  private void flyOneTime(Player player, int time) {
-  
-  }
-  
+
   public static int getRoll1() {
     return roll1;
   }
-  
+
   public static int getRoll2() {
     return roll2;
   }
-  
+
   public static int getBig() {
     return big;
   }
-  
+
   public static int getSmall() {
     return small;
   }
-  
+
   public static int getSum() {
     return sum;
   }
-  
+
   public static int getQuotient() {
     return quotient;
   }
-  
+
   public static int getSub() {
     return sub;
   }
-  
+
   public static int getProduct() {
     return product;
   }
-  
+
   public static boolean isAbleToProduct() {
     return ableToProduct;
   }
-  
+
   public static boolean isAbleToQuotient() {
     return ableToQuotient;
   }
-  
+
   public static Player[] getPlayers() {
     return players;
   }
-  
+
   public static void setIsOnLineGame(boolean isOnLineGame) {
     Main.isOnLineGame = isOnLineGame;
   }
-  
+
   public static void setOpe(char o) {
     ope = '+';
     if (o == '-' || o == '*' || o == '/') {
       ope = o;
     }
   }
-  
+
   /**
    * used with setOpe()... right after it.
    *
@@ -171,11 +170,11 @@ public class Main {
   public static void setHasGotOpe(boolean hasGotOpe) {
     Main.hasGotOpe = hasGotOpe;
   }
-  
+
   public static void setPlane(Plane plane) {
     Main.plane = plane;
   }
-  
+
   /**
    * used with setPlane()... right after it.
    *
@@ -184,8 +183,12 @@ public class Main {
   public static void setHasGotPlane(boolean hasGotPlane) {
     Main.hasGotPlane = hasGotPlane;
   }
-  
+
   public static int getChosenStep() {
     return chosenStep;
+  }
+
+  private void flyOneTime(Player player, int time) {
+
   }
 }
