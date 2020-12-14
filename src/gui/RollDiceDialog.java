@@ -1,6 +1,7 @@
 package gui;
 
 import GAMING.Main;
+import GAMING.setHasGotOpe;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -41,7 +42,7 @@ public class RollDiceDialog extends JDialog {
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         Main.setOpe('+');
-        Main.setHasGotOpe(true);
+        new setHasGotOpe(true);
         dispose();
       }
     });
@@ -51,7 +52,7 @@ public class RollDiceDialog extends JDialog {
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         Main.setOpe('-');
-        Main.setHasGotOpe(true);
+        new setHasGotOpe(true);
         dispose();
       }
     });
@@ -61,7 +62,7 @@ public class RollDiceDialog extends JDialog {
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         Main.setOpe('*');
-        Main.setHasGotOpe(true);
+        new setHasGotOpe(true);
         dispose();
       }
     });
@@ -71,7 +72,7 @@ public class RollDiceDialog extends JDialog {
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         Main.setOpe('/');
-        Main.setHasGotOpe(true);
+        new setHasGotOpe(true);
         dispose();
       }
     });
