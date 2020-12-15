@@ -40,6 +40,7 @@ public class RollDiceDialog extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
+        System.out.println("clicked + ");
         Main.setOpe('+');
         Main.setHasGotOpe(true);
         dispose();
