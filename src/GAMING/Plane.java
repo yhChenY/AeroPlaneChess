@@ -19,6 +19,7 @@ public class Plane {
     button = new JButton();
     this.color = color;
     state = State.FORWARD;
+    setPosition(MapSystem.getBlocks().get(0));
     button.setIcon(new ImageIcon(
         new ImageIcon("resources/" + color.getColor() + "Airplane.png").getImage()
             .getScaledInstance(36, 31, Image.SCALE_DEFAULT)));
@@ -29,7 +30,6 @@ public class Plane {
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         System.out.println("clicked");
-        setPosition(MapSystem.getBlocks().get(0));
         run(Main.getChosenStep());
       }
     });

@@ -13,6 +13,7 @@ import java.util.List;
 
 public class MapSystem {
   static ArrayList<Block> blocks = new ArrayList<>();
+  
   public static void loadBlocks() {
     LoadSettings loadSettings = LoadSettings.builder().build();
     Load load = new Load(loadSettings);
@@ -22,31 +23,32 @@ public class MapSystem {
       for (LinkedHashMap l : hashMaps) {
         Color color = Color.getColor(l.get("blockColor").toString());
         Block.Type type = Block.Type.getType(l.get("blockType").toString());
-        int x = Integer.parseInt(l.get("x").toString());
-        int y = Integer.parseInt(l.get("y").toString());
+        int x = Integer.parseInt(l.get("x").toString()) + 300;
+        int y = Integer.parseInt(l.get("y").toString()) + 15;
         int id = Integer.parseInt(l.get("id").toString());
         int nid = Integer.parseInt(l.get("nextId").toString());
         int pid = Integer.parseInt(l.get("preId").toString());
-        Block b=new Block(color,type,x,y,id,nid,pid);
+        Block b = new Block(color, type, x, y, id, nid, pid);
         blocks.add(b);
       }
       file.close();
     } catch (Exception exception) {
-        System.out.println(exception);
+      System.out.println(exception);
     }
-    for(Block block:blocks){
+    for (Block block : blocks) {
       block.setNextBlock(getNthBlock(block.getNextId()));
       block.setPreBlock(getNthBlock(block.getPreId()));
     }
   }
-  public static void saveBlocks(){
+  
+  public static void saveBlocks() {
     try {
       File file = new File("resources/blocks.yaml");
       if (!file.exists()) {
         file.createNewFile();
       }
       FileWriter fw = new FileWriter(file);
-      for (Block b:blocks) {
+      for (Block b : blocks) {
         fw.write(b.toString());
       }
       fw.close();
@@ -54,17 +56,18 @@ public class MapSystem {
     
     }
   }
-  public static Block getNthBlock(int n){
+  
+  public static Block getNthBlock(int n) {
     Block ans = null;
-    for(Block b:blocks){
-      if(b.getId()==n){
-        ans=b;
+    for (Block b : blocks) {
+      if (b.getId() == n) {
+        ans = b;
         break;
       }
     }
     return ans;
   }
-
+  
   public static ArrayList<Block> getBlocks() {
     return blocks;
   }

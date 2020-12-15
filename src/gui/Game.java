@@ -222,6 +222,7 @@ public class Game extends JFrame {
     for (Player p : players) {
       for (Plane plane : planes.get(p)) {
         JButton planeButton = plane.getButton();
+//        System.out.println(plane.getPosition()==null);
         planeButton.setBounds(plane.getPosition().getX(), plane.getPosition().getY(),
             planeButton.getWidth(), planeButton.getHeight());
         layeredPane.add(planeButton, JLayeredPane.DRAG_LAYER);
