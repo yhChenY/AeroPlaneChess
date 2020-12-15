@@ -1,0 +1,641 @@
+
+- 
+ blockType: COMMON 
+ blockColor: RED 
+ x: 534 
+ y: 94 
+ id: 0 
+ nextId: 1 
+ preId: 51 
+- 
+ blockType: COMMON 
+ blockColor: YELLOW 
+ x: 534 
+ y: 138 
+ id: 1 
+ nextId: 2 
+ preId: 0 
+- 
+ blockType: COMMON 
+ blockColor: BLUE 
+ x: 515 
+ y: 186 
+ id: 2 
+ nextId: 3 
+ preId: 1 
+- 
+ blockType: FLY 
+ blockColor: GREEN 
+ x: 552 
+ y: 223 
+ id: 3 
+ nextId: 4 
+ preId: 2 
+- 
+ blockType: COMMON 
+ blockColor: RED 
+ x: 605 
+ y: 209 
+ id: 4 
+ nextId: 5 
+ preId: 3 
+- 
+ blockType: COMMON 
+ blockColor: YELLOW 
+ x: 647 
+ y: 209 
+ id: 5 
+ nextId: 6 
+ preId: 4 
+- 
+ blockType: COMMON 
+ blockColor: BLUE 
+ x: 698 
+ y: 224 
+ id: 6 
+ nextId: 7 
+ preId: 5 
+- 
+ blockType: COMMON 
+ blockColor: GREEN 
+ x: 715 
+ y: 272 
+ id: 7 
+ nextId: 8 
+ preId: 6 
+- 
+ blockType: COMMON 
+ blockColor: RED 
+ x: 715 
+ y: 315 
+ id: 8 
+ nextId: 9 
+ preId: 7 
+- 
+ blockType: CORNER 
+ blockColor: YELLOW 
+ x: 715 
+ y: 359 
+ id: 9 
+ nextId: 10 
+ preId: 8 
+- 
+ blockType: COMMON 
+ blockColor: BLUE 
+ x: 715 
+ y: 404 
+ id: 10 
+ nextId: 11 
+ preId: 9 
+- 
+ blockType: COMMON 
+ blockColor: GREEN 
+ x: 715 
+ y: 447 
+ id: 11 
+ nextId: 12 
+ preId: 10 
+- 
+ blockType: COMMON 
+ blockColor: RED 
+ x: 695 
+ y: 495 
+ id: 12 
+ nextId: 13 
+ preId: 11 
+- 
+ blockType: COMMON 
+ blockColor: YELLOW 
+ x: 647 
+ y: 514 
+ id: 13 
+ nextId: 14 
+ preId: 12 
+- 
+ blockType: COMMON 
+ blockColor: BLUE 
+ x: 604 
+ y: 514 
+ id: 14 
+ nextId: 15 
+ preId: 13 
+- 
+ blockType: COMMON 
+ blockColor: GREEN 
+ x: 553 
+ y: 495 
+ id: 15 
+ nextId: 16 
+ preId: 14 
+- 
+ blockType: FLY 
+ blockColor: RED 
+ x: 516 
+ y: 530 
+ id: 16 
+ nextId: 17 
+ preId: 15 
+- 
+ blockType: COMMON 
+ blockColor: YELLOW 
+ x: 533 
+ y: 578 
+ id: 17 
+ nextId: 18 
+ preId: 16 
+- 
+ blockType: COMMON 
+ blockColor: BLUE 
+ x: 533 
+ y: 623 
+ id: 18 
+ nextId: 19 
+ preId: 17 
+- 
+ blockType: COMMON 
+ blockColor: GREEN 
+ x: 513 
+ y: 671 
+ id: 19 
+ nextId: 20 
+ preId: 18 
+- 
+ blockType: COMMON 
+ blockColor: RED 
+ x: 465 
+ y: 687 
+ id: 20 
+ nextId: 21 
+ preId: 19 
+- 
+ blockType: COMMON 
+ blockColor: YELLOW 
+ x: 419 
+ y: 687 
+ id: 21 
+ nextId: 22 
+ preId: 20 
+- 
+ blockType: CORNER 
+ blockColor: BLUE 
+ x: 375 
+ y: 687 
+ id: 22 
+ nextId: 23 
+ preId: 21 
+- 
+ blockType: COMMON 
+ blockColor: GREEN 
+ x: 329 
+ y: 687 
+ id: 23 
+ nextId: 24 
+ preId: 22 
+- 
+ blockType: COMMON 
+ blockColor: RED 
+ x: 282 
+ y: 687 
+ id: 24 
+ nextId: 25 
+ preId: 23 
+- 
+ blockType: COMMON 
+ blockColor: YELLOW 
+ x: 232 
+ y: 669 
+ id: 25 
+ nextId: 26 
+ preId: 24 
+- 
+ blockType: COMMON 
+ blockColor: BLUE 
+ x: 214 
+ y: 623 
+ id: 26 
+ nextId: 27 
+ preId: 25 
+- 
+ blockType: COMMON 
+ blockColor: GREEN 
+ x: 214 
+ y: 579 
+ id: 27 
+ nextId: 28 
+ preId: 26 
+- 
+ blockType: COMMON 
+ blockColor: RED 
+ x: 233 
+ y: 530 
+ id: 28 
+ nextId: 29 
+ preId: 27 
+- 
+ blockType: FLY 
+ blockColor: YELLOW 
+ x: 195 
+ y: 496 
+ id: 29 
+ nextId: 30 
+ preId: 28 
+- 
+ blockType: COMMON 
+ blockColor: BLUE 
+ x: 146 
+ y: 510 
+ id: 30 
+ nextId: 31 
+ preId: 29 
+- 
+ blockType: COMMON 
+ blockColor: GREEN 
+ x: 101 
+ y: 510 
+ id: 31 
+ nextId: 32 
+ preId: 30 
+- 
+ blockType: COMMON 
+ blockColor: RED 
+ x: 51 
+ y: 492 
+ id: 32 
+ nextId: 33 
+ preId: 31 
+- 
+ blockType: COMMON 
+ blockColor: YELLOW 
+ x: 30 
+ y: 446 
+ id: 33 
+ nextId: 34 
+ preId: 32 
+- 
+ blockType: COMMON 
+ blockColor: BLUE 
+ x: 30 
+ y: 403 
+ id: 34 
+ nextId: 35 
+ preId: 33 
+- 
+ blockType: CORNER 
+ blockColor: GREEN 
+ x: 30 
+ y: 360 
+ id: 35 
+ nextId: 36 
+ preId: 34 
+- 
+ blockType: COMMON 
+ blockColor: RED 
+ x: 30 
+ y: 315 
+ id: 36 
+ nextId: 37 
+ preId: 35 
+- 
+ blockType: COMMON 
+ blockColor: YELLOW 
+ x: 30 
+ y: 270 
+ id: 37 
+ nextId: 38 
+ preId: 36 
+- 
+ blockType: COMMON 
+ blockColor: BLUE 
+ x: 351 
+ y: 211 
+ id: 38 
+ nextId: 39 
+ preId: 37 
+- 
+ blockType: COMMON 
+ blockColor: GREEN 
+ x: 101 
+ y: 205 
+ id: 39 
+ nextId: 40 
+ preId: 38 
+- 
+ blockType: COMMON 
+ blockColor: RED 
+ x: 146 
+ y: 205 
+ id: 40 
+ nextId: 41 
+ preId: 39 
+- 
+ blockType: COMMON 
+ blockColor: YELLOW 
+ x: 195 
+ y: 218 
+ id: 41 
+ nextId: 42 
+ preId: 40 
+- 
+ blockType: COMMON 
+ blockColor: BLUE 
+ x: 231 
+ y: 186 
+ id: 42 
+ nextId: 43 
+ preId: 41 
+- 
+ blockType: COMMON 
+ blockColor: GREEN 
+ x: 215 
+ y: 140 
+ id: 43 
+ nextId: 44 
+ preId: 42 
+- 
+ blockType: COMMON 
+ blockColor: RED 
+ x: 215 
+ y: 95 
+ id: 44 
+ nextId: 45 
+ preId: 43 
+- 
+ blockType: COMMON 
+ blockColor: YELLOW 
+ x: 232 
+ y: 45 
+ id: 45 
+ nextId: 46 
+ preId: 44 
+- 
+ blockType: COMMON 
+ blockColor: BLUE 
+ x: 285 
+ y: 30 
+ id: 46 
+ nextId: 47 
+ preId: 45 
+- 
+ blockType: COMMON 
+ blockColor: GREEN 
+ x: 330 
+ y: 30 
+ id: 47 
+ nextId: 48 
+ preId: 46 
+- 
+ blockType: CORNER 
+ blockColor: RED 
+ x: 375 
+ y: 30 
+ id: 48 
+ nextId: 49 
+ preId: 47 
+- 
+ blockType: CORNER 
+ blockColor: YELLOW 
+ x: 420 
+ y: 30 
+ id: 49 
+ nextId: 50 
+ preId: 48 
+- 
+ blockType: CORNER 
+ blockColor: BLUE 
+ x: 465 
+ y: 30 
+ id: 50 
+ nextId: 51 
+ preId: 49 
+- 
+ blockType: CORNER 
+ blockColor: GREEN 
+ x: 515 
+ y: 45 
+ id: 51 
+ nextId: 50 
+ preId: 50 
+- 
+ blockType: SPRINT 
+ blockColor: RED 
+ x: 375 
+ y: 85 
+ id: 52 
+ nextId: 53 
+ preId: 48 
+- 
+ blockType: SPRINT 
+ blockColor: RED 
+ x: 375 
+ y: 135 
+ id: 53 
+ nextId: 54 
+ preId: 52 
+- 
+ blockType: SPRINT 
+ blockColor: RED 
+ x: 375 
+ y: 225 
+ id: 55 
+ nextId: 56 
+ preId: 54 
+- 
+ blockType: SPRINT 
+ blockColor: RED 
+ x: 375 
+ y: 270 
+ id: 56 
+ nextId: 57 
+ preId: 55 
+- 
+ blockType: SPRINT 
+ blockColor: RED 
+ x: 375 
+ y: 270 
+ id: 56 
+ nextId: 57 
+ preId: 55 
+- 
+ blockType: FINAL 
+ blockColor: RED 
+ x: 365 
+ y: 305 
+ id: 57 
+ nextId: 0 
+ preId: 56 
+- 
+ blockType: SPRINT 
+ blockColor: YELLOW 
+ x: 650 
+ y: 360 
+ id: 58 
+ nextId: 59 
+ preId: 9 
+- 
+ blockType: SPRINT 
+ blockColor: YELLOW 
+ x: 605 
+ y: 360 
+ id: 59 
+ nextId: 60 
+ preId: 58 
+- 
+ blockType: SPRINT 
+ blockColor: YELLOW 
+ x: 560 
+ y: 360 
+ id: 60 
+ nextId: 61 
+ preId: 59 
+- 
+ blockType: SPRINT 
+ blockColor: YELLOW 
+ x: 515 
+ y: 360 
+ id: 61 
+ nextId: 62 
+ preId: 60 
+- 
+ blockType: SPRINT 
+ blockColor: YELLOW 
+ x: 470 
+ y: 360 
+ id: 62 
+ nextId: 63 
+ preId: 61 
+- 
+ blockType: FINAL 
+ blockColor: YELLOW 
+ x: 415 
+ y: 350 
+ id: 63 
+ nextId: 0 
+ preId: 62 
+- 
+ blockType: SPRINT 
+ blockColor: BLUE 
+ x: 375 
+ y: 625 
+ id: 64 
+ nextId: 65 
+ preId: 22 
+- 
+ blockType: SPRINT 
+ blockColor: BLUE 
+ x: 375 
+ y: 580 
+ id: 65 
+ nextId: 66 
+ preId: 64 
+- 
+ blockType: SPRINT 
+ blockColor: BLUE 
+ x: 375 
+ y: 535 
+ id: 66 
+ nextId: 67 
+ preId: 65 
+- 
+ blockType: SPRINT 
+ blockColor: BLUE 
+ x: 375 
+ y: 490 
+ id: 67 
+ nextId: 68 
+ preId: 66 
+- 
+ blockType: SPRINT 
+ blockColor: BLUE 
+ x: 375 
+ y: 445 
+ id: 68 
+ nextId: 69 
+ preId: 67 
+- 
+ blockType: FINAL 
+ blockColor: BLUE 
+ x: 365 
+ y: 390 
+ id: 69 
+ nextId: 0 
+ preId: 68 
+- 
+ blockType: SPRINT 
+ blockColor: GREEN 
+ x: 95 
+ y: 360 
+ id: 70 
+ nextId: 71 
+ preId: 35 
+- 
+ blockType: SPRINT 
+ blockColor: GREEN 
+ x: 140 
+ y: 360 
+ id: 71 
+ nextId: 72 
+ preId: 70 
+- 
+ blockType: SPRINT 
+ blockColor: GREEN 
+ x: 185 
+ y: 360 
+ id: 72 
+ nextId: 73 
+ preId: 71 
+- 
+ blockType: SPRINT 
+ blockColor: GREEN 
+ x: 225 
+ y: 360 
+ id: 73 
+ nextId: 74 
+ preId: 72 
+- 
+ blockType: SPRINT 
+ blockColor: GREEN 
+ x: 270 
+ y: 360 
+ id: 74 
+ nextId: 75 
+ preId: 73 
+- 
+ blockType: FINAL 
+ blockColor: GREEN 
+ x: 315 
+ y: 350 
+ id: 75 
+ nextId: 0 
+ preId: 74 
+- 
+ blockType: WAIT 
+ blockColor: RED 
+ x: 545 
+ y: 3 
+ id: 76 
+ nextId: 0 
+ preId: 0 
+- 
+ blockType: WAIT 
+ blockColor: YELLOW 
+ x: 725 
+ y: 525 
+ id: 77 
+ nextId: 13 
+ preId: 13 
+- 
+ blockType: WAIT 
+ blockColor: BLUE 
+ x: 185 
+ y: 700 
+ id: 77 
+ nextId: 26 
+ preId: 26 
+- 
+ blockType: WAIT 
+ blockColor: GREEN 
+ x: 3 
+ y: 175 
+ id: 78 
+ nextId: 39 
+ preId: 39 
