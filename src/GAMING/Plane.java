@@ -8,13 +8,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class Plane {
-
+  
   private final Color color;
   private State state;
   private Block position;
   private boolean hasSetOff = false;
   private JButton button;
-
+  
   public Plane(Color color) {
     button = new JButton();
     this.color = color;
@@ -37,48 +37,48 @@ public class Plane {
     button.setFocusPainted(false);
     button.setBorderPainted(false);
   }
-
+  
   public void setOff() {
     hasSetOff = true;
-
+    
   }
-
+  
   public boolean isHasSetOff() {
     return hasSetOff;
   }
-
+  
   public Block getPosition() {
     return position;
   }
-
+  
   public void setPosition(Block block) {
     this.position = block;
   }
-
+  
   public boolean isForward() {
     return state == State.FORWARD;
   }
-
+  
   public boolean isBackward() {
     return !isForward();
   }
-
+  
   public void setForward() {
     this.state = State.FORWARD;
   }
-
+  
   public void setBackward() {
     this.state = State.BACKWARD;
   }
-
+  
   public Color getColor() {
     return color;
   }
-
+  
   public JButton getButton() {
     return button;
   }
-
+  
   public void run(int n) {
     Block dest = position.getNextNBlock(n, this);
     setPosition(dest);
@@ -94,9 +94,9 @@ public class Plane {
     }
     //重绘
   }
-
+  
   enum State {
     FORWARD, BACKWARD
   }
-
+  
 }

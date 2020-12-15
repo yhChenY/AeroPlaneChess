@@ -9,10 +9,11 @@ public class Block {
   private Block nextBlock;
   private Block afterCornerBlock;
   private Block nextFlyBlock;
-  private int distance=0;
+  private int distance = 0;
   private int id;
   private int nextId;
   private int preId;
+  
   public enum Type {
     COMMON(),
     CORNER(),
@@ -20,12 +21,13 @@ public class Block {
     FINAL(),
     SPRINT(),
     WAIT();
-    public static Type getType(String s){
-      if(s.equals("COMMON"))return COMMON;
-      if(s.equals("CONNER"))return CORNER;
-      if(s.equals("FLY"))return FLY;
-      if(s.equals("FINAL"))return FINAL;
-      if(s.equals("WAIT"))return WAIT;
+    
+    public static Type getType(String s) {
+      if (s.equals("COMMON")) return COMMON;
+      if (s.equals("CONNER")) return CORNER;
+      if (s.equals("FLY")) return FLY;
+      if (s.equals("FINAL")) return FINAL;
+      if (s.equals("WAIT")) return WAIT;
       return SPRINT;
     }
   }
@@ -39,15 +41,16 @@ public class Block {
     this.type = type;
   }
   
-  public Block(Color c, Type type,int x,int y,int id,int nextId,int preId) {
+  public Block(Color c, Type type, int x, int y, int id, int nextId, int preId) {
     this.color = c;
     this.type = type;
-    this.x=x;
-    this.y=y;
-    this.id=id;
-    this.nextId=nextId;
-    this.preId=preId;
+    this.x = x;
+    this.y = y;
+    this.id = id;
+    this.nextId = nextId;
+    this.preId = preId;
   }
+  
   public Block getPreBlock() {
     return preBlock;
   }
@@ -56,8 +59,8 @@ public class Block {
     this.preBlock = preBlock;
   }
   
-  public void setNextFlyBlock(Block block){
-    nextFlyBlock=block;
+  public void setNextFlyBlock(Block block) {
+    nextFlyBlock = block;
   }
   
   public Block getFlyBlock() {
@@ -68,23 +71,23 @@ public class Block {
 //  }
   
   public Block getNextBlock(Plane plane) {
-    if (plane.getColor()==color&&type==Type.CORNER) return afterCornerBlock;
+    if (plane.getColor() == color && type == Type.CORNER) return afterCornerBlock;
     return nextBlock;
   }
   
-  public Block getNextNBlock(int n, Plane plane){
-    if(n>distance){
-      if(n==2*distance)return this;
-      if(n>2*distance)return getPreNBlock(n-2*distance);
-      return getNextNBlock(2*distance-n,plane);
+  public Block getNextNBlock(int n, Plane plane) {
+    if (n > distance) {
+      if (n == 2 * distance) return this;
+      if (n > 2 * distance) return getPreNBlock(n - 2 * distance);
+      return getNextNBlock(2 * distance - n, plane);
     }
-    if(n==1)return getNextBlock(plane);
-    else return getNextNBlock(n-1,plane);
+    if (n == 1) return getNextBlock(plane);
+    else return getNextNBlock(n - 1, plane);
   }
   
-  private Block getPreNBlock(int n){
-    if(n==1)return preBlock;
-    else return getPreNBlock(n-1);
+  private Block getPreNBlock(int n) {
+    if (n == 1) return preBlock;
+    else return getPreNBlock(n - 1);
   }
   
   public void setNextBlock(Block nextBlock) {
@@ -125,12 +128,24 @@ public class Block {
     this.y = y;
   }
   
-  public void killPlane(){
+  public void killPlane() {
   
   }
   
+  public int getId() {
+    return id;
+  }
+  
+  public int getNextId() {
+    return nextId;
+  }
+  
+  public int getPreId() {
+    return preId;
+  }
+  
   @Override
-  public String toString(){
+  public String toString() {
     return "\n" +
         "- \n" +
         " blockType: " + type + " \n" +

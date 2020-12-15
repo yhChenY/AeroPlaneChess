@@ -34,6 +34,10 @@ public class MapSystem {
     } catch (Exception exception) {
       System.out.println(exception);
     }
+    for(Block block:blocks){
+      block.setNextBlock(getNthBlock(block.getNextId()));
+      block.setPreBlock(getNthBlock(block.getPreId()));
+    }
   }
   public static void saveBlocks(){
     try {
@@ -50,7 +54,17 @@ public class MapSystem {
     
     }
   }
-  
+  public static Block getNthBlock(int n){
+    Block ans = null;
+    for(Block b:blocks){
+      if(b.getId()==n){
+        ans=b;
+        break;
+      }
+    }
+    return ans;
+  }
+
   public static ArrayList<Block> getBlocks() {
     return blocks;
   }

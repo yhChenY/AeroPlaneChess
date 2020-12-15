@@ -21,7 +21,7 @@ public class Main {
   static boolean hasGotPlane = false;
   static Player[] players = new Player[4];
   static Plane plane = null;
-  static int chosenStep;
+  static int chosenStep=1;
   static Color nowPlayer;
   
   public static void playerWin(Player player) {
@@ -31,6 +31,7 @@ public class Main {
   
   static {
     MapSystem.loadBlocks();
+    System.out.println("载入block完毕");
   }
    
   public static void main(String[] args) {
@@ -38,6 +39,7 @@ public class Main {
     players[1] = new Player(Color.YELLOW);
     players[2] = new Player(Color.BLUE);
     players[3] = new Player(Color.GREEN);
+    new MainMenu();
 //    if (!isOnLineGame) {
 //      players[0].setHuman();
 //      do {
