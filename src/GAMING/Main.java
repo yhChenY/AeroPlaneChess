@@ -23,7 +23,7 @@ public class Main {
   static Plane plane = null;
   static int chosenStep=1;
   static Color nowPlayer;
-  
+  static MainMenu mainMenu;
   public static void playerWin(Player player) {
     player.setRank(nowRank);
     nowRank++;
@@ -39,7 +39,8 @@ public class Main {
     players[1] = new Player(Color.YELLOW);
     players[2] = new Player(Color.BLUE);
     players[3] = new Player(Color.GREEN);
-    new MainMenu();
+    mainMenu = new MainMenu();
+    
 //    if (!isOnLineGame) {
 //      players[0].setHuman();
 //      do {
@@ -265,5 +266,14 @@ public class Main {
     else playerTurnStart(players[0]);
   }
   
-
+  public void initializeData(){
+    nowRank=1;
+    roll1=1;
+    roll2=1;
+    big=roll1>roll2?roll1:roll2;
+  }
+  
+  public static MainMenu getMainMenu() {
+    return mainMenu;
+  }
 }

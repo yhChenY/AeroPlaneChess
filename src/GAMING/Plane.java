@@ -93,6 +93,7 @@ public class Plane {
       return;
     }
     //重绘
+    Main.getMainMenu().getGame().flushGameFrame();
   }
   
   enum State {

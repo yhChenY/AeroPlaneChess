@@ -1,5 +1,6 @@
 package gui;
 
+import GAMING.Main;
 import chatroom.User;
 
 import javax.swing.*;
@@ -24,6 +25,8 @@ public class MainMenu extends JFrame {
   Font font = new Font("Ravie", Font.PLAIN, 24);
 
   User user = new User();
+  
+  Game game = null;
 
   GridBagLayout layout = new GridBagLayout();
   GridBagConstraints constraints = new GridBagConstraints();
@@ -63,7 +66,7 @@ public class MainMenu extends JFrame {
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         dispose();
-        new Game(chooseIfOnline.isSelected(), user);
+        game = new Game(chooseIfOnline.isSelected(), user);
       }
     });
     startNew.setFocusPainted(false);
@@ -125,5 +128,9 @@ public class MainMenu extends JFrame {
     chooseIfOnline.setOpaque(false);
     chooseIfOnline.setFocusPainted(false);
     layeredPane.add(chooseIfOnline, constraints, JLayeredPane.PALETTE_LAYER);
+  }
+  
+  public Game getGame() {
+    return game;
   }
 }

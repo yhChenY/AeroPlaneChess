@@ -32,7 +32,7 @@ public class MapSystem {
       }
       file.close();
     } catch (Exception exception) {
-      System.out.println(exception);
+        System.out.println(exception);
     }
     for(Block block:blocks){
       block.setNextBlock(getNthBlock(block.getNextId()));
