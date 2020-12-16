@@ -30,8 +30,6 @@ public class RollDiceDialog extends JDialog {
     GridBagLayout layout = new GridBagLayout();
     GridBagConstraints constraints = new GridBagConstraints();
     Font font = new Font("Arial", Font.PLAIN, 16);
-    multiplyButton.setEnabled(ableToProduct);
-    divideButton.setEnabled(ableToQuotient);
 
     setLayout(layout);
 
@@ -81,6 +79,8 @@ public class RollDiceDialog extends JDialog {
     constraints.insets = new Insets(50, 20, 10, 20);
 
     if (!cheatingMode) {
+      multiplyButton.setEnabled(ableToProduct);
+      divideButton.setEnabled(ableToQuotient);
       randomNumber[0] = r1;
       randomNumber[1] = r2;
       JLabel randomNumbers = new JLabel("You rolled: " + randomNumber[0] + " " + randomNumber[1],
@@ -122,6 +122,19 @@ public class RollDiceDialog extends JDialog {
           }
         }
       });
+
+      boolean[] ifValid = ifValid(randomNumber[1], randomNumber[2]);
+      if(ifValid[0]) {
+        plusButton.setEnabled(true);
+        minusButton.setEnabled(true);
+        multiplyButton.setEnabled(ifValid[1]);
+        divideButton.setEnabled(ifValid[2]);
+      } else {
+        plusButton.setEnabled(false);
+        minusButton.setEnabled(false);
+        multiplyButton.setEnabled(false);
+        divideButton.setEnabled(false);
+      }
 
       constraints.gridx = 0;
       constraints.gridy = 0;
@@ -189,5 +202,19 @@ public class RollDiceDialog extends JDialog {
     setResizable(false);
     setVisible(true);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+  }
+
+  private boolean[] ifValid(int number1, int number2) {
+    if (0 < number1 && number1 < 7 && 0 < number2 && number2 < 7) {
+      boolean[] result = new boolean[3];
+      result[1] = true;
+      result[2] = number1 * number2 < 7;
+      result[3] =
+          (number1 / number2) == (int) (number1 / number2) || (number2 / number1) == (int) (number2
+              / number1);
+      return result;
+    } else {
+      return new boolean[]{false, false, false};
+    }
   }
 }
