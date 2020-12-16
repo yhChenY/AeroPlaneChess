@@ -23,7 +23,7 @@ public class MapSystem {
       for (LinkedHashMap l : hashMaps) {
         Color color = Color.getColor(l.get("blockColor").toString());
         Block.Type type = Block.Type.getType(l.get("blockType").toString());
-        int x = Integer.parseInt(l.get("x").toString()) + 300;
+        int x = Integer.parseInt(l.get("x").toString()) + 310;
         int y = Integer.parseInt(l.get("y").toString()) + 15;
         int id = Integer.parseInt(l.get("id").toString());
         int nid = Integer.parseInt(l.get("nextId").toString());

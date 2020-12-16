@@ -270,7 +270,15 @@ public class Main {
     nowRank=1;
     roll1=1;
     roll2=1;
-    big=roll1>roll2?roll1:roll2;
+    big= Math.max(roll1, roll2);
+    small=Math.min(roll1,roll2);
+    sum=roll1+roll2;
+    sub=big-small;
+    product=roll1*roll2>12?roll1*roll2:0;
+    ableToProduct=!(product==0);
+    quotient=big%small==0?big/small:0;
+    ableToQuotient=!(quotient==0);
+    
   }
   
   public static MainMenu getMainMenu() {

@@ -1,5 +1,6 @@
 package Accounts;
 
+import com.sun.javafx.sg.prism.NGAmbientLight;
 import org.snakeyaml.engine.v2.api.Load;
 import org.snakeyaml.engine.v2.api.LoadSettings;
 
@@ -103,6 +104,26 @@ public class AccountSystem {
     }
     
   }
-  
+  public static ArrayList<Account> getRankList(){
+    ArrayList<Account> rankList=new ArrayList<>();
+    ArrayList<Account> tempList=new ArrayList<>();
+    for(Account ac:accountList){
+      tempList.add(ac);
+    }
+    for(int i=0;i<tempList.size();i++){
+      Account maxAc=null;
+      int max=0;
+      for(int q=0;q<tempList.size();q++){
+        Account ac=tempList.get(q);
+        if(ac.getScore()>max){
+          max=ac.getScore();
+          maxAc=ac;
+        }
+      }
+      rankList.add(maxAc);
+      tempList.remove(maxAc);
+    }
+    return rankList;
+  }
   
 }

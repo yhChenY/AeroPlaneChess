@@ -13,6 +13,11 @@ public class gameMainThread extends Thread {
     System.out.println("Running " +  threadName );
     try {
       Thread.sleep(1);
+      
+      
+      
+      
+      
     }catch (InterruptedException e) {
       System.out.println("Thread " +  threadName + " interrupted.");
     }
