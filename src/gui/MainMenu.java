@@ -106,11 +106,10 @@ public class MainMenu extends JFrame {
           public void mouseReleased(MouseEvent e) {
             super.mouseClicked(e);
             RankingListPanel rlp = new RankingListPanel();
-            constraints.gridx =1; constraints.gridy = 5;
-            for (Component component : layeredPane.getComponents()
-            ) {
-              component.setVisible(false);
-            }
+            constraints.gridx =1; constraints.gridy = 2;
+            constraints.gridwidth = 5; constraints.gridheight = 1;
+            layeredPane.removeAll();
+            layeredPane.repaint();
             layeredPane.add(rlp, constraints);
             layeredPane.validate();
             JButton returnButton = rlp.getReturnButton();
@@ -121,10 +120,7 @@ public class MainMenu extends JFrame {
                     super.mouseReleased(e);
                     layeredPane.remove(rlp);
                     layeredPane.repaint();
-                    for (Component component : layeredPane.getComponents()
-                    ) {
-                      component.setVisible(true);
-                    }
+                    createComponent();
                   }
                 }
             );
