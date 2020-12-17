@@ -1,108 +1,131 @@
 package gui.playerbase;
 
 import GAMING.Main;
-import GAMING.Plane;
 import GAMING.Player;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
 import java.util.ArrayList;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  * A JPanel displaying the base of a player.
  */
 public final class BasePanel extends JPanel {
 
+  private static ArrayList<BasePanel> basePanels = new ArrayList<>(0);
   private Color color;
   private Base base;
-  private JLabel backgroundLabel = new JLabel();
-  private ApronLabel[] apronLabels;
-  private Plane[] planes;
-  private JButton[] planeButtons;
+  private int launchable, arrived;
+  private JButton launchButton = new JButton();
+  private JLabel launchableLabel = new JLabel("Launchable: "), arrivedLabel = new JLabel(
+      "Arrived: ", JLabel.LEFT);
+  private JLabel[] launchableImageLabel = new JLabel[4], arrivedImageLabel = new JLabel[4];
   private GridBagLayout layout = new GridBagLayout();
   private GridBagConstraints constraints = new GridBagConstraints();
-  private static ArrayList<BasePanel> basePanels = new ArrayList<>(0);
+  private Font font = new Font("Ravie", Font.PLAIN, 15);
 
   public BasePanel(Color color) {
     basePanels.add(this);
     this.setLayout(layout);
-    //constraints.fill = GridBagConstraints.BOTH;
     this.color = color;
     this.base = new Base(color);
     this.setBounds(0, 0, 175, 165);
 
     Player[] players = Main.getPlayers();
     int index = -1;
-    for(int i = 0; i < players.length; i++) {
-      if(players[i].getColor().getColor().equals(this.getColor().getColorName())) {
+    for (int i = 0; i < players.length; i++) {
+      if (players[i].getColor().getColor().equals(this.getColor().getColorName())) {
         index = i;
       }
     }
-    planes = players[index].getPlanes();
-    planeButtons = new JButton[planes.length];
-    for(int i = 0; i < planeButtons.length; i++) {
-      planeButtons[i] = planes[i].getButton();
+    launchable = players[index].getToBeSetOff();
+    arrived = players[index].getHasFinished();
+
+    launchableLabel.setFont(font);
+    launchableLabel.setHorizontalAlignment(JLabel.LEFT);
+
+    arrivedLabel.setFont(font);
+    arrivedLabel.setHorizontalAlignment(JLabel.LEFT);
+
+    constraints.fill = GridBagConstraints.BOTH;
+    constraints.insets = new Insets(20, 5, 0, 0);
+    constraints.weighty = 0.2;
+    constraints.gridx = 0;
+    constraints.gridy = 0;
+    constraints.gridwidth = 4;
+    constraints.gridheight = 1;
+    add(launchableLabel, constraints);
+
+    for (int i = 0; i < launchable; i++) {
+      launchableImageLabel[i] = new JLabel();
+      launchableImageLabel[i].setIcon(new ImageIcon(
+          new ImageIcon("resources/" + color.getColorName() + "Airplane.png").getImage()
+              .getScaledInstance(25, 22, Image.SCALE_DEFAULT)));
+      constraints.fill = GridBagConstraints.NONE;
+      constraints.insets = new Insets(0, 10, 0, 10);
+      constraints.anchor = GridBagConstraints.WEST;
+      constraints.weightx = 1;
+      constraints.weighty = 0.3;
+      constraints.gridx = 4 - i;
+      constraints.gridy = 1;
+      constraints.gridwidth = 1;
+      constraints.gridheight = 1;
+      add(launchableImageLabel[i], constraints);
     }
 
-    //initApronLabels();
-    String backgroundImageLocation = "resources/" + color.getColorName() + "Base.png";
-    ImageIcon backgroundImage = new ImageIcon(backgroundImageLocation);
-    backgroundLabel.setIcon(backgroundImage);
+    constraints.fill = GridBagConstraints.HORIZONTAL;
+    constraints.anchor = GridBagConstraints.CENTER;
+    constraints.insets = new Insets(0, 5, 0, 0);
     constraints.weightx = 1;
-    constraints.weighty = 1;
+    constraints.weighty = 0.2;
     constraints.gridx = 0;
-    constraints.gridy = 0;
-    constraints.gridwidth = 2;
-    constraints.gridheight = 2;
-    layout.setConstraints(backgroundLabel, constraints);
-    constraints.gridx = 0;
-    constraints.gridy = 0;
-    constraints.gridwidth = 1;
+    constraints.gridy = 2;
+    constraints.gridwidth = 4;
     constraints.gridheight = 1;
-    layout.setConstraints(planeButtons[0], constraints);
-    constraints.gridx = 0;
-    constraints.gridy = 1;
-    constraints.gridwidth = 1;
-    constraints.gridheight = 1;
-    layout.setConstraints(planeButtons[1], constraints);
-    constraints.gridx = 1;
-    constraints.gridy = 0;
-    constraints.gridwidth = 1;
-    constraints.gridheight = 1;
-    layout.setConstraints(planeButtons[2], constraints);
-    constraints.gridx = 1;
-    constraints.gridy = 1;
-    constraints.gridwidth = 1;
-    constraints.gridheight = 1;
-    layout.setConstraints(planeButtons[3], constraints);
-    for (int i = 0; i < planeButtons.length; i++) {
-      add(planeButtons[i]);
-    }
-    setVisible(true);
-    add(backgroundLabel);
-  }
+    add(arrivedLabel, constraints);
 
-  private void initApronLabels() {
-    apronLabels = new ApronLabel[base.getApronQuantity()];
-    for (int i = 0; i < base.getApronQuantity(); i++) {
-      apronLabels[i] = new ApronLabel(color, base.getApron(i));
+    if (arrived == 0) {
+      constraints.weightx = 0;
+      constraints.weighty = 0.3;
+      constraints.gridx = 0;
+      constraints.gridy = 3;
+      constraints.gridwidth = 4;
+      constraints.gridheight = 1;
+      JLabel blank = new JLabel("N/A", JLabel.CENTER);
+      blank.setFont(font);
+      add(blank, constraints);
     }
+    for (int i = 0; i < arrived; i++) {
+      arrivedImageLabel[i] = new JLabel();
+      arrivedImageLabel[i].setIcon(new ImageIcon(
+          new ImageIcon("resources/" + color.getColorName() + "Airplane.png").getImage()
+              .getScaledInstance(15, 13, Image.SCALE_DEFAULT)));
+      constraints.fill = GridBagConstraints.NONE;
+      constraints.insets = new Insets(0, 10, 0, 0);
+      constraints.anchor = GridBagConstraints.WEST;
+      constraints.weightx = 1;
+      constraints.weighty = 0.3;
+      constraints.gridx = 4 - i;
+      constraints.gridy = 3;
+      constraints.gridwidth = 1;
+      constraints.gridheight = 1;
+      add(arrivedImageLabel[i], constraints);
+    }
+
+    setVisible(true);
   }
 
   public static void flushBasePanel() {
-    for(int i = basePanels.size() - 1; i > basePanels.size() - 4; i--) {
-      basePanels.get(i).updateUI();
+    for (int i = basePanels.size() - 1; i > basePanels.size() - 4; i--) {
+      basePanels.get(i).repaint();
     }
-  }
-
-  /**
-   * @deprecated
-   * Set the status of an apron.
-   *
-   * @param index   Determine the index of the apron. 0 is the arrow block. 1~4 are in garage.
-   * @param isEmpty The next status of the apron.
-   */
-  public void setApronStatus(int index, boolean isEmpty) {
-    apronLabels[index].setStatus(isEmpty);
   }
 
   /**
@@ -112,5 +135,12 @@ public final class BasePanel extends JPanel {
    */
   public Color getColor() {
     return base.getColor();
+  }
+
+  @Override
+  protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    ImageIcon background = new ImageIcon("resources/" + color.getColorName() + "Base.png");
+    background.paintIcon(this, g, 0, 0);
   }
 }

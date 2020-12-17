@@ -19,7 +19,9 @@ public class Plane {
     button = new JButton();
     this.color = color;
     state = State.FORWARD;
-    setPosition(MapSystem.getBlocks().get(0));
+    int i=(int)(Math.random()*50);
+    System.out.println(i+"produced");
+    setPosition(MapSystem.getBlocks().get(i));
     button.setIcon(new ImageIcon(
         new ImageIcon("resources/" + color.getColor() + "Airplane.png").getImage()
             .getScaledInstance(36, 31, Image.SCALE_DEFAULT)));
@@ -28,8 +30,9 @@ public class Plane {
     button.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
+        setPosition(MapSystem.getNthBlock(0));
         super.mouseClicked(e);
-        System.out.println("clicked");
+        System.out.println("clicked"+color);
         run(Main.getChosenStep());
       }
     });
@@ -85,12 +88,10 @@ public class Plane {
     if (dest.getColor() == color && dest.getType() == Block.Type.COMMON) {
       dest = dest.getNextNBlock(4, this);
       setPosition(dest);
-      return;
     }
-    if (dest.getColor() == color && dest.getType() == Block.Type.FLY) {
+    else if (dest.getColor() == color && dest.getType() == Block.Type.FLY) {
       dest = dest.getFlyBlock();
       setPosition(dest);
-      return;
     }
     //重绘
     Main.getMainMenu().getGame().flushGameFrame();

@@ -18,7 +18,7 @@ public class MainMenu extends JFrame {
   JButton signIn = new JButton("Sign In/Register");
   JButton leaderboardButton = new JButton("Leaderboard");
   JButton exitButton = new JButton("Exit");
-  JCheckBox chooseIfOnline = new JCheckBox("Online Mode", true);
+  JCheckBox chooseIfOnline = new JCheckBox("Online Mode", false);
   JDialog chooseTeamMate = new JDialog();
 
   JDialog settings = new JDialog();

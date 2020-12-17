@@ -28,16 +28,18 @@ import javax.swing.UnsupportedLookAndFeelException;
  * Game frame.
  */
 public class Game extends JFrame {
+
   JLayeredPane layeredPane = new JLayeredPaneWithBackground();
   private JLabel lane = new JLabel();
   private BasePanel greenBase = new BasePanel(Color.GREEN);
   private BasePanel yellowBase = new BasePanel(Color.YELLOW);
   private BasePanel redBase = new BasePanel(Color.RED);
   private BasePanel blueBase = new BasePanel(Color.BLUE);
-  private JButton surrenderButton;
+  private JButton surrenderButton = new JButton("Surrender");
   private JButton saveGameButton = new JButton("Save game");
   private JButton rollDiceButton = new JButton("Roll dice");
   private JButton toggleCheatingModeButton = new JButton("Cheating Mode");
+  private JButton launchAPlaneButton = new JButton("Launch a plane");
   private boolean cheatingMode = false;
   private Player[] players = Main.getPlayers();
 
@@ -63,14 +65,11 @@ public class Game extends JFrame {
     this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
     if (ifOnline) {
-      surrenderButton = new JButton("Surrender");
       try {
         addChatPanel(user);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-    } else {
-      surrenderButton = new JButton("Restart");
     }
 
     createComponent(ifOnline);
@@ -121,11 +120,7 @@ public class Game extends JFrame {
         super.mouseClicked(e);
         dispose();
         //resetServer();
-        if (ifOnline) {
-          new MainMenu();
-        } else {
-          new Game(ifOnline, new User());
-        }
+        new MainMenu();
       }
     });
 
@@ -164,11 +159,22 @@ public class Game extends JFrame {
       }
     });
 
+    launchAPlaneButton.setBounds(1230, 360, 190, 50);
+    launchAPlaneButton.setFont(font);
+    launchAPlaneButton.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        super.mouseClicked(e);
+        //launchAPlane();
+      }
+    });
+
     layeredPane.add(lane, JLayeredPane.PALETTE_LAYER);
     layeredPane.add(blueBase, JLayeredPane.MODAL_LAYER);
     layeredPane.add(greenBase, JLayeredPane.MODAL_LAYER);
     layeredPane.add(redBase, JLayeredPane.MODAL_LAYER);
     layeredPane.add(yellowBase, JLayeredPane.MODAL_LAYER);
+    layeredPane.add(launchAPlaneButton, JLayeredPane.MODAL_LAYER);
     layeredPane.add(toggleCheatingModeButton, JLayeredPane.MODAL_LAYER);
     layeredPane.add(rollDiceButton, JLayeredPane.MODAL_LAYER);
     layeredPane.add(surrenderButton, JLayeredPane.MODAL_LAYER);
@@ -177,12 +183,10 @@ public class Game extends JFrame {
   }
 
   /**
-   * @deprecated
-   * Change the status of an apron.
-   *
    * @param apron      The apron whose status is changing.
    * @param color      The color of the apron. (Apron class does not include color attribute)
    * @param isOccupied Whether the apron will be occupied. Indicates the next status.
+   * @deprecated Change the status of an apron.
    */
   public void toggleApron(JLabel apron, Color color, boolean isOccupied) {
     if (!isOccupied) {
@@ -222,7 +226,6 @@ public class Game extends JFrame {
     for (Player p : players) {
       for (Plane plane : planes.get(p)) {
         JButton planeButton = plane.getButton();
-//        System.out.println(plane.getPosition()==null);
         planeButton.setBounds(plane.getPosition().getX(), plane.getPosition().getY(),
             planeButton.getWidth(), planeButton.getHeight());
         layeredPane.add(planeButton, JLayeredPane.DRAG_LAYER);
@@ -232,7 +235,7 @@ public class Game extends JFrame {
 
   private void clearDragLayer() {
     Component[] components = layeredPane.getComponentsInLayer(JLayeredPane.DRAG_LAYER);
-    for(Component c: components) {
+    for (Component c : components) {
       layeredPane.remove(c);
     }
   }
