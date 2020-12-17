@@ -100,13 +100,38 @@ public class MainMenu extends JFrame {
     constraints.gridx = 1; constraints.gridy = 6;
     leaderboardButton.setFont(font);
     leaderboardButton.setFocusPainted(false);
-    leaderboardButton.addMouseListener(new MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        super.mouseClicked(e);
-        System.exit(0);
-      }
-    });
+    leaderboardButton.addMouseListener(
+        new MouseAdapter() {
+          @Override
+          public void mouseReleased(MouseEvent e) {
+            super.mouseClicked(e);
+            RankingListPanel rlp = new RankingListPanel();
+            constraints.gridx =1; constraints.gridy = 5;
+            for (Component component : layeredPane.getComponents()
+            ) {
+              component.setVisible(false);
+            }
+            layeredPane.add(rlp, constraints);
+            layeredPane.validate();
+            JButton returnButton = rlp.getReturnButton();
+            returnButton.addMouseListener(
+                new MouseAdapter() {
+                  @Override
+                  public void mouseReleased(MouseEvent e) {
+                    super.mouseReleased(e);
+                    layeredPane.remove(rlp);
+                    layeredPane.repaint();
+                    for (Component component : layeredPane.getComponents()
+                    ) {
+                      component.setVisible(true);
+                    }
+                  }
+                }
+            );
+          }
+        }
+    );
+    constraints.gridx = 1; constraints.gridy = 6;
     layeredPane.add(leaderboardButton, constraints, JLayeredPane.PALETTE_LAYER);
 
     constraints.gridx = 1; constraints.gridy = 8;
@@ -128,6 +153,7 @@ public class MainMenu extends JFrame {
     chooseIfOnline.setOpaque(false);
     chooseIfOnline.setFocusPainted(false);
     layeredPane.add(chooseIfOnline, constraints, JLayeredPane.PALETTE_LAYER);
+
   }
   
   public Game getGame() {
