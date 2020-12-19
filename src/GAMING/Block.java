@@ -9,7 +9,7 @@ public class Block {
   private Block nextBlock;
   private Block afterCornerBlock;
   private Block nextFlyBlock;
-  private int distance = 0;
+  private int distance = 100;
   private int id;
   private int nextId;
   private int preId;

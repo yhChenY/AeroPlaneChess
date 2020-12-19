@@ -1,0 +1,104 @@
+
+- 
+ nowPlayer: RED 
+ nowRank: 1 
+  
+ REDhasFinished: 0 
+ REDtoBeSetOff: 4 
+ REDtoBeFinished: 4 
+ RED0position: -1 
+ RED0hasSetOff: false 
+ RED1position: -1 
+ RED1hasSetOff: false 
+ RED2position: -1 
+ RED2hasSetOff: false 
+ RED3position: -1 
+ RED3hasSetOff: false 
+ 
+ YELLOWhasFinished: 0 
+ YELLOWtoBeSetOff: 4 
+ YELLOWtoBeFinished: 4 
+ YELLOW0position: -1 
+ YELLOW0hasSetOff: false 
+ YELLOW1position: -1 
+ YELLOW1hasSetOff: false 
+ YELLOW2position: -1 
+ YELLOW2hasSetOff: false 
+ YELLOW3position: -1 
+ YELLOW3hasSetOff: false 
+ 
+ BLUEhasFinished: 0 
+ BLUEtoBeSetOff: 4 
+ BLUEtoBeFinished: 4 
+ BLUE0position: -1 
+ BLUE0hasSetOff: false 
+ BLUE1position: -1 
+ BLUE1hasSetOff: false 
+ BLUE2position: -1 
+ BLUE2hasSetOff: false 
+ BLUE3position: -1 
+ BLUE3hasSetOff: false 
+ 
+ GREENhasFinished: 0 
+ GREENtoBeSetOff: 4 
+ GREENtoBeFinished: 4 
+ GREEN0position: -1 
+ GREEN0hasSetOff: false 
+ GREEN1position: -1 
+ GREEN1hasSetOff: false 
+ GREEN2position: -1 
+ GREEN2hasSetOff: false 
+ GREEN3position: -1 
+ GREEN3hasSetOff: false 
+
+- 
+ nowPlayer: RED 
+ nowRank: 1 
+  
+ REDhasFinished: 0 
+ REDtoBeSetOff: 4 
+ REDtoBeFinished: 4 
+ RED0position: -1 
+ RED0hasSetOff: false 
+ RED1position: -1 
+ RED1hasSetOff: false 
+ RED2position: -1 
+ RED2hasSetOff: false 
+ RED3position: -1 
+ RED3hasSetOff: false 
+ 
+ YELLOWhasFinished: 0 
+ YELLOWtoBeSetOff: 4 
+ YELLOWtoBeFinished: 4 
+ YELLOW0position: -1 
+ YELLOW0hasSetOff: false 
+ YELLOW1position: -1 
+ YELLOW1hasSetOff: false 
+ YELLOW2position: -1 
+ YELLOW2hasSetOff: false 
+ YELLOW3position: -1 
+ YELLOW3hasSetOff: false 
+ 
+ BLUEhasFinished: 0 
+ BLUEtoBeSetOff: 4 
+ BLUEtoBeFinished: 4 
+ BLUE0position: -1 
+ BLUE0hasSetOff: false 
+ BLUE1position: -1 
+ BLUE1hasSetOff: false 
+ BLUE2position: -1 
+ BLUE2hasSetOff: false 
+ BLUE3position: -1 
+ BLUE3hasSetOff: false 
+ 
+ GREENhasFinished: 0 
+ GREENtoBeSetOff: 4 
+ GREENtoBeFinished: 4 
+ GREEN0position: -1 
+ GREEN0hasSetOff: false 
+ GREEN1position: -1 
+ GREEN1hasSetOff: false 
+ GREEN2position: -1 
+ GREEN2hasSetOff: false 
+ GREEN3position: -1 
+ GREEN3hasSetOff: false 

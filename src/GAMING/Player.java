@@ -5,19 +5,19 @@ package GAMING;
 public class Player {
   Color color;
   private int hasFinished = 0;
-  private int toBeSetOff=4;
+  private int toBeSetOff = 4;
   private int toBeFinished = 4;
   private boolean wined = false;
   private int score = 0;
   private int rank = 4;
   private Plane[] planes;
-  private boolean isHuman=false;
+  private boolean isHuman = false;
   
   public Player(Color color) {
     this.color = color;
-    planes=new Plane[4];
-    for(int i=0;i<4;i++){
-      planes[i]=new Plane(color);
+    planes = new Plane[4];
+    for (int i = 0; i < 4; i++) {
+      planes[i] = new Plane(color);
     }
   }
   
@@ -37,7 +37,7 @@ public class Player {
     return toBeSetOff;
   }
   
-  public void setOff(Plane plane){
+  public void setOff(Plane plane) {
     plane.setOff();
     toBeSetOff--;
   }
@@ -70,15 +70,43 @@ public class Player {
     score += add;
   }
   
-  public void setHuman(){
-    isHuman=true;
+  public void setHuman() {
+    isHuman = true;
   }
   
   public boolean isHuman() {
     return isHuman;
   }
-
+  
   public Plane[] getPlanes() {
     return planes;
+  }
+  
+  public void initialize() {
+    hasFinished = 0;
+    toBeFinished = 4;
+    toBeSetOff = 4;
+    score = 0;
+    rank = 4;
+    for (Plane plane : planes) {
+      plane.initialize();
+    }
+    isHuman = false;
+  }
+  
+  @Override
+  public String toString(){
+    String p0 = planes[0].toString(0);
+    String p1 = planes[1].toString(1);
+    String p2 = planes[2].toString(2);
+    String p3 = planes[3].toString(3);
+    return " \n" +
+        " " + color + "hasFinished: " + hasFinished + " \n" +
+        " " + color + "toBeSetOff: " + toBeSetOff + " \n" +
+        " " + color + "toBeFinished: " + toBeFinished + " \n" +
+        p0 +
+        p1 +
+        p2 +
+        p3;
   }
 }

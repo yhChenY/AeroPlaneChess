@@ -1,6 +1,6 @@
 package gui;
 
-import GAMING.Main;
+import GAMING.*;
 import chatroom.User;
 
 import javax.swing.*;
@@ -67,6 +67,8 @@ public class MainMenu extends JFrame {
         super.mouseClicked(e);
         dispose();
         game = new Game(chooseIfOnline.isSelected(), user);
+        gameMainThread mainThread=new gameMainThread("mainThread");
+        mainThread.start();
       }
     });
     startNew.setFocusPainted(false);
@@ -145,7 +147,7 @@ public class MainMenu extends JFrame {
     constraints.gridx = 1; constraints.gridy = 10;
     constraints.insets = new Insets(5,20,15,1175);
     chooseIfOnline.setFont(font);
-    chooseIfOnline.setForeground(new Color(0xfbfe93));
+    chooseIfOnline.setForeground(new java.awt.Color(0xfbfe93));
     chooseIfOnline.setOpaque(false);
     chooseIfOnline.setFocusPainted(false);
     layeredPane.add(chooseIfOnline, constraints, JLayeredPane.PALETTE_LAYER);
