@@ -15,8 +15,6 @@ import javax.swing.JPanel;
 
 public class LotteryPanel extends JPanel {
   private String finalPrize = null;
-  private final JButton returnButton = new JButton();
-  private final LotteryPanel lotteryPanel = this;
   private boolean lotteryDone = false;
   public Color backGroundColor = new Color(73, 50, 50);
   private static final ArrayList<Prop> props = new ArrayList<Prop>(){
@@ -42,10 +40,6 @@ public class LotteryPanel extends JPanel {
 
   public LotteryPanel() {
     run();
-  }
-
-  public JButton getReturnButton() {
-    return returnButton;
   }
 
   public static ArrayList<Prop> getProps() {
@@ -169,10 +163,6 @@ public class LotteryPanel extends JPanel {
     startButton.setIcon(new ImageIcon("resources/start.png"));
     startButton.setBounds(50, 100, 140, 50);
     confirmPanel.add(startButton);
-    returnButton.setOpaque(true);
-    returnButton.setIcon(new ImageIcon("resources/exit2.jpg"));
-    returnButton.setBounds(130, 230, 50, 50);
-    confirmPanel.add(returnButton);
 
   }
 }

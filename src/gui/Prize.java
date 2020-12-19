@@ -1,12 +1,10 @@
 package gui;
 
 import java.awt.Dimension;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class Prize extends Thread {
   private final JPanel prizePanel = new JPanel();
-  private JButton returnButton;
   private String prize = null;
   private String chosePlane = null;
   private final PrizeFrame prizeFrame;
@@ -20,10 +18,6 @@ public class Prize extends Thread {
     start();
   }
 
-  public JButton getReturnButton() {
-    return returnButton;
-  }
-
   public String getPrize() {
     return prize;
   }
@@ -35,7 +29,6 @@ public class Prize extends Thread {
   public void run() {
     prizePanel.setPreferredSize(new Dimension(500,500));
     LotteryPanel lotteryPanel = new LotteryPanel();
-    returnButton = lotteryPanel.getReturnButton();
     prizePanel.add(lotteryPanel);
     while (!lotteryPanel.isLotteryDone()) {
       try {

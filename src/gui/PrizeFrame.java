@@ -1,8 +1,6 @@
 package gui;
 
 import java.awt.HeadlessException;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -36,16 +34,6 @@ public class PrizeFrame extends JFrame{
     setVisible(true);
     Prize prize = new Prize(this);
     Thread.sleep(500);
-    prize.getReturnButton().addMouseListener(
-        new MouseAdapter() {
-          @Override
-          public void mouseReleased(MouseEvent e) {
-            dispose();
-            repaint();
-            super.mouseReleased(e);
-          }
-        }
-    );
     add(prize.getPrizePanel());
     validate();
     while (prize.getPrize() == null || (prize.getPrize().equals("SWORD") && prize.getChosePlane() == null)) {
