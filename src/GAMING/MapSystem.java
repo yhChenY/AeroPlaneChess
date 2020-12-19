@@ -13,7 +13,7 @@ import java.util.List;
 
 public class MapSystem {
   static ArrayList<Block> blocks = new ArrayList<>();
-  
+  public static Block shitBlock = new Block(Color.RED, Block.Type.COMMON, 8000, 20, -1, -1, -1);
   public static void loadBlocks() {
     LoadSettings loadSettings = LoadSettings.builder().build();
     Load load = new Load(loadSettings);
@@ -23,7 +23,7 @@ public class MapSystem {
       for (LinkedHashMap l : hashMaps) {
         Color color = Color.getColor(l.get("blockColor").toString());
         Block.Type type = Block.Type.getType(l.get("blockType").toString());
-        int x = Integer.parseInt(l.get("x").toString()) + 310;
+        int x = Integer.parseInt(l.get("x").toString()) + 330;
         int y = Integer.parseInt(l.get("y").toString()) + 15;
         int id = Integer.parseInt(l.get("id").toString());
         int nid = Integer.parseInt(l.get("nextId").toString());
@@ -39,6 +39,7 @@ public class MapSystem {
       block.setNextBlock(getNthBlock(block.getNextId()));
       block.setPreBlock(getNthBlock(block.getPreId()));
     }
+    //剩余关系未加入
   }
   
   public static void saveBlocks() {

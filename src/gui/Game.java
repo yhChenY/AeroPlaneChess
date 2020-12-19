@@ -173,6 +173,7 @@ public class Game extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
+        flushGameFrame();
         //launchAPlane();
       }
     });

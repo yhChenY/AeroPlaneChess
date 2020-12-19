@@ -1,0 +1,6 @@
+调用抽奖系统
+    PrizeFrame prizeFrame = new PrizeFrame();
+    道具为prizeFrame.getFinalPrize());
+    对道具进行判断，
+    若道具为"SWORD", 调用prizeFrame.getChosePlane()
+    取得指定的飞机颜色
