@@ -4,35 +4,41 @@ import chatroom.VerticalFlowLayout;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 public class LotteryPanel extends JPanel {
+  private String finalPrize = null;
   private final JButton returnButton = new JButton();
+  private final LotteryPanel lotteryPanel = this;
+  private boolean lotteryDone = false;
   public Color backGroundColor = new Color(73, 50, 50);
   private static final ArrayList<Prop> props = new ArrayList<Prop>(){
     {
       add(new Prop("BOOK", "resources/props/book.png",
           "STOP a round to read this magical book"));
       add(new Prop("SWORD", "resources/props/sword.png",
-          "Appoint one plane to RETURN 10 blocks"));
+          "Appoint one plane to RETURN 7 blocks"));
       add(new Prop("DRINK", "resources/props/drink.png",
-          "THREE dice will be given to you in the next throw"));
-      add(new Prop("RING", "resources/props/ring.png",
-          "CANCEL out one attack from other players"));
+          "One of your plane will move 5 blocks FORWARD"));
       add(new Prop("MAGNET", "resources/props/magnet.png",
           "DRAW players within 7 blocks ahead of you to your back"));
     }
   };
+
+  public boolean isLotteryDone() {
+    return lotteryDone;
+  }
+
+  public String getFinalPrize() {
+    return finalPrize;
+  }
 
   public LotteryPanel() {
     run();
@@ -47,21 +53,11 @@ public class LotteryPanel extends JPanel {
   }
 
   public void run() {
-
-    class JLayeredPaneWithBack extends JLayeredPane {
-      @Override
-      protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        ImageIcon background = new ImageIcon("resources/blackBackground.jpg");
-        background.paintIcon(this, g, 0, 0);
-      }
-    }
-
     setBackground(new Color(61, 57, 57, 255));
     setPreferredSize(new Dimension(500, 400));
     setLayout(new BorderLayout());
 
-    JLayeredPaneWithBack prizePanel = new JLayeredPaneWithBack();
+    JLayeredPaneWithBack prizePanel = new JLayeredPaneWithBack("resources/blackBackground.jpg");
     prizePanel.setPreferredSize(new Dimension(300, 400));
     prizePanel.setLayout(new VerticalFlowLayout());
 
@@ -110,7 +106,7 @@ public class LotteryPanel extends JPanel {
     }
     add(prizePanel, BorderLayout.WEST);
 
-    JLayeredPaneWithBack confirmPanel = new JLayeredPaneWithBack();
+    JLayeredPaneWithBack confirmPanel = new JLayeredPaneWithBack("resources/blackBackground.jpg");
     confirmPanel.setPreferredSize(new Dimension(200, 400));
     confirmPanel.setLayout(null);
     add(confirmPanel, BorderLayout.EAST);
@@ -119,11 +115,11 @@ public class LotteryPanel extends JPanel {
         new MouseAdapter() {
           @Override
           public void mouseReleased(MouseEvent e) {
-            final int[] cnt = {4};
+            final int[] cnt = {3};
             class paintName extends Thread {
               public void run() {
-                //随机数生成1.5~4.5
-                double time = 1.5 + (4.51 - 1.5) * Math.random();
+                //随机数生成1.2~3.6
+                double time = 1.2 + (3.600001 - 1.2) * Math.random();
 
                 boolean goDown = true;
                 while (time > 0) {
@@ -131,8 +127,8 @@ public class LotteryPanel extends JPanel {
                     cnt[0] = 0;
                     goDown = false;
                   }
-                  if (cnt[0] == 5) {
-                    cnt[0] = 4;
+                  if (cnt[0] == 4) {
+                    cnt[0] = 3;
                     goDown = true;
                   }
                   subPanels.get(cnt[0]).getNameLabel().setBorder(BorderFactory.createMatteBorder(
@@ -153,13 +149,15 @@ public class LotteryPanel extends JPanel {
                 if (cnt[0] == -1) {
                   cnt[0] = 0;
                 }
-                if (cnt[0] == 5) {
-                  cnt[0] = 4;
+                if (cnt[0] == 4) {
+                  cnt[0] = 3;
                 }
                 SubPanel targetPrizeSubPanel = subPanels.get(cnt[0]);
                 targetPrizeSubPanel.getNameLabel().setBorder(BorderFactory.createMatteBorder(
                     3, 3, 3, 3, new Color(238, 96, 96)));
                 new PrizeShowPane(targetPrizeSubPanel.getPropName());
+                finalPrize = targetPrizeSubPanel.getPropName();
+                lotteryDone = true;
               }
             }
             new paintName().start();

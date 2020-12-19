@@ -7,18 +7,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Comparator;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.Border;
 
 public class RankingListPanel extends JPanel{
   private final JButton returnButton = new JButton();
@@ -33,27 +29,17 @@ public class RankingListPanel extends JPanel{
   }
 
   public void run() {
-
-    class JLayeredPaneWithBlack extends JLayeredPane {
-
-      @Override
-      protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        ImageIcon background = new ImageIcon("resources/blackBackground.jpg");
-        background.paintIcon(this, g, 0, 0);
-      }
-    }
-
+    
     setBackground(new Color(61, 57, 57, 255));
     setPreferredSize(new Dimension(700,400));
     setLayout(new BorderLayout());
 
-    JLayeredPaneWithBlack rankingPanel = new JLayeredPaneWithBlack();
+    JLayeredPaneWithBack rankingPanel = new JLayeredPaneWithBack("resources/blackBackground.jpg");
     rankingPanel.setPreferredSize(new Dimension(665,400));
     rankingPanel.setLayout(new VerticalFlowLayout());
 
     // 退出
-    JLayeredPaneWithBlack exitPanel = new JLayeredPaneWithBlack();
+    JLayeredPaneWithBack exitPanel = new JLayeredPaneWithBack("resources/blackBackground.jpg");
     exitPanel.setPreferredSize(new Dimension(20, 400));
     exitPanel.setLayout(new BorderLayout());
     add(exitPanel, BorderLayout.EAST);
