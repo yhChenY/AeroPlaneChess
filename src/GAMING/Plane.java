@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.nio.file.attribute.FileOwnerAttributeView;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -19,9 +20,8 @@ public class Plane {
     button = new JButton();
     this.color = color;
     state = State.FORWARD;
-    int i=(int)(Math.random()*50);
-    System.out.println(i+"produced");
-    setPosition(MapSystem.getBlocks().get(i));
+    System.out.println("Produced Plane" + color);
+    setPosition(MapSystem.shitBlock);
     button.setIcon(new ImageIcon(
         new ImageIcon("resources/" + color.getColor() + "Airplane.png").getImage()
             .getScaledInstance(36, 31, Image.SCALE_DEFAULT)));
@@ -30,9 +30,9 @@ public class Plane {
     button.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        setPosition(MapSystem.getNthBlock(0));
+//        setPosition(MapSystem.getNthBlock(0));
         super.mouseClicked(e);
-        System.out.println("clicked"+color);
+        System.out.println("clicked" + color);
         run(Main.getChosenStep());
       }
     });
@@ -88,8 +88,7 @@ public class Plane {
     if (dest.getColor() == color && dest.getType() == Block.Type.COMMON) {
       dest = dest.getNextNBlock(4, this);
       setPosition(dest);
-    }
-    else if (dest.getColor() == color && dest.getType() == Block.Type.FLY) {
+    } else if (dest.getColor() == color && dest.getType() == Block.Type.FLY) {
       dest = dest.getFlyBlock();
       setPosition(dest);
     }
@@ -101,4 +100,14 @@ public class Plane {
     FORWARD, BACKWARD
   }
   
+  public void initialize() {
+    hasSetOff = false;
+    state = State.FORWARD;
+    position = MapSystem.shitBlock;
+  }
+  
+  public String toString(int n) {
+    return " " + color + n + "position: " + position.getId() + " \n" +
+           " " + color + n + "hasSetOff: " + hasSetOff + " \n" ;
+  }
 }

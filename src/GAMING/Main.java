@@ -1,7 +1,11 @@
 package GAMING;
 
+import gui.Game;
 import gui.MainMenu;
 import utils.*;
+
+import java.io.File;
+import java.io.FileWriter;
 
 public class Main {
   static int nowRank = 1;
@@ -22,7 +26,7 @@ public class Main {
   static Player[] players = new Player[4];
   static Plane plane = null;
   static int chosenStep=1;
-  static Color nowPlayer;
+  static Color nowPlayer=Color.RED;
   static MainMenu mainMenu;
   public static void playerWin(Player player) {
     player.setRank(nowRank);
@@ -39,8 +43,7 @@ public class Main {
     players[1] = new Player(Color.YELLOW);
     players[2] = new Player(Color.BLUE);
     players[3] = new Player(Color.GREEN);
-    mainMenu = new MainMenu();
-    
+//    mainMenu = new MainMenu();
 //    if (!isOnLineGame) {
 //      players[0].setHuman();
 //      do {
@@ -278,10 +281,45 @@ public class Main {
     ableToProduct=!(product==0);
     quotient=big%small==0?big/small:0;
     ableToQuotient=!(quotient==0);
-    
+    isOnLineGame=false;
+    ope='+';
+    hasGotOpe=false;
+    hasGotPlane=false;
+    for(Player p:players){
+      p.initialize();
+    }
+    plane=null;
+    chosenStep=1;
+    nowPlayer=Color.RED;
   }
   
   public static MainMenu getMainMenu() {
     return mainMenu;
+  }
+  
+  public static void saveGameData(){
+    try {
+      File file = new File("resources/savedGame.yaml");
+      if (!file.exists()) {
+        file.createNewFile();
+      }
+      FileWriter fw = new FileWriter(file,true);
+      fw.write(dataToString());
+      fw.close();
+    } catch (Exception ignored) {
+      System.out.println("Save data failed!!!");
+    }
+    System.out.println("Save data successfully.");
+  }
+  
+  public static String dataToString(){
+    return "\n" +
+        "- \n" +
+        " nowPlayer: " + nowPlayer + " \n" +
+        " nowRank: " +  nowRank + " \n" + " "
+        + players[0].toString()
+        + players[1].toString()
+        + players[2].toString()
+        + players[3].toString();
   }
 }
