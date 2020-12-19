@@ -34,7 +34,7 @@ public class RollDiceDialog extends JDialog {
     setLayout(layout);
 
     plusButton.setFont(font);
-    plusButton.addMouseListener(new MouseAdapter() {
+    plusButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
@@ -45,7 +45,7 @@ public class RollDiceDialog extends JDialog {
       }
     });
     minusButton.setFont(font);
-    minusButton.addMouseListener(new MouseAdapter() {
+    minusButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
@@ -55,7 +55,7 @@ public class RollDiceDialog extends JDialog {
       }
     });
     multiplyButton.setFont(font);
-    multiplyButton.addMouseListener(new MouseAdapter() {
+    multiplyButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
@@ -65,7 +65,7 @@ public class RollDiceDialog extends JDialog {
       }
     });
     divideButton.setFont(font);
-    divideButton.addMouseListener(new MouseAdapter() {
+    divideButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
@@ -119,22 +119,21 @@ public class RollDiceDialog extends JDialog {
           if (!inputNumber2.getText().equals("") && e.getKeyCode() == KeyEvent.VK_ENTER) {
             randomNumber[1] = Integer.parseInt(inputNumber2.getText());
             inputNumber2.transferFocus();
+            boolean[] ifValid = ifValid(randomNumber[0], randomNumber[1]);
+            if(ifValid[0]) {
+              plusButton.setEnabled(true);
+              minusButton.setEnabled(true);
+              multiplyButton.setEnabled(ifValid[1]);
+              divideButton.setEnabled(ifValid[2]);
+            } else {
+              plusButton.setEnabled(false);
+              minusButton.setEnabled(false);
+              multiplyButton.setEnabled(false);
+              divideButton.setEnabled(false);
+            }
           }
         }
       });
-
-      boolean[] ifValid = ifValid(randomNumber[1], randomNumber[2]);
-      if(ifValid[0]) {
-        plusButton.setEnabled(true);
-        minusButton.setEnabled(true);
-        multiplyButton.setEnabled(ifValid[1]);
-        divideButton.setEnabled(ifValid[2]);
-      } else {
-        plusButton.setEnabled(false);
-        minusButton.setEnabled(false);
-        multiplyButton.setEnabled(false);
-        divideButton.setEnabled(false);
-      }
 
       constraints.gridx = 0;
       constraints.gridy = 0;
@@ -207,9 +206,9 @@ public class RollDiceDialog extends JDialog {
   private boolean[] ifValid(int number1, int number2) {
     if (0 < number1 && number1 < 7 && 0 < number2 && number2 < 7) {
       boolean[] result = new boolean[3];
-      result[1] = true;
-      result[2] = number1 * number2 < 7;
-      result[3] =
+      result[0] = true;
+      result[1] = number1 * number2 < 7;
+      result[2] =
           (number1 / number2) == (int) (number1 / number2) || (number2 / number1) == (int) (number2
               / number1);
       return result;

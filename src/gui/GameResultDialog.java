@@ -1,5 +1,6 @@
 package gui;
 
+import gui.BackgroundMusicSystem.Status;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,6 +12,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 public class GameResultDialog extends JDialog {
+  private BackgroundMusicSystem bgm;
+  private Thread backgroundMusicThread;
   private JLabel resultLabel = new JLabel();
   private JButton exitButton = new JButton("Exit");
   Font font = new Font("Arial", Font.PLAIN, 16);
@@ -25,18 +28,25 @@ public class GameResultDialog extends JDialog {
     setLayout(layout);
 
     if(gameResult) {
+      bgm = new BackgroundMusicSystem(Status.VICTORY);
       resultLabel.setText("Congrats! You won the game.");
     } else {
+      bgm = new BackgroundMusicSystem(Status.DEFEAT);
       resultLabel.setText("Sorry, You lost the game.");
     }
+
+    backgroundMusicThread = new Thread(bgm);
+    backgroundMusicThread.start();
+
     resultLabel.setFont(font);
     resultLabel.setHorizontalAlignment(JLabel.CENTER);
 
     exitButton.setFont(font);
-    exitButton.addMouseListener(new MouseAdapter() {
+    exitButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
+        bgm.stop();
         dispose();
         new MainMenu();
       }

@@ -5,6 +5,7 @@ import GAMING.Plane;
 import GAMING.Player;
 import chatroom.ChatRoom;
 import chatroom.User;
+import gui.BackgroundMusicSystem.Status;
 import gui.playerbase.BasePanel;
 import gui.playerbase.Color;
 import java.awt.Component;
@@ -42,6 +43,8 @@ public class Game extends JFrame {
   private JButton launchAPlaneButton = new JButton("Launch a plane");
   private boolean cheatingMode = false;
   private Player[] players = Main.getPlayers();
+  private BackgroundMusicSystem bgm;
+  private Thread backgroundMusicThread;
 
   /**
    * Start a new game.
@@ -71,6 +74,10 @@ public class Game extends JFrame {
         e.printStackTrace();
       }
     }
+
+    bgm = new BackgroundMusicSystem(Status.GAMING);
+    backgroundMusicThread = new Thread(bgm);
+    backgroundMusicThread.start();
 
     createComponent(ifOnline);
   }
@@ -114,10 +121,11 @@ public class Game extends JFrame {
     surrenderButton.setBounds(1250, 680, 150, 50);
     Font font = new Font("Ravie", Font.PLAIN, 16);
     surrenderButton.setFont(font);
-    surrenderButton.addMouseListener(new MouseAdapter() {
+    surrenderButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
+        bgm.stop();
         dispose();
         //resetServer();
         new MainMenu();
@@ -127,7 +135,7 @@ public class Game extends JFrame {
     saveGameButton.setBounds(1250, 600, 150, 50);
     font = new Font("Ravie", Font.PLAIN, 16);
     saveGameButton.setFont(font);
-    saveGameButton.addMouseListener(new MouseAdapter() {
+    saveGameButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
@@ -139,7 +147,7 @@ public class Game extends JFrame {
 
     rollDiceButton.setBounds(1250, 520, 150, 50);
     rollDiceButton.setFont(font);
-    rollDiceButton.addMouseListener(new MouseAdapter() {
+    rollDiceButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
@@ -150,7 +158,7 @@ public class Game extends JFrame {
 
     toggleCheatingModeButton.setBounds(1250, 440, 150, 50);
     toggleCheatingModeButton.setFont(font);
-    toggleCheatingModeButton.addMouseListener(new MouseAdapter() {
+    toggleCheatingModeButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
@@ -161,7 +169,7 @@ public class Game extends JFrame {
 
     launchAPlaneButton.setBounds(1230, 360, 190, 50);
     launchAPlaneButton.setFont(font);
-    launchAPlaneButton.addMouseListener(new MouseAdapter() {
+    launchAPlaneButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);

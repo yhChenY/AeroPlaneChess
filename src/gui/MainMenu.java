@@ -3,6 +3,9 @@ package gui;
 import GAMING.Main;
 import chatroom.User;
 
+import gui.BackgroundMusicSystem.Status;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -20,6 +23,8 @@ public class MainMenu extends JFrame {
   JButton exitButton = new JButton("Exit");
   JCheckBox chooseIfOnline = new JCheckBox("Online Mode", false);
   JDialog chooseTeamMate = new JDialog();
+  private BackgroundMusicSystem bgm;
+  private Thread backgroundMusicThread;
 
   JDialog settings = new JDialog();
   Font font = new Font("Ravie", Font.PLAIN, 24);
@@ -32,6 +37,9 @@ public class MainMenu extends JFrame {
   GridBagConstraints constraints = new GridBagConstraints();
 
   public MainMenu() {
+    bgm = new BackgroundMusicSystem(Status.MAIN_MENU);
+    backgroundMusicThread = new Thread(bgm);
+    backgroundMusicThread.start();
     setTitle("Rick and Morty's Gamble");
 
     createComponent();
@@ -61,10 +69,11 @@ public class MainMenu extends JFrame {
     constraints.insets = new Insets(380,500,15,500);
     constraints.weightx = 1; constraints.weighty = 1;
     startNew.setFont(font);
-    startNew.addMouseListener(new MouseAdapter() {
+    startNew.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
+        bgm.stop();
         dispose();
         game = new Game(chooseIfOnline.isSelected(), user);
       }
@@ -77,7 +86,7 @@ public class MainMenu extends JFrame {
     constraints.gridwidth = 3; constraints.gridheight = 2;
     loadSaveButton.setFont(font);
     loadSaveButton.setFocusPainted(false);
-    loadSaveButton.addMouseListener(new MouseAdapter() {
+    loadSaveButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
@@ -89,7 +98,7 @@ public class MainMenu extends JFrame {
     constraints.gridx = 1; constraints.gridy = 4;
     signIn.setFont(font);
     signIn.setFocusPainted(false);
-    signIn.addMouseListener(new MouseAdapter() {
+    signIn.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         JDialog account = new AccountDialog();
@@ -100,7 +109,7 @@ public class MainMenu extends JFrame {
     constraints.gridx = 1; constraints.gridy = 6;
     leaderboardButton.setFont(font);
     leaderboardButton.setFocusPainted(false);
-    leaderboardButton.addMouseListener(new MouseAdapter() {
+    leaderboardButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
@@ -112,10 +121,11 @@ public class MainMenu extends JFrame {
     constraints.gridx = 1; constraints.gridy = 8;
     exitButton.setFont(font);
     exitButton.setFocusPainted(false);
-    exitButton.addMouseListener(new MouseAdapter() {
+    exitButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
+        bgm.stop();
         System.exit(0);
       }
     });
@@ -128,6 +138,22 @@ public class MainMenu extends JFrame {
     chooseIfOnline.setOpaque(false);
     chooseIfOnline.setFocusPainted(false);
     layeredPane.add(chooseIfOnline, constraints, JLayeredPane.PALETTE_LAYER);
+
+    try {
+      InetAddress ipAddr = InetAddress.getLocalHost();
+      String ipAddressString = ipAddr.getHostAddress();
+      JLabel ipAddressLabel = new JLabel(ipAddressString);
+      ipAddressLabel.setFont(new Font("Ravie", Font.PLAIN, 20));
+      ipAddressLabel.setForeground(new Color(0xfbfe93));
+      ipAddressLabel.setHorizontalAlignment(JLabel.RIGHT);
+      ipAddressLabel.setOpaque(false);
+      constraints.anchor = GridBagConstraints.EAST;
+      constraints.gridx = 2; constraints.gridy = 10;
+      constraints.insets = new Insets(5, 1175, 15, 20);
+      layeredPane.add(ipAddressLabel, constraints, JLayeredPane.PALETTE_LAYER);
+    } catch (UnknownHostException e) {
+      e.printStackTrace();
+    }
   }
   
   public Game getGame() {
