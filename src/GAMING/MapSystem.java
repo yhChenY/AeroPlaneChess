@@ -39,6 +39,7 @@ public class MapSystem {
       block.setNextBlock(getNthBlock(block.getNextId()));
       block.setPreBlock(getNthBlock(block.getPreId()));
     }
+    //剩余关系未加入
   }
   
   public static void saveBlocks() {

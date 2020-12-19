@@ -15,25 +15,29 @@ public class waitOpeThread implements Runnable {
     try {
       while (!Main.hasGotOpe) {
         Thread.sleep(50);
-        switch (Main.ope) {
-          case '+':
-            Main.chosenStep = Main.sum;
-            System.out.println("Got ope and chosenStep");
-            break;
-          case '-':
-            Main.chosenStep = Main.sub;
-            break;
-          case '*':
-            Main.chosenStep = Main.product;
-            break;
-          case '/':
-            Main.chosenStep = Main.quotient;
-            break;
+        if (Main.hasGotOpe) {
+          switch (Main.ope) {
+            case '+':
+              Main.chosenStep = Main.sum;
+              break;
+            case '-':
+              Main.chosenStep = Main.sub;
+              break;
+            case '*':
+              Main.chosenStep = Main.product;
+              break;
+            case '/':
+              Main.chosenStep = Main.quotient;
+              break;
+          }
+          System.out.println(Main.nowPlayer + " Got Ope");
         }
       }
-    } catch (InterruptedException e) {
+    } catch (
+        InterruptedException e) {
       System.out.println("Thread " + threadName + " interrupted");
     }
+    
   }
   
   public void start() {

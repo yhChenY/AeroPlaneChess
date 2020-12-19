@@ -25,9 +25,10 @@ public class Main {
   static boolean hasGotPlane = false;
   static Player[] players = new Player[4];
   static Plane plane = null;
-  static int chosenStep=1;
-  static Color nowPlayer=Color.RED;
+  static int chosenStep = 1;
+  static Color nowPlayer = Color.RED;
   static MainMenu mainMenu;
+  
   public static void playerWin(Player player) {
     player.setRank(nowRank);
     nowRank++;
@@ -36,13 +37,14 @@ public class Main {
   static {
     MapSystem.loadBlocks();
     System.out.println("载入block完毕");
-  }
-   
-  public static void main(String[] args) {
     players[0] = new Player(Color.RED);
     players[1] = new Player(Color.YELLOW);
     players[2] = new Player(Color.BLUE);
     players[3] = new Player(Color.GREEN);
+  }
+  
+  public static void main(String[] args) {
+
 //    mainMenu = new MainMenu();
 //    if (!isOnLineGame) {
 //      players[0].setHuman();
@@ -253,57 +255,52 @@ public class Main {
     }
   }
   
-  public void playerTurnStart(Player player) {
-    if (player.isWined()) {
-      nextTurn(player);
-    } else {
-      
-      nextTurn(player);
-    }
+  public static void playerTurnStart(Player player) {
+    nowPlayer = player.color;
   }
   
-  private void nextTurn(Player player) {
-    if (player.getColor() == Color.RED) playerTurnStart(players[1]);
-    else if (player.getColor() == Color.YELLOW) playerTurnStart(players[2]);
-    else if (player.getColor() == Color.BLUE) playerTurnStart(players[3]);
+  public static void nextTurn() {
+    if (nowPlayer == Color.RED) playerTurnStart(players[1]);
+    else if (nowPlayer == Color.YELLOW) playerTurnStart(players[2]);
+    else if (nowPlayer == Color.BLUE) playerTurnStart(players[3]);
     else playerTurnStart(players[0]);
   }
   
-  public void initializeData(){
-    nowRank=1;
-    roll1=1;
-    roll2=1;
-    big= Math.max(roll1, roll2);
-    small=Math.min(roll1,roll2);
-    sum=roll1+roll2;
-    sub=big-small;
-    product=roll1*roll2>12?roll1*roll2:0;
-    ableToProduct=!(product==0);
-    quotient=big%small==0?big/small:0;
-    ableToQuotient=!(quotient==0);
-    isOnLineGame=false;
-    ope='+';
-    hasGotOpe=false;
-    hasGotPlane=false;
-    for(Player p:players){
+  public static void initializeData() {
+    nowRank = 1;
+    roll1 = 1;
+    roll2 = 1;
+    big = Math.max(roll1, roll2);
+    small = Math.min(roll1, roll2);
+    sum = roll1 + roll2;
+    sub = big - small;
+    product = roll1 * roll2 > 12 ? roll1 * roll2 : 0;
+    ableToProduct = !(product == 0);
+    quotient = big % small == 0 ? big / small : 0;
+    ableToQuotient = !(quotient == 0);
+    isOnLineGame = false;
+    ope = '+';
+    hasGotOpe = false;
+    hasGotPlane = false;
+    for (Player p : players) {
       p.initialize();
     }
-    plane=null;
-    chosenStep=1;
-    nowPlayer=Color.RED;
+    plane = null;
+    chosenStep = 1;
+    nowPlayer = Color.RED;
   }
   
   public static MainMenu getMainMenu() {
     return mainMenu;
   }
   
-  public static void saveGameData(){
+  public static void saveGameData() {
     try {
       File file = new File("resources/savedGame.yaml");
       if (!file.exists()) {
         file.createNewFile();
       }
-      FileWriter fw = new FileWriter(file,true);
+      FileWriter fw = new FileWriter(file, true);
       fw.write(dataToString());
       fw.close();
     } catch (Exception ignored) {
@@ -312,14 +309,26 @@ public class Main {
     System.out.println("Save data successfully.");
   }
   
-  public static String dataToString(){
+  public static String dataToString() {
     return "\n" +
         "- \n" +
         " nowPlayer: " + nowPlayer + " \n" +
-        " nowRank: " +  nowRank + " \n" + " "
+        " nowRank: " + nowRank + " \n" + " "
         + players[0].toString()
         + players[1].toString()
         + players[2].toString()
         + players[3].toString();
+  }
+  public static void roll(){
+    roll1 = util.random(1, 6);
+    roll2 = util.random(1, 6);
+    big = Math.max(roll1, roll2);
+    small = Math.min(roll1, roll2);
+    sum = roll1 + roll2;
+    product = roll1 * roll2;
+    ableToProduct = product <= 12;
+    sub = big - small;
+    ableToQuotient = big % small == 0;
+    quotient = ableToQuotient ? big / small : 0;
   }
 }
