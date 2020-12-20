@@ -127,6 +127,7 @@ public class Game extends JFrame {
         super.mouseClicked(e);
         bgm.stop();
         dispose();
+        Main.initializeData();
         //resetServer();
         new MainMenu();
       }
