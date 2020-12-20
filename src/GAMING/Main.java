@@ -28,8 +28,8 @@ public class Main {
   static Player[] players = new Player[4];
   static Plane plane = null;
   static int chosenStep = 1;
-  static Color nowPlayer = RED;
-  static MainMenu mainMenu;
+  public static Color nowPlayer = RED;
+  public static MainMenu mainMenu;
   
   public static void playerWin(Player player) {
     player.setRank(nowRank);

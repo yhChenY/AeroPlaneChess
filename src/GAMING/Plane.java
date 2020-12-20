@@ -102,6 +102,7 @@ public class Plane {
   }
   
   public void run(int n) {
+    System.out.println("Plane Run Steps: " + n);
     Block dest = position.getNextNBlock(n, this);
     setPosition(dest);
     if (dest.getColor() == color && dest.getType() == Block.Type.COMMON) {

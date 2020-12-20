@@ -13,12 +13,13 @@ public class waitOpeThread implements Runnable {
   public void run() {
     System.out.println("Running " + threadName);
     try {
+      Main.roll();
       while (!Main.hasGotOpe) {
         Thread.sleep(50);
-        Main.roll();
         if (Main.hasGotOpe) {
-          if(Main.getRoll1()==6||Main.getRoll2()==6){
-            Main.getPlayerByColor(Main.nowPlayer).setOffOnePlane();
+          if (Main.getRoll1() == 6 || Main.getRoll2() == 6) {
+//            Main.getPlayerByColor(Main.nowPlayer).setOffOnePlane();
+//            Main.getMainMenu().getGame().flushGameFrame();
           }
           switch (Main.ope) {
             case '+':
@@ -34,7 +35,7 @@ public class waitOpeThread implements Runnable {
               Main.chosenStep = Main.quotient;
               break;
           }
-          System.out.println(Main.nowPlayer + " Got Ope");
+          System.out.println(Main.nowPlayer + " Got Ope" + " chosenStep is " + Main.chosenStep);
         }
       }
     } catch (

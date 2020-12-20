@@ -4,7 +4,7 @@ import gui.MainMenu;
 
 public class test {
   public static void main(String[] args) {
-    MainMenu mainMenu = new MainMenu();
+    Main.mainMenu = new MainMenu();
 //    Block[] blocks = new Block[80];
 //    blocks[0] = new Block(Color.RED, Block.Type.COMMON, 534, 94, 0, 1, 51);
 //    blocks[1] = new Block(Color.YELLOW, Block.Type.COMMON, 534, 138, 1, 2, 0);

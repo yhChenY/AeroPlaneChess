@@ -38,7 +38,18 @@ public class Player {
   }
   
   public void setOffOnePlane() {
-    toBeSetOff--;
+    if (toBeSetOff > 0) {
+      toBeSetOff--;
+    }
+    if (!planes[0].isHasSetOff()) {
+      planes[0].setOff();
+    } else if (!planes[1].isHasSetOff()) {
+      planes[1].setOff();
+    } else if (!planes[2].isHasSetOff()) {
+      planes[2].setOff();
+    } else if (!planes[3].isHasSetOff()) {
+      planes[3].setOff();
+    }
   }
   
   public void killedOnePlane() {

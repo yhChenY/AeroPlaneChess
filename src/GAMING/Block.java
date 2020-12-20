@@ -82,7 +82,7 @@ public class Block {
       return getNextNBlock(2 * distance - n, plane);
     }
     if (n == 1) return getNextBlock(plane);
-    else return getNextNBlock(n - 1, plane);
+    else return getNextBlock(plane).getNextNBlock(n - 1, plane);
   }
   
   private Block getPreNBlock(int n) {

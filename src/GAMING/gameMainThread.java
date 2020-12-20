@@ -32,6 +32,7 @@ public class gameMainThread extends Thread {
           while (!hasGotPlane) {
             Thread.sleep(20);
           }
+          System.out.println("run!!!!");
           plane.run(chosenStep);
           nextTurn();
         }
