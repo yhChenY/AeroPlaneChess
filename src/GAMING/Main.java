@@ -7,6 +7,8 @@ import utils.*;
 import java.io.File;
 import java.io.FileWriter;
 
+import static GAMING.Color.*;
+
 public class Main {
   static int nowRank = 1;
   static int roll1;
@@ -26,7 +28,7 @@ public class Main {
   static Player[] players = new Player[4];
   static Plane plane = null;
   static int chosenStep = 1;
-  static Color nowPlayer = Color.RED;
+  static Color nowPlayer = RED;
   static MainMenu mainMenu;
   
   public static void playerWin(Player player) {
@@ -37,7 +39,7 @@ public class Main {
   static {
     MapSystem.loadBlocks();
     System.out.println("载入block完毕");
-    players[0] = new Player(Color.RED);
+    players[0] = new Player(RED);
     players[1] = new Player(Color.YELLOW);
     players[2] = new Player(Color.BLUE);
     players[3] = new Player(Color.GREEN);
@@ -260,7 +262,7 @@ public class Main {
   }
   
   public static void nextTurn() {
-    if (nowPlayer == Color.RED) playerTurnStart(players[1]);
+    if (nowPlayer == RED) playerTurnStart(players[1]);
     else if (nowPlayer == Color.YELLOW) playerTurnStart(players[2]);
     else if (nowPlayer == Color.BLUE) playerTurnStart(players[3]);
     else playerTurnStart(players[0]);
@@ -287,7 +289,7 @@ public class Main {
     }
     plane = null;
     chosenStep = 1;
-    nowPlayer = Color.RED;
+    nowPlayer = RED;
   }
   
   public static MainMenu getMainMenu() {
@@ -319,7 +321,8 @@ public class Main {
         + players[2].toString()
         + players[3].toString();
   }
-  public static void roll(){
+  
+  public static void roll() {
     roll1 = util.random(1, 6);
     roll2 = util.random(1, 6);
     big = Math.max(roll1, roll2);
@@ -330,5 +333,15 @@ public class Main {
     sub = big - small;
     ableToQuotient = big % small == 0;
     quotient = ableToQuotient ? big / small : 0;
+  }
+  
+  public static Player getPlayerByColor(Color color) {
+    if (color == RED) {
+      return players[0];
+    } else if (color == YELLOW) {
+      return players[1];
+    } else if (color == BLUE) {
+      return players[2];
+    } else return players[3];
   }
 }

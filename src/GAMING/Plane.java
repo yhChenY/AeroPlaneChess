@@ -1,10 +1,10 @@
 package GAMING;
 
-import java.awt.Dimension;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.nio.file.attribute.FileOwnerAttributeView;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -15,8 +15,10 @@ public class Plane {
   private Block position;
   private boolean hasSetOff = false;
   private JButton button;
+  private Player father;
   
-  public Plane(Color color) {
+  public Plane(Color color, Player player) {
+    father = player;
     button = new JButton();
     this.color = color;
     state = State.FORWARD;
@@ -43,7 +45,24 @@ public class Plane {
   
   public void setOff() {
     hasSetOff = true;
-    
+    int n = -1;
+    if (color == Color.RED) {
+      n = 0;
+    } else if (color == Color.YELLOW) {
+      n = 13;
+    } else if (color == Color.BLUE) {
+      n = 26;
+    } else if (color == Color.GREEN) {
+      n = 39;
+    }
+    setPosition(MapSystem.getNthBlock(n));
+    father.setOffOnePlane();
+  }
+  
+  public void inSetOff() {
+    hasSetOff = false;
+    setPosition(MapSystem.shitBlock);
+    father.killedOnePlane();
   }
   
   public boolean isHasSetOff() {
@@ -108,6 +127,6 @@ public class Plane {
   
   public String toString(int n) {
     return " " + color + n + "position: " + position.getId() + " \n" +
-           " " + color + n + "hasSetOff: " + hasSetOff + " \n" ;
+        " " + color + n + "hasSetOff: " + hasSetOff + " \n";
   }
 }

@@ -17,7 +17,7 @@ public class Player {
     this.color = color;
     planes = new Plane[4];
     for (int i = 0; i < 4; i++) {
-      planes[i] = new Plane(color);
+      planes[i] = new Plane(color, this);
     }
   }
   
@@ -37,9 +37,12 @@ public class Player {
     return toBeSetOff;
   }
   
-  public void setOff(Plane plane) {
-    plane.setOff();
+  public void setOffOnePlane() {
     toBeSetOff--;
+  }
+  
+  public void killedOnePlane() {
+    toBeSetOff++;
   }
   
   public int getHasFinished() {
@@ -95,7 +98,7 @@ public class Player {
   }
   
   @Override
-  public String toString(){
+  public String toString() {
     String p0 = planes[0].toString(0);
     String p1 = planes[1].toString(1);
     String p2 = planes[2].toString(2);

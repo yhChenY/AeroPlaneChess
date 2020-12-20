@@ -129,7 +129,13 @@ public class Block {
   }
   
   public void killPlane() {
-  
+    for (Player p : Main.players) {
+      for (Plane plane : p.getPlanes()) {
+        if (plane.getPosition().getId() == id) {
+          plane.inSetOff();
+        }
+      }
+    }
   }
   
   public int getId() {
