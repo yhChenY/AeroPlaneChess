@@ -59,7 +59,6 @@ public class BackgroundMusicSystem implements Runnable {
     } catch (LineUnavailableException e) {
       e.printStackTrace();
     }
-    System.out.println("Music playing. Can you hear?");
     audioDataLine.start();
   }
 

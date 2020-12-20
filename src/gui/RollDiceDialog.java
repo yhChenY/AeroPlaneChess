@@ -10,7 +10,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -30,9 +29,10 @@ public class RollDiceDialog extends JDialog {
     JButton minusButton = new JButton("-");
     JButton multiplyButton = new JButton("x");
     JButton divideButton = new JButton("÷");
+    JButton launchPlaneButton = new JButton("or launch a plane");
     GridBagLayout layout = new GridBagLayout();
     GridBagConstraints constraints = new GridBagConstraints();
-    Font font = new Font("Arial", Font.PLAIN, 16);
+    Font font = new Font("Arial", Font.BOLD, 16);
     
     setLayout(layout);
     
@@ -76,9 +76,19 @@ public class RollDiceDialog extends JDialog {
         dispose();
       }
     });
+    launchPlaneButton.setFont(font);
+    launchPlaneButton.setEnabled(false);
+    launchPlaneButton.addMouseListener(new gui.MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        super.mouseClicked(e);
+        Main.getPlayerByColor(Main.nowPlayer).setOffOnePlane();
+        Main.getMainMenu().getGame().flushGameFrame();
+      }
+    });
     
     constraints.fill = GridBagConstraints.BOTH;
-    constraints.insets = new Insets(50, 20, 10, 20);
+//    constraints.insets = new Insets(50, 20, 10, 20);
     
     if (!cheatingMode) {
       multiplyButton.setEnabled(ableToProduct);
@@ -91,12 +101,12 @@ public class RollDiceDialog extends JDialog {
       constraints.gridx = 0;
       constraints.gridy = 0;
       constraints.gridwidth = 4;
-      constraints.gridheight = 1;
+      constraints.gridheight = 2;
       constraints.weightx = 1;
       constraints.weighty = 1;
       add(randomNumbers, constraints);
     } else {
-      JLabel randomNumbers = new JLabel("You rolled: ");
+      JLabel randomNumbers = new JLabel("You roll: ", JLabel.RIGHT);
       randomNumbers.setFont(font);
       
       JTextField inputNumber1 = new JTextField();
@@ -165,21 +175,25 @@ public class RollDiceDialog extends JDialog {
               divideButton.setEnabled(false);
             }
           }
+          if(randomNumber[0] == 6 || randomNumber[1] == 6) {
+            launchPlaneButton.setEnabled(true);
+          }
         }
       });
       
       constraints.gridx = 0;
       constraints.gridy = 0;
       constraints.gridwidth = 1;
-      constraints.gridheight = 1;
+      constraints.gridheight = 2;
       constraints.weightx = 1;
       constraints.weighty = 1;
+      constraints.anchor = GridBagConstraints.EAST;
       add(randomNumbers, constraints);
       
       constraints.gridx = 1;
       constraints.gridy = 0;
       constraints.gridwidth = 1;
-      constraints.gridheight = 1;
+      constraints.gridheight = 2;
       constraints.weightx = 1;
       constraints.weighty = 1;
       add(inputNumber1, constraints);
@@ -187,46 +201,53 @@ public class RollDiceDialog extends JDialog {
       constraints.gridx = 2;
       constraints.gridy = 0;
       constraints.gridwidth = 1;
-      constraints.gridheight = 1;
+      constraints.gridheight = 2;
       constraints.weightx = 1;
       constraints.weighty = 1;
       add(inputNumber2, constraints);
-      
+
       
     }
     
     constraints.gridx = 0;
-    constraints.gridy = 1;
+    constraints.gridy = 2;
     constraints.gridwidth = 1;
     constraints.gridheight = 1;
     constraints.weightx = 1;
-    constraints.weighty = 1;
+    constraints.weighty = 0;
     constraints.insets = new Insets(20, 20, 10, 20);
     add(plusButton, constraints);
     
     constraints.gridx = 1;
-    constraints.gridy = 1;
+    constraints.gridy = 2;
     constraints.gridwidth = 1;
     constraints.gridheight = 1;
     constraints.weightx = 1;
-    constraints.weighty = 1;
+    constraints.weighty = 0;
     add(minusButton, constraints);
     
     constraints.gridx = 2;
-    constraints.gridy = 1;
+    constraints.gridy = 2;
     constraints.gridwidth = 1;
     constraints.gridheight = 1;
     constraints.weightx = 1;
-    constraints.weighty = 1;
+    constraints.weighty = 0;
     add(multiplyButton, constraints);
     
     constraints.gridx = 3;
-    constraints.gridy = 1;
+    constraints.gridy = 2;
     constraints.gridwidth = 1;
     constraints.gridheight = 1;
     constraints.weightx = 1;
-    constraints.weighty = 1;
+    constraints.weighty = 0;
     add(divideButton, constraints);
+
+    constraints.gridx = 0;
+    constraints.gridy = 3;
+    constraints.gridwidth = 4;
+    constraints.gridheight = 0;
+    constraints.anchor = GridBagConstraints.CENTER;
+    add(launchPlaneButton, constraints);
     
     setUndecorated(true);
     setModal(true);

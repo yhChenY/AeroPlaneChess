@@ -40,7 +40,10 @@ public class Game extends JFrame {
   private JButton saveGameButton = new JButton("Save game");
   private JButton rollDiceButton = new JButton("Roll dice");
   private JButton toggleCheatingModeButton = new JButton("Cheating Mode");
-  private JButton launchAPlaneButton = new JButton("Launch a plane");
+//  private JButton launchAPlaneButton = new JButton("Launch a plane");
+  private JButton nextTurnButton = new JButton("Next turn");
+  private Player nowPlayer;
+  private Player thisPlayer;
   private boolean cheatingMode = false;
   private Player[] players = Main.getPlayers();
   private BackgroundMusicSystem bgm;
@@ -53,6 +56,10 @@ public class Game extends JFrame {
    * @param user     Indicates the player.
    */
   public Game(boolean ifOnline, User user) {
+    thisPlayer = Main.getPlayerByColor(GAMING.Color.RED);
+    System.err.println("Using red as default color of player. Change it.");
+    nowPlayer = Main.getPlayerByColor(Main.nowPlayer);
+
     setTitle("Rick and Morty's Gamble");
     Main.setIsOnLineGame(ifOnline);
     try {
@@ -118,18 +125,56 @@ public class Game extends JFrame {
       yellowBase.setBounds(939, 593, 175, 165);
     }
 
-    surrenderButton.setBounds(1250, 680, 150, 50);
     Font font = new Font("Ravie", Font.PLAIN, 16);
-    surrenderButton.setFont(font);
-    surrenderButton.addMouseListener(new gui.MouseAdapter() {
+
+    rollDiceButton.setBounds(1230, 15, 190, 50);
+    rollDiceButton.setFont(font);
+    rollDiceButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        bgm.stop();
-        dispose();
-        Main.initializeData();
-        //resetServer();
-        new MainMenu();
+        new RollDiceDialog(Main.getRoll1(), Main.getRoll2(), Main.isAbleToProduct(),
+            Main.isAbleToQuotient(), cheatingMode);
+        rollDiceButton.setEnabled(false);
+      }
+    });
+
+/*    launchAPlaneButton.setBounds(1230, 95, 190, 50);
+    launchAPlaneButton.setFont(font);
+    launchAPlaneButton.addMouseListener(new gui.MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        super.mouseClicked(e);
+        Main.getPlayerByColor(Main.nowPlayer).setOffOnePlane();
+        flushGameFrame();
+        //launchAPlane();
+      }
+    });*/
+
+    nextTurnButton.setBounds(1230, 175, 190, 50);
+    nextTurnButton.setFont(font);
+    nextTurnButton.addMouseListener(new gui.MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        super.mouseClicked(e);
+        Main.nextTurn();
+      }
+    });
+
+    if(!nowPlayer.equals(thisPlayer)) {
+      rollDiceButton.setEnabled(false);
+//      launchAPlaneButton.setEnabled(false);
+      nextTurnButton.setEnabled(false);
+    }
+
+    toggleCheatingModeButton.setBounds(1250, 520, 150, 50);
+    toggleCheatingModeButton.setFont(font);
+    toggleCheatingModeButton.addMouseListener(new gui.MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        super.mouseClicked(e);
+        cheatingMode = !cheatingMode;
+        toggleCheatingModeButton.setText(cheatingMode ? "Normal Mode" : "Cheating Mode");
       }
     });
 
@@ -146,37 +191,17 @@ public class Game extends JFrame {
       }
     });
 
-    rollDiceButton.setBounds(1250, 520, 150, 50);
-    rollDiceButton.setFont(font);
-    rollDiceButton.addMouseListener(new gui.MouseAdapter() {
+    surrenderButton.setBounds(1250, 680, 150, 50);
+    surrenderButton.setFont(font);
+    surrenderButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        new RollDiceDialog(Main.getRoll1(), Main.getRoll2(), Main.isAbleToProduct(),
-            Main.isAbleToQuotient(), cheatingMode);
-      }
-    });
-
-    toggleCheatingModeButton.setBounds(1250, 440, 150, 50);
-    toggleCheatingModeButton.setFont(font);
-    toggleCheatingModeButton.addMouseListener(new gui.MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        super.mouseClicked(e);
-        cheatingMode = !cheatingMode;
-        toggleCheatingModeButton.setText(cheatingMode ? "Normal Mode" : "Cheating Mode");
-      }
-    });
-
-    launchAPlaneButton.setBounds(1230, 360, 190, 50);
-    launchAPlaneButton.setFont(font);
-    launchAPlaneButton.addMouseListener(new gui.MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        super.mouseClicked(e);
-        Main.getPlayerByColor(Main.nowPlayer).setOffOnePlane();
-        flushGameFrame();
-        //launchAPlane();
+        bgm.stop();
+        dispose();
+        Main.initializeData();
+        //resetServer();
+        new MainMenu();
       }
     });
 
@@ -185,9 +210,10 @@ public class Game extends JFrame {
     layeredPane.add(greenBase, JLayeredPane.MODAL_LAYER);
     layeredPane.add(redBase, JLayeredPane.MODAL_LAYER);
     layeredPane.add(yellowBase, JLayeredPane.MODAL_LAYER);
-    layeredPane.add(launchAPlaneButton, JLayeredPane.MODAL_LAYER);
-    layeredPane.add(toggleCheatingModeButton, JLayeredPane.MODAL_LAYER);
     layeredPane.add(rollDiceButton, JLayeredPane.MODAL_LAYER);
+//    layeredPane.add(launchAPlaneButton, JLayeredPane.MODAL_LAYER);
+    layeredPane.add(nextTurnButton, JLayeredPane.MODAL_LAYER);
+    layeredPane.add(toggleCheatingModeButton, JLayeredPane.MODAL_LAYER);
     layeredPane.add(surrenderButton, JLayeredPane.MODAL_LAYER);
     layeredPane.add(saveGameButton, JLayeredPane.MODAL_LAYER);
     layeredPane.setOpaque(false);
@@ -224,6 +250,10 @@ public class Game extends JFrame {
   }
 
   public void flushGameFrame() {
+
+    rollDiceButton.setEnabled(true);
+    nowPlayer = Main.getPlayerByColor(Main.nowPlayer);
+
     BasePanel.flushBasePanel();
     Map<Player, Plane[]> planes = new HashMap<>(0);
     for (Player p : players) {
