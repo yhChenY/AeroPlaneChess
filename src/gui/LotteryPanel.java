@@ -109,53 +109,56 @@ public class LotteryPanel extends JPanel {
         new MouseAdapter() {
           @Override
           public void mouseReleased(MouseEvent e) {
-            final int[] cnt = {3};
-            class paintName extends Thread {
-              public void run() {
-                //随机数生成1.2~3.6
-                double time = 1.2 + (3.600001 - 1.2) * Math.random();
+            if(startButton.isEnabled()) {
+              final int[] cnt = {3};
+              class paintName extends Thread {
 
-                boolean goDown = true;
-                while (time > 0) {
+                public void run() {
+                  //随机数生成1.2~3.6
+                  double time = 1.2 + (3.600001 - 1.2) * Math.random();
+
+                  boolean goDown = true;
+                  while (time > 0) {
+                    if (cnt[0] == -1) {
+                      cnt[0] = 0;
+                      goDown = false;
+                    }
+                    if (cnt[0] == 4) {
+                      cnt[0] = 3;
+                      goDown = true;
+                    }
+                    subPanels.get(cnt[0]).getNameLabel().setBorder(BorderFactory.createMatteBorder(
+                        3, 3, 3, 3, new Color(238, 96, 96)));
+                    try {
+                      Thread.sleep(300);
+                    } catch (InterruptedException interruptedException) {
+                      interruptedException.printStackTrace();
+                    }
+                    subPanels.get(cnt[0]).getNameLabel().setBorder(null);
+                    if (goDown) {
+                      cnt[0]--;
+                    } else {
+                      cnt[0]++;
+                    }
+                    time -= 0.3;
+                  }
                   if (cnt[0] == -1) {
                     cnt[0] = 0;
-                    goDown = false;
                   }
                   if (cnt[0] == 4) {
                     cnt[0] = 3;
-                    goDown = true;
                   }
-                  subPanels.get(cnt[0]).getNameLabel().setBorder(BorderFactory.createMatteBorder(
+                  SubPanel targetPrizeSubPanel = subPanels.get(cnt[0]);
+                  targetPrizeSubPanel.getNameLabel().setBorder(BorderFactory.createMatteBorder(
                       3, 3, 3, 3, new Color(238, 96, 96)));
-                  try {
-                    Thread.sleep(300);
-                  } catch (InterruptedException interruptedException) {
-                    interruptedException.printStackTrace();
-                  }
-                  subPanels.get(cnt[0]).getNameLabel().setBorder(null);
-                  if (goDown) {
-                    cnt[0]--;
-                  } else {
-                    cnt[0]++;
-                  }
-                  time -= 0.3;
+                  new PrizeShowPane(targetPrizeSubPanel.getPropName());
+                  finalPrize = targetPrizeSubPanel.getPropName();
+                  lotteryDone = true;
                 }
-                if (cnt[0] == -1) {
-                  cnt[0] = 0;
-                }
-                if (cnt[0] == 4) {
-                  cnt[0] = 3;
-                }
-                SubPanel targetPrizeSubPanel = subPanels.get(cnt[0]);
-                targetPrizeSubPanel.getNameLabel().setBorder(BorderFactory.createMatteBorder(
-                    3, 3, 3, 3, new Color(238, 96, 96)));
-                new PrizeShowPane(targetPrizeSubPanel.getPropName());
-                finalPrize = targetPrizeSubPanel.getPropName();
-                lotteryDone = true;
               }
+              new paintName().start();
+              super.mouseReleased(e);
             }
-            new paintName().start();
-            super.mouseReleased(e);
           }
         }
     );

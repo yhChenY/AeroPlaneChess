@@ -46,9 +46,11 @@ public class GameResultDialog extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        bgm.stop();
-        dispose();
-        new MainMenu();
+        if(exitButton.isEnabled()) {
+          bgm.stop();
+          dispose();
+          new MainMenu();
+        }
       }
     });
 

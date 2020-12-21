@@ -138,27 +138,29 @@ public class MainMenu extends JFrame {
           @Override
           public void mouseReleased(MouseEvent e) {
             super.mouseClicked(e);
-            RankingListPanel rlp = new RankingListPanel();
-            constraints.gridx = 1;
-            constraints.gridy = 2;
-            constraints.gridwidth = 5;
-            constraints.gridheight = 1;
-            layeredPane.removeAll();
-            layeredPane.repaint();
-            layeredPane.add(rlp, constraints);
-            layeredPane.validate();
-            JButton returnButton = rlp.getReturnButton();
-            returnButton.addMouseListener(
-                new MouseAdapter() {
-                  @Override
-                  public void mouseReleased(MouseEvent e) {
-                    super.mouseReleased(e);
-                    layeredPane.remove(rlp);
-                    layeredPane.repaint();
-                    createComponent();
+            if(leaderboardButton.isEnabled()) {
+              RankingListPanel rlp = new RankingListPanel();
+              constraints.gridx = 1;
+              constraints.gridy = 2;
+              constraints.gridwidth = 5;
+              constraints.gridheight = 1;
+              layeredPane.removeAll();
+              layeredPane.repaint();
+              layeredPane.add(rlp, constraints);
+              layeredPane.validate();
+              JButton returnButton = rlp.getReturnButton();
+              returnButton.addMouseListener(
+                  new MouseAdapter() {
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                      super.mouseReleased(e);
+                      layeredPane.remove(rlp);
+                      layeredPane.repaint();
+                      createComponent();
+                    }
                   }
-                }
-            );
+              );
+            }
           }
         }
     );

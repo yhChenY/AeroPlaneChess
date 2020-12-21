@@ -133,9 +133,11 @@ public class Game extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        new RollDiceDialog(Main.getRoll1(), Main.getRoll2(), Main.isAbleToProduct(),
-            Main.isAbleToQuotient(), cheatingMode);
-        rollDiceButton.setEnabled(false);
+        if(rollDiceButton.isEnabled()) {
+          new RollDiceDialog(Main.getRoll1(), Main.getRoll2(), Main.isAbleToProduct(),
+              Main.isAbleToQuotient(), cheatingMode);
+          rollDiceButton.setEnabled(false);
+        }
       }
     });
 
@@ -145,9 +147,11 @@ public class Game extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
+        if(launchAPlaneButton.isEnabled()) {
         Main.getPlayerByColor(Main.nowPlayer).setOffOnePlane();
         flushGameFrame();
         //launchAPlane();
+        }
       }
     });*/
 
@@ -157,7 +161,9 @@ public class Game extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        Main.nextTurn();
+        if(nextTurnButton.isEnabled()) {
+          Main.nextTurn();
+        }
       }
     });
 
@@ -173,8 +179,10 @@ public class Game extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
+        if(toggleCheatingModeButton.isEnabled()) {
         cheatingMode = !cheatingMode;
         toggleCheatingModeButton.setText(cheatingMode ? "Normal Mode" : "Cheating Mode");
+        }
       }
     });
 
@@ -185,9 +193,11 @@ public class Game extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        //saveGame();
-        //resetServer();
-        new MainMenu();
+        if(saveGameButton.isEnabled()) {
+          //saveGame();
+          //resetServer();
+          new MainMenu();
+        }
       }
     });
 
@@ -197,11 +207,13 @@ public class Game extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        bgm.stop();
-        dispose();
-        Main.initializeData();
-        //resetServer();
-        new MainMenu();
+        if(surrenderButton.isEnabled()) {
+          bgm.stop();
+          dispose();
+          Main.initializeData();
+          //resetServer();
+          new MainMenu();
+        }
       }
     });
 

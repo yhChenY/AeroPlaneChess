@@ -41,9 +41,11 @@ public class RollDiceDialog extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        Main.setOpe('+');
-        Main.setHasGotOpe(true);
-        dispose();
+        if(plusButton.isEnabled()) {
+          Main.setOpe('+');
+          Main.setHasGotOpe(true);
+          dispose();
+        }
       }
     });
     minusButton.setFont(font);
@@ -51,9 +53,11 @@ public class RollDiceDialog extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        Main.setOpe('-');
-        Main.setHasGotOpe(true);
-        dispose();
+        if(minusButton.isEnabled()) {
+          Main.setOpe('-');
+          Main.setHasGotOpe(true);
+          dispose();
+        }
       }
     });
     multiplyButton.setFont(font);
@@ -61,9 +65,11 @@ public class RollDiceDialog extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        Main.setOpe('*');
-        Main.setHasGotOpe(true);
-        dispose();
+        if(multiplyButton.isEnabled()) {
+          Main.setOpe('*');
+          Main.setHasGotOpe(true);
+          dispose();
+        }
       }
     });
     divideButton.setFont(font);
@@ -71,9 +77,11 @@ public class RollDiceDialog extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        Main.setOpe('/');
-        Main.setHasGotOpe(true);
-        dispose();
+        if(divideButton.isEnabled()) {
+          Main.setOpe('/');
+          Main.setHasGotOpe(true);
+          dispose();
+        }
       }
     });
     launchPlaneButton.setFont(font);
@@ -82,8 +90,10 @@ public class RollDiceDialog extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        Main.getPlayerByColor(Main.nowPlayer).setOffOnePlane();
-        Main.getMainMenu().getGame().flushGameFrame();
+        if(launchPlaneButton.isEnabled()) {
+          Main.getPlayerByColor(Main.nowPlayer).setOffOnePlane();
+          Main.getMainMenu().getGame().flushGameFrame();
+        }
       }
     });
     
