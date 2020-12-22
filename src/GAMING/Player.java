@@ -6,6 +6,8 @@ package GAMING;
 //
 //import java.awt.*;
 
+import gui.GameResultDialog;
+
 import java.util.Map;
 
 public class Player {
@@ -108,6 +110,8 @@ public class Player {
     wined = true;
     setRank(Main.nowRank);
     Main.playerWin(this);
+    new GameResultDialog(Main.nowRank<4);
+    Main.myAccount.addScore(4-Main.nowRank);
   }
   
   public boolean isWined() {
