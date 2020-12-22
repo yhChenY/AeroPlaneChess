@@ -4,6 +4,7 @@ import chatroom.VerticalFlowLayout;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -14,10 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class LotteryPanel extends JPanel {
-  private String finalPrize = null;
-  private boolean lotteryDone = false;
-  public Color backGroundColor = new Color(73, 50, 50);
-  private static final ArrayList<Prop> props = new ArrayList<Prop>(){
+
+  private static final ArrayList<Prop> props = new ArrayList<Prop>() {
     {
       add(new Prop("BOOK", "resources/props/book.png",
           "STOP a round to read this magical book"));
@@ -29,14 +28,9 @@ public class LotteryPanel extends JPanel {
           "DRAW players within 7 blocks ahead of you to your back"));
     }
   };
-
-  public boolean isLotteryDone() {
-    return lotteryDone;
-  }
-
-  public String getFinalPrize() {
-    return finalPrize;
-  }
+  public Color backGroundColor = new Color(73, 50, 50);
+  private String finalPrize = null;
+  private boolean lotteryDone = false;
 
   public LotteryPanel() {
     run();
@@ -46,19 +40,28 @@ public class LotteryPanel extends JPanel {
     return props;
   }
 
+  public boolean isLotteryDone() {
+    return lotteryDone;
+  }
+
+  public String getFinalPrize() {
+    return finalPrize;
+  }
+
   public void run() {
     setBackground(new Color(61, 57, 57, 255));
     setPreferredSize(new Dimension(500, 400));
     setLayout(new BorderLayout());
 
-    JLayeredPaneWithBack prizePanel = new JLayeredPaneWithBack("resources/blackBackground.jpg");
+    JLayeredPaneWithBack prizePanel = new JLayeredPaneWithBack("resources/blackBackground1.jpg");
     prizePanel.setPreferredSize(new Dimension(300, 400));
     prizePanel.setLayout(new VerticalFlowLayout());
 
     class SubPanel extends JPanel {
-      private String propName;
+
       private final String filename;
       private final JLabel nameLabel = new JLabel();
+      private String propName;
 
       public SubPanel(String filename) {
         super();
@@ -100,16 +103,17 @@ public class LotteryPanel extends JPanel {
     }
     add(prizePanel, BorderLayout.WEST);
 
-    JLayeredPaneWithBack confirmPanel = new JLayeredPaneWithBack("resources/blackBackground.jpg");
+    JLayeredPaneWithBack confirmPanel = new JLayeredPaneWithBack("resources/blackBackground2.jpg");
     confirmPanel.setPreferredSize(new Dimension(200, 400));
     confirmPanel.setLayout(null);
     add(confirmPanel, BorderLayout.EAST);
     JButton startButton = new JButton();
     startButton.addMouseListener(
-        new MouseAdapter() {
+        new gui.MouseAdapter() {
           @Override
-          public void mouseReleased(MouseEvent e) {
-            if(startButton.isEnabled()) {
+          public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+            if (startButton.isEnabled()) {
               final int[] cnt = {3};
               class paintName extends Thread {
 
@@ -156,15 +160,21 @@ public class LotteryPanel extends JPanel {
                   lotteryDone = true;
                 }
               }
+              startButton.setEnabled(false);
               new paintName().start();
-              super.mouseReleased(e);
             }
           }
         }
     );
-    startButton.setOpaque(true);
     startButton.setIcon(new ImageIcon("resources/start.png"));
     startButton.setBounds(50, 100, 140, 50);
+    startButton.setMargin(new Insets(0, 0, 0, 0));
+    startButton.setIconTextGap(0);
+    startButton.setBorderPainted(false);
+    startButton.setBorder(null);
+    startButton.setFocusPainted(false);
+    startButton.setContentAreaFilled(false);
+    startButton.setOpaque(false);
     confirmPanel.add(startButton);
 
   }
