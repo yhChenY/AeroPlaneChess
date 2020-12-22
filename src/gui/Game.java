@@ -266,17 +266,18 @@ public class Game extends JFrame {
     nowPlayer = Main.getPlayerByColor(Main.nowPlayer);
 
     BasePanel.flushBasePanel();
-    Map<Player, Plane[]> planes = new HashMap<>(0);
+    Map<Player, Plane[]> planesOfPlayer = new HashMap<>(0);
     for (Player p : players) {
       ArrayList<Plane> planeArrayList = new ArrayList<>(0);
       for (Plane plane : p.getPlanes()) {
         planeArrayList.add(plane);
       }
-      planes.put(p, planeArrayList.toArray(new Plane[0]));
+      planesOfPlayer.put(p, planeArrayList.toArray(new Plane[0]));
     }
     clearDragLayer();
     for (Player p : players) {
-      for (Plane plane : planes.get(p)) {
+      Plane[] planes = planesOfPlayer.get(p);
+      for (Plane plane : planes) {
         JButton planeButton = plane.getButton();
         planeButton.setBounds(plane.getPosition().getX(), plane.getPosition().getY(),
             planeButton.getWidth(), planeButton.getHeight());
