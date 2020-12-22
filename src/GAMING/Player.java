@@ -62,6 +62,7 @@ public class Player {
       planes[3].setOff();
     }
     System.out.println(color + " Set Off A Plane.");
+    Main.mainMenu.getGame().flushGameFrame();
   }
   
   public void finishOnePlane() {

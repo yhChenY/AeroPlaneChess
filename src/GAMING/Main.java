@@ -135,11 +135,13 @@ public class Main {
   }
   
   public static void playerTurnStart(Player player) {
+    mainMenu.getGame().flushGameFrame();
     nowPlayer = player.color;
     System.out.println(nowPlayer + " Turn Started.");
   }
   
   public static void nextTurn() {
+    mainMenu.getGame().flushGameFrame();
     System.out.println(nowPlayer + "Turn Finished");
     if (nowPlayer == RED) {
       playerTurnStart(players[1]);
@@ -215,6 +217,7 @@ public class Main {
     sum = roll1 + roll2;
     product = roll1 * roll2;
     ableToProduct = product <= 12;
+    product = product > 12 ? 0 : product;
     sub = big - small;
     ableToQuotient = big % small == 0;
     quotient = ableToQuotient ? big / small : 0;
