@@ -16,6 +16,7 @@ public class startATurn implements Runnable {
   public void run() {
     try {
       Main.roll();
+      System.out.println(player.getColor() + " rolled " + Main.getRoll1() + " " + Main.getRoll2());
       Main.setOffInTurn = false;
       Main.setHasGotOpe(false);
       Main.setHasGotPlane(false);
@@ -33,9 +34,11 @@ public class startATurn implements Runnable {
         while (!Main.hasGotOpe) {
           Thread.sleep(20);
         }
-        System.out.println(1111);
         if (!Main.setOffInTurn && player.getToBeArrived() > 0) {
           new waitPlaneThread(player.getColor().toString()).start();
+          while(!Main.hasGotPlane){
+            Thread.sleep(20);
+          }
         }
       } else if (able) {
         if ((Main.roll1 == 6 || Main.roll2 == 6) && player.getToBeSetOff() > 0) {
