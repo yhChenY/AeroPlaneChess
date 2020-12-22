@@ -2,6 +2,7 @@ package gui.playerbase;
 
 import GAMING.Main;
 import GAMING.Player;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -124,7 +125,10 @@ public final class BasePanel extends JPanel {
 
   public static void flushBasePanel() {
     for (int i = basePanels.size() - 1; i > basePanels.size() - 4; i--) {
-      basePanels.get(i).repaint();
+      Component[] components = basePanels.get(i).getComponents();
+      for(Component c: components) {
+        c.repaint();
+      }
     }
   }
 

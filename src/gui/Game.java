@@ -263,7 +263,6 @@ public class Game extends JFrame {
 
   public void flushGameFrame() {
 
-    rollDiceButton.setEnabled(true);
     nowPlayer = Main.getPlayerByColor(Main.nowPlayer);
 
     BasePanel.flushBasePanel();
@@ -286,6 +285,7 @@ public class Game extends JFrame {
     }
 
     if(thisPlayer == nowPlayer) {
+      rollDiceButton.setEnabled(true);
       new YourTurnDialog();
     }
   }

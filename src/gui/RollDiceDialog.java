@@ -1,7 +1,6 @@
 package gui;
 
 import GAMING.Main;
-
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -20,10 +19,10 @@ import javax.swing.JTextField;
  * new RollDiceDialog() would be OK.
  */
 public class RollDiceDialog extends JDialog {
-  
-  
+
+
   public RollDiceDialog(int r1, int r2, boolean ableToProduct, boolean ableToQuotient,
-                        boolean cheatingMode) {
+      boolean cheatingMode) {
     int[] randomNumber = new int[2];
     JButton plusButton = new JButton("+");
     JButton minusButton = new JButton("-");
@@ -33,15 +32,15 @@ public class RollDiceDialog extends JDialog {
     GridBagLayout layout = new GridBagLayout();
     GridBagConstraints constraints = new GridBagConstraints();
     Font font = new Font("Arial", Font.BOLD, 16);
-    
+
     setLayout(layout);
-    
+
     plusButton.setFont(font);
     plusButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        if(plusButton.isEnabled()) {
+        if (plusButton.isEnabled()) {
           Main.setOpe('+');
           Main.setHasGotOpe(true);
           dispose();
@@ -53,7 +52,7 @@ public class RollDiceDialog extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        if(minusButton.isEnabled()) {
+        if (minusButton.isEnabled()) {
           Main.setOpe('-');
           Main.setHasGotOpe(true);
           dispose();
@@ -65,7 +64,7 @@ public class RollDiceDialog extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        if(multiplyButton.isEnabled()) {
+        if (multiplyButton.isEnabled()) {
           Main.setOpe('*');
           Main.setHasGotOpe(true);
           dispose();
@@ -77,7 +76,7 @@ public class RollDiceDialog extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        if(divideButton.isEnabled()) {
+        if (divideButton.isEnabled()) {
           Main.setOpe('/');
           Main.setHasGotOpe(true);
           dispose();
@@ -90,22 +89,25 @@ public class RollDiceDialog extends JDialog {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        if(launchPlaneButton.isEnabled()) {
+        if (launchPlaneButton.isEnabled()) {
           Main.getPlayerByColor(Main.nowPlayer).setOffOnePlane();
           Main.getMainMenu().getGame().flushGameFrame();
           dispose();
         }
       }
     });
-    
+
     constraints.fill = GridBagConstraints.BOTH;
 //    constraints.insets = new Insets(50, 20, 10, 20);
-    
+
     if (!cheatingMode) {
       multiplyButton.setEnabled(ableToProduct);
       divideButton.setEnabled(ableToQuotient);
       randomNumber[0] = r1;
       randomNumber[1] = r2;
+      if (randomNumber[0] == 6 || randomNumber[1] == 6) {
+        launchPlaneButton.setEnabled(true);
+      }
       JLabel randomNumbers = new JLabel("You rolled: " + randomNumber[0] + " " + randomNumber[1],
           JLabel.CENTER);
       randomNumbers.setFont(font);
@@ -119,7 +121,7 @@ public class RollDiceDialog extends JDialog {
     } else {
       JLabel randomNumbers = new JLabel("You roll: ", JLabel.RIGHT);
       randomNumbers.setFont(font);
-      
+
       JTextField inputNumber1 = new JTextField();
       inputNumber1.setHorizontalAlignment(JTextField.CENTER);
       inputNumber1.addKeyListener(new KeyAdapter() {
@@ -142,7 +144,7 @@ public class RollDiceDialog extends JDialog {
           }
         }
       });
-      
+
       JTextField inputNumber2 = new JTextField();
       inputNumber2.setHorizontalAlignment(JTextField.CENTER);
       inputNumber2.addKeyListener(new KeyAdapter() {
@@ -174,7 +176,7 @@ public class RollDiceDialog extends JDialog {
           if (!inputNumber2.getText().equals("")) {
             randomNumber[1] = Integer.parseInt(inputNumber2.getText());
             boolean[] ifValid = ifValid(randomNumber[0], randomNumber[1]);
-            if(ifValid[0]) {
+            if (ifValid[0]) {
               plusButton.setEnabled(true);
               minusButton.setEnabled(true);
               multiplyButton.setEnabled(ifValid[1]);
@@ -185,10 +187,13 @@ public class RollDiceDialog extends JDialog {
               multiplyButton.setEnabled(false);
               divideButton.setEnabled(false);
             }
+            if (randomNumber[0] == 6 || randomNumber[1] == 6) {
+              launchPlaneButton.setEnabled(true);
+            }
           }
         }
       });
-      
+
       constraints.gridx = 0;
       constraints.gridy = 0;
       constraints.gridwidth = 1;
@@ -197,7 +202,7 @@ public class RollDiceDialog extends JDialog {
       constraints.weighty = 1;
       constraints.anchor = GridBagConstraints.EAST;
       add(randomNumbers, constraints);
-      
+
       constraints.gridx = 1;
       constraints.gridy = 0;
       constraints.gridwidth = 1;
@@ -205,7 +210,7 @@ public class RollDiceDialog extends JDialog {
       constraints.weightx = 1;
       constraints.weighty = 1;
       add(inputNumber1, constraints);
-      
+
       constraints.gridx = 2;
       constraints.gridy = 0;
       constraints.gridwidth = 1;
@@ -214,9 +219,8 @@ public class RollDiceDialog extends JDialog {
       constraints.weighty = 1;
       add(inputNumber2, constraints);
 
-      
     }
-    
+
     constraints.gridx = 0;
     constraints.gridy = 2;
     constraints.gridwidth = 1;
@@ -225,7 +229,7 @@ public class RollDiceDialog extends JDialog {
     constraints.weighty = 0;
     constraints.insets = new Insets(20, 20, 10, 20);
     add(plusButton, constraints);
-    
+
     constraints.gridx = 1;
     constraints.gridy = 2;
     constraints.gridwidth = 1;
@@ -233,7 +237,7 @@ public class RollDiceDialog extends JDialog {
     constraints.weightx = 1;
     constraints.weighty = 0;
     add(minusButton, constraints);
-    
+
     constraints.gridx = 2;
     constraints.gridy = 2;
     constraints.gridwidth = 1;
@@ -241,7 +245,7 @@ public class RollDiceDialog extends JDialog {
     constraints.weightx = 1;
     constraints.weighty = 0;
     add(multiplyButton, constraints);
-    
+
     constraints.gridx = 3;
     constraints.gridy = 2;
     constraints.gridwidth = 1;
@@ -249,25 +253,24 @@ public class RollDiceDialog extends JDialog {
     constraints.weightx = 1;
     constraints.weighty = 0;
     add(divideButton, constraints);
-
-    if(randomNumber[0] == 6 || randomNumber[1] == 6) {
-      launchPlaneButton.setEnabled(true);
-    }
+    
     constraints.gridx = 0;
     constraints.gridy = 3;
     constraints.gridwidth = 4;
     constraints.gridheight = 0;
     constraints.anchor = GridBagConstraints.CENTER;
     add(launchPlaneButton, constraints);
-    
+
     setUndecorated(true);
     setModal(true);
     setBounds(520, 305, 400, 150);
     setResizable(false);
     setVisible(true);
     setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
+
   }
-  
+
   private boolean[] ifValid(int number1, int number2) {
     if (0 < number1 && number1 < 7 && 0 < number2 && number2 < 7) {
       boolean[] result = new boolean[3];
