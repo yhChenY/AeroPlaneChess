@@ -88,7 +88,7 @@ public class MainMenu extends JFrame {
         dispose();
         game = new Game(chooseIfOnline.isSelected(), user);
         gameMainThread mainThread = new gameMainThread("mainThread");
-        mainThread.setClient(game.getChatRoom().getClient());
+//        mainThread.setClient(game.getChatRoom().getClient());
         mainThread.start();
       }
     });

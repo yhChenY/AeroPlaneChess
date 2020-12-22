@@ -32,6 +32,7 @@ public class Main {
   public static MainMenu mainMenu;
   public static boolean setOffInTurn = false;
   public static boolean finishOneTurn = false;
+  public Color myColor;
   
   public static void playerWin(Player player) {
     player.setRank(nowRank);
