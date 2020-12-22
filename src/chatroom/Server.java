@@ -46,9 +46,11 @@ public class Server {
 
   public void runServer() throws IOException {
     System.out.println("Waiting for connection...");
+    String[] colors = {"red", "yellow", "blue", "green"};
+    int cnt = 0;
     while(true) {
       Socket socket = serverSocket.accept();
-      new ServerThread(socket, this);
+      new ServerThread(socket, colors[cnt++], this);
     }
   }
 

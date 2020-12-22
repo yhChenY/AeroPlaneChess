@@ -15,9 +15,11 @@ public class ServerThread extends Thread {
   public Server server;
   private boolean onlineMark = true;
   private ServerTimer serverTimer; // 定时检查client是否在线
+  private String color;
 
-  public ServerThread(Socket socket, Server server) {
+  public ServerThread(Socket socket, String color, Server server) {
     this.server = server;
+    this.color = color;
     this.socket = socket;
     start();
   }
@@ -37,7 +39,21 @@ public class ServerThread extends Thread {
       BufferedReader netIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       // 读取该用户username
       username = netIn.readLine();
+      System.out.println("the name is: " + username);
       server.getUsers().add(new User(username, socket));
+      //  通知其他人有新用户登录
+      transmit2All("--" + username + " connected--", socket);
+      //  每有新用户登录，给所有用户（包括新用户）更新users
+      //  [User]为更新users名单的标志，user接收到后会进行处理
+      transmit2All("[user]" + " " + username, socket);
+      //  server给该新用户完整的用户名单(String)
+      for (User user : server.getUsers()
+      ) {
+        soloTransmit("[user]" + " " + user.getUsername(), socket);
+      }
+      
+      //告知该用户他的颜色
+      soloTransmit("[color]" + " " + color, socket);
 
       //把队友名字传给他
       if (!server.redTeam.isEmpty() && server.redTeam.contains(username)) {
@@ -55,16 +71,6 @@ public class ServerThread extends Thread {
             soloTransmit("[teammate]" + " " + user, socket);
           }
         }
-      }
-      //  通知其他人有新用户登录
-      transmit2All("--" + username + " connected--", socket);
-      //  每有新用户登录，给所有用户（包括新用户）更新users
-      //  [User]为更新users名单的标志，user接收到后会进行处理
-      transmit2All("[user]" + " " + username, socket);
-      //  server给该新用户完整的用户名单(String)
-      for (User user : server.getUsers()
-      ) {
-        soloTransmit("[user]" + " " + user.getUsername(), socket);
       }
       // 对client是否在线进行检查
       serverTimer = new ServerTimer(this);
