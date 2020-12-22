@@ -77,6 +77,7 @@ public class Plane {
   }
   
   public void combinePlane(Plane plane) {
+    System.out.println("Combine " + color + " Planes!");
     //combine self and hasCombined planes with @plane
     if (!plane.combinedPlanes.contains(this)) {
       plane.combinedPlanes.add(this);
@@ -177,6 +178,7 @@ public class Plane {
   
   private void PK(ArrayList<Plane> planes) {
     Color enemyColor = planes.get(0).getColor();
+    System.out.println(color +" PK with "+ enemyColor);
     while (planes.size() > 0 || this.combinedPlanes.size() > 0 || this.hasSetOff) {
       int pkc1 = utils.util.random(1, 6);
       System.out.println(color + " rolled " + pkc1);

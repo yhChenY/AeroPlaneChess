@@ -30,7 +30,7 @@ public class MapSystem {
         int nid = Integer.parseInt(l.get("nextId").toString());
         int pid = Integer.parseInt(l.get("preId").toString());
         Block b = new Block(color, type, x, y, id, nid, pid);
-        System.out.println(id + " " + type + " " + color);
+//        System.out.println(id + " " + type + " " + color);
         blocks.add(b);
       }
       file.close();

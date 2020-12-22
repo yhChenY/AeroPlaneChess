@@ -44,9 +44,12 @@ public class gameMainThread extends Thread {
 //                plane.run(chosenStep);
               }
             } else {
+              System.out.println(nowPlayer + " AI turn start.");
               if ((roll1 == 6 || roll2 == 6) && Main.getNowPlayer().getToBeSetOff() > 0) {
+                System.out.println("mactch");
                 Main.getNowPlayer().setOffOnePlane();
               } else {
+                System.out.println("strange");
                 chosenStep = Math.max(product, sum);
                 Plane p = Main.getNowPlayer().tryGetOnePlane();
                 if (p != null) {
@@ -55,7 +58,7 @@ public class gameMainThread extends Thread {
               }
               Main.getMainMenu().getGame().flushGameFrame();
             }
-            Thread.sleep(500);
+            Thread.sleep(50);
             nextTurn();
           }
         }
