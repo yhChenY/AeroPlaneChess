@@ -39,7 +39,7 @@ public class Prize extends Thread {
     }
     if (lotteryPanel.getFinalPrize() != null && lotteryPanel.getFinalPrize().equals("SWORD")) {
       prize = lotteryPanel.getFinalPrize();
-      PlaneChoosePane pcp = new PlaneChoosePane("resources/blackBackground.jpg");
+      PlaneChoosePane pcp = new PlaneChoosePane("resources/blackBackground1.jpg");
       prizeFrame.setSize(300,400);
       prizeFrame.remove(prizePanel);
       prizeFrame.repaint();
