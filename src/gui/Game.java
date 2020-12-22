@@ -284,6 +284,10 @@ public class Game extends JFrame {
         layeredPane.add(planeButton, JLayeredPane.DRAG_LAYER);
       }
     }
+
+    if(thisPlayer == nowPlayer) {
+      new YourTurnDialog();
+    }
   }
 
   private void clearDragLayer() {
