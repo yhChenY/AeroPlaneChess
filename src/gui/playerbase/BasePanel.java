@@ -24,6 +24,7 @@ public final class BasePanel extends JPanel {
   private Color color;
   private Base base;
   private int launchable, arrived;
+  private Player[] players;
   private JButton launchButton = new JButton();
   private JLabel launchableLabel = new JLabel("Launchable: "), arrivedLabel = new JLabel(
       "Arrived: ", JLabel.LEFT);
@@ -39,7 +40,7 @@ public final class BasePanel extends JPanel {
     this.base = new Base(color);
     this.setBounds(0, 0, 175, 165);
 
-    Player[] players = Main.getPlayers();
+    players = Main.getPlayers();
     int index = -1;
     for (int i = 0; i < players.length; i++) {
       if (players[i].getColor().getColor().equals(this.getColor().getColorName())) {
@@ -124,10 +125,33 @@ public final class BasePanel extends JPanel {
   }
 
   public static void flushBasePanel() {
-    for (int i = basePanels.size() - 1; i > basePanels.size() - 4; i--) {
-      Component[] components = basePanels.get(i).getComponents();
-      for(Component c: components) {
-        c.repaint();
+    for (int j = 0; j < basePanels.size(); j++) {
+      BasePanel basePanel = basePanels.get(j);
+      int index = -1;
+      for (int i = 0; i < basePanel.players.length; i++) {
+        if (basePanel.players[i].getColor().getColor().equals(basePanel.getColor().getColorName())) {
+          index = i;
+        }
+      }
+      basePanel.launchable = basePanel.players[index].getToBeSetOff();
+      basePanel.arrived = basePanel.players[index].getHasFinished();
+      for(int i = 3; i > basePanel.launchable - 1; i--) {
+        basePanel.launchableImageLabel[i].setVisible(false);
+      }
+      for(int i = 0; i < basePanel.arrived; i++) {
+        basePanel.arrivedImageLabel[i].setIcon(new ImageIcon(
+            new ImageIcon("resources/" + basePanel.color.getColorName() + "Airplane.png").getImage()
+                .getScaledInstance(15, 13, Image.SCALE_DEFAULT)));
+        basePanel.constraints.fill = GridBagConstraints.NONE;
+        basePanel.constraints.insets = new Insets(0, 10, 0, 0);
+        basePanel.constraints.anchor = GridBagConstraints.WEST;
+        basePanel.constraints.weightx = 1;
+        basePanel.constraints.weighty = 0.3;
+        basePanel.constraints.gridx = 4 - i;
+        basePanel.constraints.gridy = 3;
+        basePanel.constraints.gridwidth = 1;
+        basePanel.constraints.gridheight = 1;
+        basePanel.add(basePanel.arrivedImageLabel[i], basePanel.constraints);
       }
     }
   }

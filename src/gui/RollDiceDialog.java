@@ -1,6 +1,7 @@
 package gui;
 
 import GAMING.Main;
+import gui.playerbase.BasePanel;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
