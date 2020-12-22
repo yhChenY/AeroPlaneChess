@@ -128,7 +128,7 @@ public class Block {
     this.y = y;
   }
   
-  public void killPlane() {
+  public void killPlaneOnside() {
     for (Player p : Main.players) {
       for (Plane plane : p.getPlanes()) {
         if (plane.getPosition().getId() == id) {

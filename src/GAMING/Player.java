@@ -6,6 +6,8 @@ package GAMING;
 //
 //import java.awt.*;
 
+import java.util.Map;
+
 public class Player {
   Color color;
   private int hasFinished = 0;
@@ -144,5 +146,14 @@ public class Player {
       }
     }
     return ans;
+  }
+  
+  public void shortCutKill(){
+    switch (color) {
+      case RED -> MapSystem.getNthBlock(66).killPlaneOnside();
+      case YELLOW -> MapSystem.getNthBlock(72).killPlaneOnside();
+      case BLUE -> MapSystem.getNthBlock(55).killPlaneOnside();
+      case GREEN -> MapSystem.getNthBlock(60).killPlaneOnside();
+    }
   }
 }

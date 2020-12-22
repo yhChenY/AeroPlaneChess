@@ -165,6 +165,7 @@ public class Plane {
       } else if (dest.getType() == Block.Type.CORNER) {
         nextDest = dest.getNextBlock(this);
       } else if (dest.getType() == Block.Type.FLY) {
+        father.shortCutKill();
         nextDest = dest.getFlyBlock();
       }
       System.out.println("Jump to " + nextDest.getId());
