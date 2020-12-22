@@ -80,7 +80,11 @@ public class Player {
   public void finishOnePlane() {
     toBeArrived--;
     toBeFinished--;
+    hasFinished++;
     System.out.println(color + "FINISH 1 PLANE!!!!!!!!!");
+    if (toBeFinished == 0){
+      win();
+    }
   }
   
   public void killedOnePlane() {
@@ -102,6 +106,8 @@ public class Player {
   
   public void win() {
     wined = true;
+    setRank(Main.nowRank);
+    Main.playerWin(this);
   }
   
   public boolean isWined() {
