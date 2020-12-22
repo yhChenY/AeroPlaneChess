@@ -44,11 +44,10 @@ public class Player {
   }
   
   public void setOffOnePlane() {
-    if (toBeSetOff > 0) {
-      toBeSetOff--;
-    } else {
+    if (toBeSetOff <= 0) {
       return;
     }
+    toBeSetOff--;
     if (!planes[0].isHasSetOff()) {
       planes[0].setOff();
     } else if (!planes[1].isHasSetOff()) {

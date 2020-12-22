@@ -17,14 +17,16 @@ public class gameMainThread extends Thread {
     System.out.println("Running " + threadName);
     Main.initializeData();
     Main.playerTurnStart(players[0]);
+    int roundCnt = 0;
     while (nowRank < 4) {
       try {
         //dividing line
         Thread.sleep(1);
         if (!isOnLineGame) {
-          int roundCnt = 0;
           if (nowPlayer == Color.RED) {
+            Main.getMainMenu().getGame().flushGameFrame();
             roundCnt++;
+            System.out.println(roundCnt);
             if (roundCnt != 0 && roundCnt % 3 == 0) {
               PrizeFrame prizeFrame = new PrizeFrame();
               String finalPrize = prizeFrame.getFinalPrize();
