@@ -29,10 +29,13 @@ public class Catcher extends Thread{
       String line;
       while (true) {
         line = netIn.readLine();
-////       测试
-//        System.out.println(line);
-//        
+//       测试
+        System.out.println(line);
+
         switch (line.split(" ")[0]) {
+          case "[start]":
+            client.setStart(true);
+            break;
           case "[color]":
             client.setColor(line.split(" ")[1]);
             break;

@@ -91,13 +91,17 @@ public class MainMenu extends JFrame {
           while(!connectHostDialog.getConnectionStatus()) {
           }
           game = new Game(user, ipAddress);
+          try {// 防止用户还没拿到颜色
+            Thread.sleep(1000);
+          } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+          }
           dispose();
         } else {
           dispose();
           game = new Game(false, user);
         }
-        gameMainThread mainThread = new gameMainThread("mainThread");
-//        mainThread.setClient(game.getChatRoom().getClient());
+        gameMainThread mainThread = new gameMainThread("mainThread", game.getChatRoom().getClient());
         mainThread.start();
       }
     });

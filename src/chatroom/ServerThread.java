@@ -39,7 +39,9 @@ public class ServerThread extends Thread {
       BufferedReader netIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       // 读取该用户username
       username = netIn.readLine();
+      //
       System.out.println("the name is: " + username);
+      //
       server.getUsers().add(new User(username, socket));
       //  通知其他人有新用户登录
       transmit2All("--" + username + " connected--", socket);

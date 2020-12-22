@@ -83,6 +83,7 @@ public class Game extends JFrame {
   }
   
   public Game(User user, String ip) {
+    Main.setIsOnLineGame(true);
     hostIpAddress = ip;
     thisPlayer = Main.getPlayerByColor(GAMING.Color.RED);
     System.err.println("Using red as default color of player. Change it.");
@@ -265,7 +266,8 @@ public class Game extends JFrame {
    */
   private void addChatPanel(User user) throws InterruptedException {
     System.out.println(hostIpAddress);
-    chatRoom = new ChatRoom(user.getUsername(), hostIpAddress);
+    chatRoom = new ChatRoom("Fourth", hostIpAddress);
+//    chatRoom = new ChatRoom(user.getUsername(), hostIpAddress);
     Thread.sleep(500);
     JPanel chatRoomPanel = chatRoom.getGui().getChatRoomPanel();
     chatRoomPanel.setBounds(10, 75, 400, 600);
