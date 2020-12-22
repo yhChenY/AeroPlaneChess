@@ -17,6 +17,7 @@ public class Plane {
   private boolean hasFinished = false;
   private JButton button;
   private Player father;
+  public boolean beOpeInTurn = false;
   ArrayList<Plane> combinedPlanes = new ArrayList<>();
   
   public Plane(Color color, Player player) {
@@ -37,6 +38,7 @@ public class Plane {
         if (color == Main.nowPlayer) {
           System.out.println("clicked" + color);
           Main.setHasGotPlane(true);
+          beOpeInTurn = true;
           run(Main.getChosenStep());
         }
       }
@@ -48,6 +50,7 @@ public class Plane {
   
   public void setOff() {
     hasSetOff = true;
+    beOpeInTurn = true;
     int n = -1;
     if (color == Color.RED) {
       n = 76;
@@ -177,7 +180,7 @@ public class Plane {
   
   private void PK(ArrayList<Plane> planes) {
     Color enemyColor = planes.get(0).getColor();
-    System.out.println(color +" PK with "+ enemyColor);
+    System.out.println(color + " PK with " + enemyColor);
     while (planes.size() > 0 || this.combinedPlanes.size() > 0 || this.hasSetOff) {
       int pkc1 = utils.util.random(1, 6);
       System.out.println(color + " rolled " + pkc1);

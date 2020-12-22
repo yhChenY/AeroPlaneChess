@@ -13,14 +13,9 @@ public class waitOpeThread implements Runnable {
   public void run() {
     System.out.println("Running " + threadName);
     try {
-      Main.roll();
       while (!Main.hasGotOpe) {
         Thread.sleep(50);
         if (Main.hasGotOpe) {
-          if (Main.getRoll1() == 6 || Main.getRoll2() == 6) {
-//            Main.getPlayerByColor(Main.nowPlayer).setOffOnePlane();
-//            Main.getMainMenu().getGame().flushGameFrame();
-          }
           switch (Main.ope) {
             case '+':
               Main.chosenStep = Main.sum;

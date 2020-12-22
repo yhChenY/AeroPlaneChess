@@ -76,6 +76,9 @@ public class Block {
   }
   
   public Block getNextNBlock(int n, Plane plane) {
+    if (n == 0) {
+      return this;
+    }
     if (n > distance) {
       if (n == 2 * distance) return this;
       if (n > 2 * distance) return getPreNBlock(n - 2 * distance);
@@ -86,6 +89,7 @@ public class Block {
   }
   
   private Block getPreNBlock(int n) {
+    if (n == 0) return this;
     if (n == 1) return preBlock;
     else return getPreNBlock(n - 1);
   }

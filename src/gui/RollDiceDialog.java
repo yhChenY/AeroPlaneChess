@@ -1,6 +1,7 @@
 package gui;
 
 import GAMING.Main;
+import gui.playerbase.BasePanel;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -90,8 +91,9 @@ public class RollDiceDialog extends JDialog {
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         if (launchPlaneButton.isEnabled()) {
-          Main.getPlayerByColor(Main.nowPlayer).setOffOnePlane();
-          Main.getMainMenu().getGame().flushGameFrame();
+          Main.setHasGotOpe(true);
+          Main.setOpe('+');
+          Main.getNowPlayer().setOffOnePlane();
           dispose();
         }
       }
