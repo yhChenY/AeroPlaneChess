@@ -95,7 +95,7 @@ public class Plane {
     //set All combined planes' position as self position
     //But After this time?????????????????????????????????
     for (Plane p : combinedPlanes) {
-      p.setPosition(position);
+      p.setPositionCom(position);
     }
   }
   
@@ -109,8 +109,17 @@ public class Plane {
   
   public void setPosition(Block block) {
     this.position = block;
-    for (Plane p : combinedPlanes) {
-      p.setPosition(block);
+    if(block.getType() == Block.Type.FINAL){
+      hasFinished = true;
+      setPosition(MapSystem.shitBlock);
+      father.finishOnePlane();
+    }
+  }
+  
+  public void setPositionCom(Block block){
+    this.position = block;
+    for(Plane p:combinedPlanes){
+      setPosition(block);
     }
   }
   
@@ -148,18 +157,22 @@ public class Plane {
     System.out.println(color + "land on " + dest.getId() + " " + dest.getColor() + " " + dest.getType());
     if (dest.getType() == Block.Type.FINAL) {
       hasFinished = true;
-      setPosition(MapSystem.shitBlock);
+      for(Plane p:combinedPlanes){
+        p.hasFinished = true;
+      }
+      setPositionCom(MapSystem.shitBlock);
       father.finishOnePlane();
+      for(Plane p:combinedPlanes){
+        father.finishOnePlane();
+      }
     }
     ArrayList<Plane> planesUpside = dest.getPlaneUpside();
     // whether crash ? or combine ?
     if (planesUpside.size() > 0) {
-      for (Plane plane : planesUpside) {
-        if (plane.getColor() == color) {
-          plane.combinePlane(this);
-        } else {
-          PK(planesUpside);
-        }
+      if (planesUpside.get(0).getColor() == color) {
+        combinePlane(planesUpside.get(0));
+      } else {
+        PK(planesUpside);
       }
     }
     Block nextDest = dest;
@@ -173,16 +186,16 @@ public class Plane {
         nextDest = dest.getFlyBlock();
       }
       System.out.println("Jump to " + nextDest.getId());
-      setPosition(nextDest);
+      setPositionCom(nextDest);
     }
-    setPosition(nextDest);
+    setPositionCom(nextDest);
     Main.mainMenu.getGame().flushGameFrame();
   }
   
   private void PK(ArrayList<Plane> planes) {
     Color enemyColor = planes.get(0).getColor();
     System.out.println(color + " PK with " + enemyColor);
-    while (planes.size() > 0 || this.combinedPlanes.size() > 0 || this.hasSetOff) {
+    while (planes.size() > 0 && (this.combinedPlanes.size() > 0 || this.hasSetOff)) {
       int pkc1 = utils.util.random(1, 6);
       System.out.println(color + " rolled " + pkc1);
       int pkc2 = utils.util.random(1, 6);

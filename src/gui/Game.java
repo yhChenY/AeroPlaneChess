@@ -48,6 +48,7 @@ public class Game extends JFrame {
   private BackgroundMusicSystem bgm;
   private Thread backgroundMusicThread;
   private ChatRoom chatRoom;
+  private String hostIpAddress;
 
   /**
    * Start a new game.
@@ -74,19 +75,43 @@ public class Game extends JFrame {
     this.setVisible(true);
     this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-    if (ifOnline) {
-      try {
-        addChatPanel(user);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    }
-
     bgm = new BackgroundMusicSystem(Status.GAMING);
     backgroundMusicThread = new Thread(bgm);
     backgroundMusicThread.start();
 
     createComponent(ifOnline);
+  }
+  
+  public Game(User user, String ip) {
+    hostIpAddress = ip;
+    thisPlayer = Main.getPlayerByColor(GAMING.Color.RED);
+    System.err.println("Using red as default color of player. Change it.");
+    nowPlayer = Main.getPlayerByColor(Main.nowPlayer);
+
+    setTitle("Rick and Morty's Gamble");
+    Main.setIsOnLineGame(true);
+    try {
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    } catch (IllegalAccessException | UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException e) {
+      e.printStackTrace();
+    }
+    this.setLayeredPane(layeredPane);
+    this.setLocation(0, 0);
+    this.setResizable(false);
+    this.setSize(new Dimension(1440, 810));
+    this.setVisible(true);
+    this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+    bgm = new BackgroundMusicSystem(Status.GAMING);
+    backgroundMusicThread = new Thread(bgm);
+    backgroundMusicThread.start();
+
+    createComponent(true);
+    try {
+      addChatPanel(user);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -239,7 +264,8 @@ public class Game extends JFrame {
    * @throws InterruptedException Thread related problems. Don't know how to handle.
    */
   private void addChatPanel(User user) throws InterruptedException {
-    chatRoom = new ChatRoom(user.getUsername(), null);
+    System.out.println(hostIpAddress);
+    chatRoom = new ChatRoom(user.getUsername(), hostIpAddress);
     Thread.sleep(500);
     JPanel chatRoomPanel = chatRoom.getGui().getChatRoomPanel();
     chatRoomPanel.setBounds(10, 75, 400, 600);
@@ -283,5 +309,9 @@ public class Game extends JFrame {
     for (Component c : components) {
       layeredPane.remove(c);
     }
+  }
+  
+  public void setHostAddress(String ip) {
+    hostIpAddress = ip;
   }
 }
