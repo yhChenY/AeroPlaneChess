@@ -2,6 +2,10 @@ package GAMING;
 
 //import sun.java2d.pipe.AAShapePipe;
 
+//import com.sun.java.swing.ui.SplashScreen;
+//
+//import java.awt.*;
+
 public class Player {
   Color color;
   private int hasFinished = 0;
@@ -40,6 +44,8 @@ public class Player {
   public void setOffOnePlane() {
     if (toBeSetOff > 0) {
       toBeSetOff--;
+    } else {
+      return;
     }
     if (!planes[0].isHasSetOff()) {
       planes[0].setOff();
@@ -50,6 +56,7 @@ public class Player {
     } else if (!planes[3].isHasSetOff()) {
       planes[3].setOff();
     }
+    System.out.println(color + " Set Off A Plane.");
   }
   
   public void killedOnePlane() {
@@ -122,5 +129,16 @@ public class Player {
         p1 +
         p2 +
         p3;
+  }
+  
+  public Plane tryGetOnePlane() {
+    Plane ans = null;
+    for (Plane p : planes) {
+      if (p.isHasSetOff() && !p.isHasFinished()) {
+        ans = p;
+        break;
+      }
+    }
+    return ans;
   }
 }

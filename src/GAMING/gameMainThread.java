@@ -14,32 +14,55 @@ public class gameMainThread extends Thread {
   public void run() {
     System.out.println("Running " + threadName);
     Main.initializeData();
-    try {
-      //dividing line
-      Thread.sleep(1);
-//      players[0] = new Player(Color.RED);
-//      players[1] = new Player(Color.YELLOW);
-//      players[2] = new Player(Color.BLUE);
-//      players[3] = new Player(Color.GREEN);
-      Main.playerTurnStart(players[0]);
-      if (!isOnLineGame) {
-        while (nowRank<4) {
-          new waitOpeThread(nowPlayer + "waitOpe").start();
-          while (!hasGotOpe) {
-            Thread.sleep(20);
+    Main.playerTurnStart(players[0]);
+    while (nowRank < 4) {
+      try {
+        //dividing line
+        Thread.sleep(1);
+        if (!isOnLineGame) {
+          while (nowRank < 4) {
+            if (nowPlayer == Color.RED) {
+              new waitOpeThread(nowPlayer + "waitOpe").start();
+              
+              while (!hasGotOpe) {
+                Thread.sleep(20);
+                if (setOffInTurn) {
+                  hasGotOpe = false;
+                  break;
+                }
+              }
+              new waitPlaneThread(nowPlayer + "waitPlane").start();
+              while (!hasGotPlane) {
+                Thread.sleep(20);
+                if (setOffInTurn || (Main.getNowPlayer().getToBeSetOff() == 4)) {
+                  break;
+                }
+              }
+              if (setOffInTurn || (Main.getNowPlayer().getToBeSetOff() == 4)) {
+                setOffInTurn = false;
+              } else {
+//                plane.run(chosenStep);
+              }
+            } else {
+              if ((roll1 == 6 || roll2 == 6) && Main.getNowPlayer().getToBeSetOff() > 0) {
+                Main.getNowPlayer().setOffOnePlane();
+              } else {
+                chosenStep = Math.max(product, sum);
+                Plane p = Main.getNowPlayer().tryGetOnePlane();
+                if (p != null) {
+                  p.run(chosenStep);
+                }
+              }
+              Main.getMainMenu().getGame().flushGameFrame();
+            }
+            Thread.sleep(2000);
+            nextTurn();
           }
-          new waitPlaneThread(nowPlayer + "waitPlane").start();
-          while (!hasGotPlane) {
-            Thread.sleep(20);
-          }
-          System.out.println("run!!!!");
-          plane.run(chosenStep);
-          nextTurn();
         }
+        //dividing line
+      } catch (InterruptedException e) {
+        System.out.println("Thread " + threadName + " interrupted.");
       }
-      //dividing line
-    } catch (InterruptedException e) {
-      System.out.println("Thread " + threadName + " interrupted.");
     }
     System.out.println("Thread " + threadName + " exiting.");
   }

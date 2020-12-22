@@ -30,6 +30,7 @@ public class Main {
   static int chosenStep = 1;
   public static Color nowPlayer = RED;
   public static MainMenu mainMenu;
+  public static boolean setOffInTurn = false;
   
   public static void playerWin(Player player) {
     player.setRank(nowRank);
@@ -259,13 +260,23 @@ public class Main {
   
   public static void playerTurnStart(Player player) {
     nowPlayer = player.color;
+    System.out.println(nowPlayer + " Turn Started.");
+    roll();
+    hasGotOpe = false;
+    hasGotPlane = false;
   }
   
   public static void nextTurn() {
-    if (nowPlayer == RED) playerTurnStart(players[1]);
-    else if (nowPlayer == Color.YELLOW) playerTurnStart(players[2]);
-    else if (nowPlayer == Color.BLUE) playerTurnStart(players[3]);
-    else playerTurnStart(players[0]);
+    System.out.println(nowPlayer + "Turn Finished");
+    if (nowPlayer == RED) {
+      playerTurnStart(players[1]);
+    } else if (nowPlayer == Color.YELLOW) {
+      playerTurnStart(players[2]);
+    } else if (nowPlayer == Color.BLUE) {
+      playerTurnStart(players[3]);
+    } else {
+      playerTurnStart(players[0]);
+    }
   }
   
   public static void initializeData() {
@@ -284,6 +295,7 @@ public class Main {
     ope = '+';
     hasGotOpe = false;
     hasGotPlane = false;
+    setOffInTurn = false;
     for (Player p : players) {
       p.initialize();
     }
@@ -343,5 +355,9 @@ public class Main {
     } else if (color == BLUE) {
       return players[2];
     } else return players[3];
+  }
+  
+  public static Player getNowPlayer() {
+    return getPlayerByColor(nowPlayer);
   }
 }

@@ -1,5 +1,7 @@
 package GAMING;
 
+import java.util.ArrayList;
+
 public class Block {
   private Color color;
   private final Type type;
@@ -161,5 +163,17 @@ public class Block {
         " id: " + id + " \n" +
         " nextId: " + nextId + " \n" +
         " preId: " + preId + " ";
+  }
+  
+  public ArrayList<Plane> getPlaneUpside() {
+    ArrayList<Plane> ans = new ArrayList<>();
+    for (Player player:Main.players){
+      for(Plane plane:player.getPlanes()){
+        if(plane.getPosition().getId()==id){
+          ans.add(plane);
+        }
+      }
+    }
+    return ans;
   }
 }
