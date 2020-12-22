@@ -139,9 +139,11 @@ public final class BasePanel extends JPanel {
         basePanel.launchableImageLabel[i].setVisible(false);
       }
       for(int i = 0; i < basePanel.arrived; i++) {
+        basePanel.arrivedImageLabel[i].setText("");
         basePanel.arrivedImageLabel[i].setIcon(new ImageIcon(
             new ImageIcon("resources/" + basePanel.color.getColorName() + "Airplane.png").getImage()
                 .getScaledInstance(15, 13, Image.SCALE_DEFAULT)));
+        System.err.println("arrivedImageLabel added");
         basePanel.constraints.fill = GridBagConstraints.NONE;
         basePanel.constraints.insets = new Insets(0, 10, 0, 0);
         basePanel.constraints.anchor = GridBagConstraints.WEST;
