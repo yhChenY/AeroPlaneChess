@@ -31,9 +31,7 @@ public class Catcher extends Thread{
         line = netIn.readLine();
 ////       测试
 //        System.out.println(line);
-//        //
-        System.out.println(client.getColor());
-        //
+//        
         switch (line.split(" ")[0]) {
           case "[color]":
             client.setColor(line.split(" ")[1]);

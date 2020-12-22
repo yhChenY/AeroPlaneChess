@@ -79,9 +79,7 @@ public class Client extends Thread{
 
   public Client(String username, String HOST) {
     user.setUsername(username);
-    if (HOST!=null) {
-      this.HOST = HOST;
-    }
+    this.HOST = HOST;
   }
 
   /**
@@ -97,7 +95,6 @@ public class Client extends Thread{
     final int TIME_OUT = 10000;  //10s
     final SocketAddress socketAddress = new InetSocketAddress(HOST, PORT);
     socket = new Socket();
-    gui.currentTargetPanel.show("Trying connected to " + socketAddress + "...");
     try {
       socket.connect(socketAddress, TIME_OUT);
       user.setSocket(socket);
