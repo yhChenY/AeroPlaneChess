@@ -26,7 +26,7 @@ public class Block {
     
     public static Type getType(String s) {
       if (s.equals("COMMON")) return COMMON;
-      if (s.equals("CONNER")) return CORNER;
+      if (s.equals("CORNER")) return CORNER;
       if (s.equals("FLY")) return FLY;
       if (s.equals("FINAL")) return FINAL;
       if (s.equals("WAIT")) return WAIT;
@@ -68,11 +68,9 @@ public class Block {
   public Block getFlyBlock() {
     return nextFlyBlock;
   }
-//  public Block getNextBlock() {
-//    return nextBlock;
-//  }
   
   public Block getNextBlock(Plane plane) {
+    System.out.println("Try get block" + id + " 's nextBlock");
     if (plane.getColor() == color && type == Type.CORNER) return afterCornerBlock;
     return nextBlock;
   }
@@ -167,9 +165,9 @@ public class Block {
   
   public ArrayList<Plane> getPlaneUpside() {
     ArrayList<Plane> ans = new ArrayList<>();
-    for (Player player:Main.players){
-      for(Plane plane:player.getPlanes()){
-        if(plane.getPosition().getId()==id){
+    for (Player player : Main.players) {
+      for (Plane plane : player.getPlanes()) {
+        if (plane.getPosition().getId() == id) {
           ans.add(plane);
         }
       }

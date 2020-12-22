@@ -392,7 +392,7 @@
  nextId: 49 
  preId: 47 
 - 
- blockType: CORNER 
+ blockType: CORNER
  blockColor: YELLOW 
  x: 420 
  y: 30 
@@ -628,7 +628,7 @@
  blockColor: BLUE 
  x: 185 
  y: 700 
- id: 77 
+ id: 78
  nextId: 26 
  preId: 26 
 - 
@@ -636,6 +636,6 @@
  blockColor: GREEN 
  x: 3 
  y: 175 
- id: 78 
+ id: 79
  nextId: 39 
  preId: 39 

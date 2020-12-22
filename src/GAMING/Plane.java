@@ -34,9 +34,11 @@ public class Plane {
       public void mouseClicked(MouseEvent e) {
 //        setPosition(MapSystem.getNthBlock(0));
         super.mouseClicked(e);
-        System.out.println("clicked" + color);
-        Main.setHasGotPlane(true);
-        run(Main.getChosenStep());
+        if (color == Main.nowPlayer) {
+          System.out.println("clicked" + color);
+          Main.setHasGotPlane(true);
+          run(Main.getChosenStep());
+        }
       }
     });
     button.setOpaque(false);
@@ -48,13 +50,13 @@ public class Plane {
     hasSetOff = true;
     int n = -1;
     if (color == Color.RED) {
-      n = 0;
+      n = 76;
     } else if (color == Color.YELLOW) {
-      n = 13;
+      n = 77;
     } else if (color == Color.BLUE) {
-      n = 26;
+      n = 78;
     } else if (color == Color.GREEN) {
-      n = 39;
+      n = 79;
     }
     setPosition(MapSystem.getNthBlock(n));
     father.setOffOnePlane();
@@ -104,6 +106,9 @@ public class Plane {
   
   public void setPosition(Block block) {
     this.position = block;
+    for (Plane p : combinedPlanes) {
+      p.setPosition(block);
+    }
   }
   
   public Color getColor() {
@@ -117,14 +122,7 @@ public class Plane {
   public void run(int n) {
     System.out.println(color + "Plane Run Steps: " + n);
     Block dest = position.getNextNBlock(n, this);
-    setPosition(dest);
-    if (dest.getColor() == color && dest.getType() == Block.Type.COMMON) {
-      dest = dest.getNextNBlock(4, this);
-      setPosition(dest);
-    } else if (dest.getColor() == color && dest.getType() == Block.Type.FLY) {
-      dest = dest.getFlyBlock();
-      setPosition(dest);
-    }
+    landOnBlock(dest);
     //重绘
     Main.getMainMenu().getGame().flushGameFrame();
   }
@@ -145,6 +143,7 @@ public class Plane {
   }
   
   private void landOnBlock(Block dest) {
+    System.out.println(color + "land on " + dest.getId() + " " + dest.getColor() + " " + dest.getType());
     ArrayList<Plane> planesUpside = dest.getPlaneUpside();
     // whether crash ? or combine ?
     if (planesUpside.size() > 0) {
@@ -156,7 +155,18 @@ public class Plane {
         }
       }
     }
-    
+    if (color == dest.getColor()) {
+      Block nextDest = MapSystem.shitBlock;
+      if (dest.getType() == Block.Type.COMMON) {
+        nextDest = dest.getNextNBlock(4, this);
+      } else if (dest.getType() == Block.Type.CORNER) {
+        nextDest = dest.getNextBlock(this);
+      } else if (dest.getType() == Block.Type.FLY) {
+        nextDest = dest.getFlyBlock();
+      }
+      setPosition(nextDest);
+    }
+    Main.mainMenu.getGame().flushGameFrame();
   }
   
   private void PK(ArrayList<Plane> planes) {
