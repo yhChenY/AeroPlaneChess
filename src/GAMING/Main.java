@@ -32,7 +32,7 @@ public class Main {
   public static MainMenu mainMenu;
   public static boolean setOffInTurn = false;
   public static boolean finishOneTurn = false;
-  public Color myColor;
+  public static Color myColor = RED;
   public static boolean loaded = false;
   public static Datas datas;
   
@@ -141,6 +141,9 @@ public class Main {
     mainMenu.getGame().flushGameFrame();
     nowPlayer = player.color;
     System.out.println(nowPlayer + " Turn Started.");
+    if(nowPlayer == myColor){
+      mainMenu.getGame().promptYourTurn();
+    }
   }
   
   public static void nextTurn() {
