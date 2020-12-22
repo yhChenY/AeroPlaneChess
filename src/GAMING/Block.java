@@ -86,7 +86,7 @@ public class Block {
     if (n == 0) {
       return this;
     }
-    if (n > distance) {
+    if (n >= distance) {
       if (n == 2 * distance) return this;
       if (n > 2 * distance) return getPreNBlock(n - 2 * distance);
       return getNextNBlock(2 * distance - n, plane);
