@@ -2,6 +2,8 @@ package GAMING;
 
 import static GAMING.Main.*;
 
+import gui.PrizeFrame;
+
 public class gameMainThread extends Thread {
   private Thread t;
   private final String threadName;
@@ -20,7 +22,14 @@ public class gameMainThread extends Thread {
         //dividing line
         Thread.sleep(1);
         if (!isOnLineGame) {
+          int roundCnt = 0;
           if (nowPlayer == Color.RED) {
+            roundCnt++;
+            if (roundCnt != 0 && roundCnt % 3 == 0) {
+              PrizeFrame prizeFrame = new PrizeFrame();
+              String finalPrize = prizeFrame.getFinalPrize();
+              String chosePlane = prizeFrame.getChosePlane();
+            }
             new waitOpeThread(nowPlayer + "waitOpe").start();
             while (!hasGotOpe) {
               Thread.sleep(20);
