@@ -22,6 +22,7 @@ public class Client extends Thread{
   private String teammate = null; // 记录队友名字
   private final ArrayList<String> blocks = new ArrayList<>();
   private String[] newGameData = new String[2]; // 储存游戏最新数据
+  private String color;
 
   public String[] getNewGameData() {
     return newGameData;
@@ -38,6 +39,14 @@ public class Client extends Thread{
 
   public void setHOST(String HOST) {
     this.HOST = HOST;
+  }
+
+  public String getColor() {
+    return color;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
   }
 
   public User getUser() {

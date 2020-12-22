@@ -125,6 +125,7 @@ public class Plane {
   public void run(int n) {
     System.out.println(color + "Plane Run Steps: " + n);
     Block dest = position.getNextNBlock(n, this);
+    Main.mainMenu.getGame().flushGameFrame();
     landOnBlock(dest);
   }
   

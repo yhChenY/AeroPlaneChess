@@ -70,9 +70,16 @@ public class Block {
   }
   
   public Block getNextBlock(Plane plane) {
-    System.out.println("Try get block" + id + " 's nextBlock");
-    if (plane.getColor() == color && type == Type.CORNER) return afterCornerBlock;
-    return nextBlock;
+    Block ans = null;
+    if (plane.getColor() == color && type == Type.CORNER) {
+      ans = afterCornerBlock;
+    } else {
+      ans = nextBlock;
+    }
+    if (ans == null) {
+      System.out.println("Block " + id + "'s next block is null!");
+    }
+    return ans;
   }
   
   public Block getNextNBlock(int n, Plane plane) {
