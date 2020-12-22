@@ -48,6 +48,7 @@ public class Game extends JFrame {
   private Player[] players = Main.getPlayers();
   private BackgroundMusicSystem bgm;
   private Thread backgroundMusicThread;
+  private ChatRoom chatRoom;
 
   /**
    * Start a new game.
@@ -87,6 +88,10 @@ public class Game extends JFrame {
     backgroundMusicThread.start();
 
     createComponent(ifOnline);
+  }
+
+  public ChatRoom getChatRoom() {
+    return chatRoom;
   }
 
   /**
@@ -252,7 +257,7 @@ public class Game extends JFrame {
    * @throws InterruptedException Thread related problems. Don't know how to handle.
    */
   private void addChatPanel(User user) throws InterruptedException {
-    ChatRoom chatRoom = new ChatRoom(user.getUsername());
+    chatRoom = new ChatRoom(user.getUsername(), null);
     Thread.sleep(500);
     JPanel chatRoomPanel = chatRoom.getGui().getChatRoomPanel();
     chatRoomPanel.setBounds(10, 75, 400, 600);

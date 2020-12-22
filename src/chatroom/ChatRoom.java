@@ -10,10 +10,12 @@ import javax.swing.WindowConstants;
 public class ChatRoom extends Thread {
   private GUI gui = null;
   private Client client = null;
+  private String targetHOST = null;
   String username;
 
-  public ChatRoom(String username) {
+  public ChatRoom(String username, String targetHOST) {
     this.username = username;
+    this.targetHOST = targetHOST;
     start();
   }
 
@@ -26,7 +28,7 @@ public class ChatRoom extends Thread {
   }
 
   public void run() {
-    client = new Client(username);
+    client = new Client(username, targetHOST);
     gui = new GUI(client);
     client.setGui(gui);
     gui.start();
