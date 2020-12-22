@@ -1,5 +1,6 @@
 package GAMING;
 
+import Accounts.Account;
 import gui.Game;
 import gui.MainMenu;
 import utils.*;
@@ -35,6 +36,8 @@ public class Main {
   public static Color myColor = RED;
   public static boolean loaded = false;
   public static Datas datas;
+  public static boolean hasRegisteredIn = false;
+  public static Account myAccount = new Account();
   
   public static void playerWin(Player player) {
     player.setRank(nowRank);

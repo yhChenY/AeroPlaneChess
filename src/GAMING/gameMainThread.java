@@ -2,6 +2,7 @@ package GAMING;
 
 import static GAMING.Main.*;
 
+import gui.GameResultDialog;
 import gui.PrizeFrame;
 
 public class gameMainThread extends Thread {
@@ -17,7 +18,7 @@ public class gameMainThread extends Thread {
     System.out.println("Running " + threadName);
     Main.initializeData();
     Main.playerTurnStart(getNowPlayer());
-    if(loaded){
+    if (loaded) {
       loadData(datas);
     }
     int roundCnt = 0;
@@ -26,29 +27,32 @@ public class gameMainThread extends Thread {
       while (nowRank < 4) {
         try {
           //dividing line
-          new startATurn(nowPlayer, 1).start();
-          while (!finishOneTurn) {
-            Thread.sleep(50);
-          }
-          if (sum >= 10) {
-            new startATurn(nowPlayer, 2).start();
+          if(!Main.getNowPlayer().isWined()){
+            new startATurn(nowPlayer, 1).start();
             while (!finishOneTurn) {
               Thread.sleep(50);
             }
-          }
-          if (sum >= 10) {
-            new startATurn(nowPlayer, 3).start();
-            while (!finishOneTurn) {
-              Thread.sleep(50);
+            if (sum >= 10) {
+              new startATurn(nowPlayer, 2).start();
+              while (!finishOneTurn) {
+                Thread.sleep(50);
+              }
             }
+            if (sum >= 10) {
+              new startATurn(nowPlayer, 3).start();
+              while (!finishOneTurn) {
+                Thread.sleep(50);
+              }
+            }
+            Thread.sleep(500);
           }
-          Thread.sleep(500);
           nextTurn();
           //dividing line
         } catch (InterruptedException e) {
           System.out.println("Thread " + threadName + " interrupted.");
         }
       }
+      new GameResultDialog(Main.getPlayerByColor(myColor).getRank() < 4);
     }
     System.out.println("Thread " + threadName + " exiting.");
   }
