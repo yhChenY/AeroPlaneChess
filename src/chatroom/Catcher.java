@@ -32,7 +32,12 @@ public class Catcher extends Thread{
 ////       测试
 //        System.out.println(line);
 //        //
+        System.out.println(client.getColor());
+        //
         switch (line.split(" ")[0]) {
+          case "[color]":
+            client.setColor(line.split(" ")[1]);
+            break;
           case "[leave]":
             client.getGui().deleteUsers(line.split(" ")[1]);
             for (TargetPanel p : client.getGui().getTargetPanels()

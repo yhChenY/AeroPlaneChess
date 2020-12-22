@@ -31,6 +31,7 @@ public class MainMenu extends JFrame {
   Font font = new Font("Ravie", Font.PLAIN, 24);
   User user = new User();
   Game game = null;
+  private String ipAddress;
   GridBagLayout layout = new GridBagLayout();
   GridBagConstraints constraints = new GridBagConstraints();
   private JLayeredPane layeredPane = new JLayeredPaneWithTitle();
@@ -85,8 +86,16 @@ public class MainMenu extends JFrame {
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         bgm.stop();
-        dispose();
-        game = new Game(chooseIfOnline.isSelected(), user);
+        if (chooseIfOnline.isSelected()) {
+          ConnectHostDialog connectHostDialog = new ConnectHostDialog();
+          while(!connectHostDialog.getConnectionStatus()) {
+          }
+          game = new Game(user, ipAddress);
+          dispose();
+        } else {
+          dispose();
+          game = new Game(false, user);
+        }
         gameMainThread mainThread = new gameMainThread("mainThread");
 //        mainThread.setClient(game.getChatRoom().getClient());
         mainThread.start();
@@ -139,14 +148,14 @@ public class MainMenu extends JFrame {
           @Override
           public void mouseReleased(MouseEvent e) {
             super.mouseClicked(e);
-            if(leaderboardButton.isEnabled()) {
+            if (leaderboardButton.isEnabled()) {
               RankingListPanel rlp = new RankingListPanel();
               constraints.gridx = 1;
               constraints.gridy = 2;
               constraints.gridwidth = 5;
               constraints.gridheight = 1;
               layeredPane.removeAll();
-              layeredPane.repaint();
+//              layeredPane.repaint();
               layeredPane.add(rlp, constraints);
               layeredPane.validate();
               JButton returnButton = rlp.getReturnButton();
@@ -212,5 +221,9 @@ public class MainMenu extends JFrame {
 
   public Game getGame() {
     return game;
+  }
+  
+  public void setIpAddress(String ipAddress) {
+    this.ipAddress = ipAddress;
   }
 }

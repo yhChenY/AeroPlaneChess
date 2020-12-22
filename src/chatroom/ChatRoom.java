@@ -41,7 +41,6 @@ public class ChatRoom extends Thread {
 //    mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 //
 //    mainFrame.setVisible(true);
-//    mainFrame.dispose();
     
     try {
       client.start();
