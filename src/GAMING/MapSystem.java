@@ -14,7 +14,6 @@ import java.util.List;
 public class MapSystem {
   static ArrayList<Block> blocks = new ArrayList<>();
   public static Block shitBlock = new Block(Color.RED, Block.Type.COMMON, 8000, 20, -1, -1, -1);
-  
   public static void loadBlocks() {
     LoadSettings loadSettings = LoadSettings.builder().build();
     Load load = new Load(loadSettings);
@@ -94,6 +93,9 @@ public class MapSystem {
   }
   
   public static Block getNthBlock(int n) {
+    if(n==-1){
+      return shitBlock;
+    }
     Block ans = null;
     for (Block b : blocks) {
       if (b.getId() == n) {

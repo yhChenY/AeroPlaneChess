@@ -238,6 +238,7 @@ public class Game extends JFrame {
     layeredPane.add(redBase, JLayeredPane.MODAL_LAYER);
     layeredPane.add(yellowBase, JLayeredPane.MODAL_LAYER);
     layeredPane.add(rollDiceButton, JLayeredPane.MODAL_LAYER);
+    layeredPane.add(nextTurnButton, JLayeredPane.MODAL_LAYER);
     layeredPane.add(toggleCheatingModeButton, JLayeredPane.MODAL_LAYER);
     layeredPane.add(surrenderButton, JLayeredPane.MODAL_LAYER);
     layeredPane.add(saveGameButton, JLayeredPane.MODAL_LAYER);
@@ -299,11 +300,20 @@ public class Game extends JFrame {
         layeredPane.add(planeButton, JLayeredPane.DRAG_LAYER);
       }
     }
+    layeredPane.repaint();
+    layeredPane.validate();
 
-    if (thisPlayer == nowPlayer) {
+    layeredPane.repaint();
+    layeredPane.validate();
+    /*if (thisPlayer == nowPlayer) {
       rollDiceButton.setEnabled(true);
       new YourTurnDialog();
-    }
+    }*/
+  }
+  
+  public void promptYourTurn() {
+    rollDiceButton.setEnabled(true);
+    new YourTurnDialog();
   }
 
   private void clearDragLayer() {

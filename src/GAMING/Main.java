@@ -1,5 +1,6 @@
 package GAMING;
 
+import Accounts.Account;
 import gui.Game;
 import gui.MainMenu;
 import utils.*;
@@ -32,7 +33,11 @@ public class Main {
   public static MainMenu mainMenu;
   public static boolean setOffInTurn = false;
   public static boolean finishOneTurn = false;
-  public Color myColor;
+  public static Color myColor = RED;
+  public static boolean loaded = false;
+  public static Datas datas;
+  public static boolean hasRegisteredIn = false;
+  public static Account myAccount = new Account();
   
   public static void playerWin(Player player) {
     player.setRank(nowRank);
@@ -139,6 +144,9 @@ public class Main {
     mainMenu.getGame().flushGameFrame();
     nowPlayer = player.color;
     System.out.println(nowPlayer + " Turn Started.");
+    if(nowPlayer == myColor){
+      mainMenu.getGame().promptYourTurn();
+    }
   }
   
   public static void nextTurn() {
@@ -178,6 +186,7 @@ public class Main {
     plane = null;
     chosenStep = 1;
     nowPlayer = RED;
+    loaded = false;
   }
   
   public static MainMenu getMainMenu() {
@@ -232,6 +241,53 @@ public class Main {
     } else if (color == BLUE) {
       return players[2];
     } else return players[3];
+  }
+  
+  public static void loadData(Datas datas){
+    players[0].setHasFinished(datas.REDhasFinished);
+    players[0].setToBeFinished(datas.REDtoBeFinished);
+    players[0].setToBeSetOff(datas.REDtoBeSetOff);
+    players[0].getPlanes()[0].hasSetOff = datas.RED0hasSetOff;
+    players[0].getPlanes()[0].setPosition(MapSystem.getNthBlock(datas.RED0position));
+    players[0].getPlanes()[1].hasSetOff = datas.RED1hasSetOff;
+    players[0].getPlanes()[1].setPosition(MapSystem.getNthBlock(datas.RED1position));
+    players[0].getPlanes()[2].hasSetOff = datas.RED2hasSetOff;
+    players[0].getPlanes()[2].setPosition(MapSystem.getNthBlock(datas.RED2position));
+    players[0].getPlanes()[3].hasSetOff = datas.RED3hasSetOff;
+    players[0].getPlanes()[3].setPosition(MapSystem.getNthBlock(datas.RED3position));
+    players[1].setHasFinished(datas.YELLOWhasFinished);
+    players[1].setToBeFinished(datas.YELLOWtoBeFinished);
+    players[1].setToBeSetOff(datas.YELLOWtoBeSetOff);
+    players[1].getPlanes()[0].hasSetOff = datas.YELLOW0hasSetOff;
+    players[1].getPlanes()[0].setPosition(MapSystem.getNthBlock(datas.YELLOW0position));
+    players[1].getPlanes()[1].hasSetOff = datas.YELLOW1hasSetOff;
+    players[1].getPlanes()[1].setPosition(MapSystem.getNthBlock(datas.YELLOW1position));
+    players[1].getPlanes()[2].hasSetOff = datas.YELLOW2hasSetOff;
+    players[1].getPlanes()[2].setPosition(MapSystem.getNthBlock(datas.YELLOW2position));
+    players[1].getPlanes()[3].hasSetOff = datas.YELLOW3hasSetOff;
+    players[1].getPlanes()[3].setPosition(MapSystem.getNthBlock(datas.YELLOW3position));
+    players[2].setHasFinished(datas.BLUEhasFinished);
+    players[2].setToBeFinished(datas.BLUEtoBeFinished);
+    players[2].setToBeSetOff(datas.BLUEtoBeSetOff);
+    players[2].getPlanes()[0].hasSetOff = datas.BLUE0hasSetOff;
+    players[2].getPlanes()[0].setPosition(MapSystem.getNthBlock(datas.BLUE0position));
+    players[2].getPlanes()[1].hasSetOff = datas.BLUE1hasSetOff;
+    players[2].getPlanes()[1].setPosition(MapSystem.getNthBlock(datas.BLUE1position));
+    players[2].getPlanes()[2].hasSetOff = datas.BLUE2hasSetOff;
+    players[2].getPlanes()[2].setPosition(MapSystem.getNthBlock(datas.BLUE2position));
+    players[2].getPlanes()[3].hasSetOff = datas.BLUE3hasSetOff;
+    players[2].getPlanes()[3].setPosition(MapSystem.getNthBlock(datas.BLUE3position));
+    players[3].setHasFinished(datas.GREENhasFinished);
+    players[3].setToBeFinished(datas.GREENtoBeFinished);
+    players[3].setToBeSetOff(datas.GREENtoBeSetOff);
+    players[3].getPlanes()[0].hasSetOff = datas.GREEN0hasSetOff;
+    players[3].getPlanes()[0].setPosition(MapSystem.getNthBlock(datas.GREEN0position));
+    players[3].getPlanes()[1].hasSetOff = datas.GREEN1hasSetOff;
+    players[3].getPlanes()[1].setPosition(MapSystem.getNthBlock(datas.GREEN1position));
+    players[3].getPlanes()[2].hasSetOff = datas.GREEN2hasSetOff;
+    players[3].getPlanes()[2].setPosition(MapSystem.getNthBlock(datas.GREEN2position));
+    players[3].getPlanes()[3].hasSetOff = datas.GREEN3hasSetOff;
+    players[3].getPlanes()[3].setPosition(MapSystem.getNthBlock(datas.GREEN3position));
   }
   
   public static Player getNowPlayer() {

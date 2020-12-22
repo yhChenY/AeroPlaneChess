@@ -5,6 +5,7 @@ import gui.MainMenu;
 public class test {
   public static void main(String[] args) {
     Main.mainMenu = new MainMenu();
+    System.out.println(MapSystem.getNthBlock(51).getNextId());
 //    Block[] blocks = new Block[80];
 //    blocks[0] = new Block(Color.RED, Block.Type.COMMON, 534, 94, 0, 1, 51);
 //    blocks[1] = new Block(Color.YELLOW, Block.Type.COMMON, 534, 138, 1, 2, 0);
@@ -67,15 +68,14 @@ public class test {
 //    blocks[47] = new Block(Color.GREEN, Block.Type.COMMON, 330, 30, 47, 48, 46);
 //
 //    blocks[48] = new Block(Color.RED, Block.Type.CORNER, 375, 30, 48, 49, 47);
-//    blocks[49] = new Block(Color.YELLOW, Block.Type.CORNER, 420, 30, 49, 50, 48);
-//    blocks[50] = new Block(Color.BLUE, Block.Type.CORNER, 465, 30, 50, 51, 49);
-//    blocks[51] = new Block(Color.GREEN, Block.Type.CORNER, 515, 45, 51, 50, 50);
+//    blocks[49] = new Block(Color.YELLOW, Block.Type.COMMON, 420, 30, 49, 50, 48);
+//    blocks[50] = new Block(Color.BLUE, Block.Type.COMMON, 465, 30, 50, 51, 49);
+//    blocks[51] = new Block(Color.GREEN, Block.Type.COMMON, 515, 45, 51, 52, 50);
 //
 //    blocks[52] = new Block(Color.RED, Block.Type.SPRINT, 375, 85, 52, 53, 48);
 //    blocks[53] = new Block(Color.RED, Block.Type.SPRINT, 375, 135, 53, 54, 52);
 //    blocks[54] = new Block(Color.RED, Block.Type.SPRINT, 375, 180, 54, 55, 53);
-//    blocks[54] = new Block(Color.RED, Block.Type.SPRINT, 375, 225, 55, 56, 54);
-//    blocks[55] = new Block(Color.RED, Block.Type.SPRINT, 375, 270, 56, 57, 55);
+//    blocks[55] = new Block(Color.RED, Block.Type.SPRINT, 375, 270, 55, 56, 55);
 //    blocks[56] = new Block(Color.RED, Block.Type.SPRINT, 375, 270, 56, 57, 55);
 //    blocks[57] = new Block(Color.RED, Block.Type.FINAL, 365, 305, 57, 0, 56);
 //
@@ -102,8 +102,8 @@ public class test {
 //
 //    blocks[76] = new Block(Color.RED, Block.Type.WAIT, 545, 3, 76, 0, 0);
 //    blocks[77] = new Block(Color.YELLOW, Block.Type.WAIT, 725, 525, 77, 13, 13);
-//    blocks[78] = new Block(Color.BLUE, Block.Type.WAIT, 185, 700, 77, 26, 26);
-//    blocks[79] = new Block(Color.GREEN, Block.Type.WAIT, 3, 175, 78, 39, 39);
+//    blocks[78] = new Block(Color.BLUE, Block.Type.WAIT, 185, 700, 78, 26, 26);
+//    blocks[79] = new Block(Color.GREEN, Block.Type.WAIT, 3, 175, 79, 39, 39);
 //
 //    for(int i=0;i<80;i++){
 //      MapSystem.getBlocks().add(blocks[i]);

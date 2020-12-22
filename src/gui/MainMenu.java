@@ -1,5 +1,6 @@
 package gui;
 
+import GAMING.Datas;
 import GAMING.gameMainThread;
 import chatroom.User;
 import gui.BackgroundMusicSystem.Status;
@@ -13,12 +14,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayer;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -119,7 +123,8 @@ public class MainMenu extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        System.exit(0);
+        JOptionPane loadSavePane = new LoadSavePane();
+        loadSavePane.setVisible(true);
       }
     });
     layeredPane.add(loadSaveButton, constraints, JLayeredPane.PALETTE_LAYER);
@@ -140,26 +145,45 @@ public class MainMenu extends JFrame {
     constraints.gridy = 6;
     leaderboardButton.setFont(font);
     leaderboardButton.setFocusPainted(false);
-    leaderboardButton.addMouseListener(new gui.MouseAdapter() {
+    /*leaderboardButton.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         System.exit(0);
       }
-    });
+    });*/
     leaderboardButton.addMouseListener(
         new MouseAdapter() {
           @Override
           public void mouseReleased(MouseEvent e) {
             super.mouseClicked(e);
             if (leaderboardButton.isEnabled()) {
+              JFrame leaderboardFrame = new JFrame("Leaderboard");
+              leaderboardFrame.setSize(new Dimension(1440, 810));
+              JLayeredPane layeredPane = new JLayeredPaneWithTitle();
+              leaderboardFrame.setLayeredPane(layeredPane);
               RankingListPanel rlp = new RankingListPanel();
+              rlp.setBounds(370, 350, 700, 400);
+              rlp.setVisible(true);
+              layeredPane.add(rlp, JLayeredPane.MODAL_LAYER);
+              leaderboardFrame.setVisible(true);
+              layeredPane.setVisible(true);
+              leaderboardFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+              JButton gobackButton = rlp.getReturnButton();
+              gobackButton.addMouseListener(new gui.MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                  super.mouseClicked(e);
+                  leaderboardFrame.dispose();
+                }
+              });
+              /*RankingListPanel rlp = new RankingListPanel();
               constraints.gridx = 1;
               constraints.gridy = 2;
-              constraints.gridwidth = 5;
-              constraints.gridheight = 1;
+              constraints.gridwidth = 3;
+              constraints.gridheight = 5;
               layeredPane.removeAll();
-//              layeredPane.repaint();
+              layeredPane.repaint();
               layeredPane.add(rlp, constraints);
               layeredPane.validate();
               JButton returnButton = rlp.getReturnButton();
@@ -173,7 +197,7 @@ public class MainMenu extends JFrame {
                       createComponent();
                     }
                   }
-              );
+              );*/
             }
           }
         }

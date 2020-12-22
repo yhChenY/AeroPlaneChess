@@ -81,6 +81,7 @@ public class AccountSystem {
     if (isExisted(p.getUid()) || isExisted(p.getName())) {
       return false;
     } else {
+      p.setUid(accountList.size());
       accountList.add(p);
       return true;
     }
@@ -124,5 +125,20 @@ public class AccountSystem {
     }
     return rankList;
   }
-  
+  public static Account findUserByName(String username) {
+    for(Account a: accountList) {
+      if(a.getName().equals(username)) {
+        return a;
+      }
+    }
+    return null;
+  }
+  public static boolean checkPassword(Account account, String password) {
+    for(Account a: accountList) {
+      if(a.equals(account)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

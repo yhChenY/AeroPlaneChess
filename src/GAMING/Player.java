@@ -6,6 +6,8 @@ package GAMING;
 //
 //import java.awt.*;
 
+import gui.GameResultDialog;
+
 import java.util.Map;
 
 public class Player {
@@ -44,6 +46,18 @@ public class Player {
     return toBeSetOff;
   }
   
+  public void setHasFinished(int hasFinished) {
+    this.hasFinished = hasFinished;
+  }
+  
+  public void setToBeSetOff(int toBeSetOff) {
+    this.toBeSetOff = toBeSetOff;
+  }
+  
+  public void setToBeFinished(int toBeFinished) {
+    this.toBeFinished = toBeFinished;
+  }
+  
   public void setOffOnePlane() {
     if (toBeSetOff > 0) {
       toBeSetOff--;
@@ -68,6 +82,11 @@ public class Player {
   public void finishOnePlane() {
     toBeArrived--;
     toBeFinished--;
+    hasFinished++;
+    System.out.println(color + "FINISH 1 PLANE!!!!!!!!!");
+    if (toBeFinished == 0){
+      win();
+    }
   }
   
   public void killedOnePlane() {
@@ -89,6 +108,10 @@ public class Player {
   
   public void win() {
     wined = true;
+    setRank(Main.nowRank);
+    Main.playerWin(this);
+    new GameResultDialog(Main.nowRank<4);
+    Main.myAccount.addScore(4-Main.nowRank);
   }
   
   public boolean isWined() {

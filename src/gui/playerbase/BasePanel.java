@@ -28,6 +28,7 @@ public final class BasePanel extends JPanel {
   private JButton launchButton = new JButton();
   private JLabel launchableLabel = new JLabel("Launchable: "), arrivedLabel = new JLabel(
       "Arrived: ", JLabel.LEFT);
+  JLabel blank = new JLabel("N/A");
   private JLabel[] launchableImageLabel = new JLabel[4], arrivedImageLabel = new JLabel[4];
   private GridBagLayout layout = new GridBagLayout();
   private GridBagConstraints constraints = new GridBagConstraints();
@@ -100,7 +101,6 @@ public final class BasePanel extends JPanel {
       constraints.gridy = 3;
       constraints.gridwidth = 4;
       constraints.gridheight = 1;
-      JLabel blank = new JLabel("N/A", JLabel.CENTER);
       blank.setFont(font);
       add(blank, constraints);
     }
@@ -139,9 +139,13 @@ public final class BasePanel extends JPanel {
         basePanel.launchableImageLabel[i].setVisible(false);
       }
       for(int i = 0; i < basePanel.arrived; i++) {
+        basePanel.remove(basePanel.blank);
+        basePanel.arrivedImageLabel[i] = new JLabel("");
+        basePanel.arrivedImageLabel[i].setText("");
         basePanel.arrivedImageLabel[i].setIcon(new ImageIcon(
             new ImageIcon("resources/" + basePanel.color.getColorName() + "Airplane.png").getImage()
                 .getScaledInstance(15, 13, Image.SCALE_DEFAULT)));
+        System.err.println("arrivedImageLabel added");
         basePanel.constraints.fill = GridBagConstraints.NONE;
         basePanel.constraints.insets = new Insets(0, 10, 0, 0);
         basePanel.constraints.anchor = GridBagConstraints.WEST;
