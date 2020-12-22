@@ -1,5 +1,6 @@
 package gui;
 
+import GAMING.Datas;
 import GAMING.gameMainThread;
 import chatroom.User;
 import gui.BackgroundMusicSystem.Status;
@@ -13,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
@@ -20,6 +22,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayer;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -117,7 +120,8 @@ public class MainMenu extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        System.exit(0);
+        JOptionPane loadSavePane = new LoadSavePane();
+        loadSavePane.setVisible(true);
       }
     });
     layeredPane.add(loadSaveButton, constraints, JLayeredPane.PALETTE_LAYER);
