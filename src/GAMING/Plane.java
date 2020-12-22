@@ -165,6 +165,7 @@ public class Plane {
       for(Plane p:combinedPlanes){
         father.finishOnePlane();
       }
+      return;
     }
     ArrayList<Plane> planesUpside = dest.getPlaneUpside();
     // whether crash ? or combine ?

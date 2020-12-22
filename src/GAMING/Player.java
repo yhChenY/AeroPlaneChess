@@ -80,6 +80,7 @@ public class Player {
   public void finishOnePlane() {
     toBeArrived--;
     toBeFinished--;
+    System.out.println(color + "FINISH 1 PLANE!!!!!!!!!");
   }
   
   public void killedOnePlane() {
