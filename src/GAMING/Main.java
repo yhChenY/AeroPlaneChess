@@ -21,7 +21,7 @@ public class Main {
   static int product;
   static boolean ableToProduct;
   static boolean ableToQuotient;
-  static boolean isOnLineGame = false;
+  public static boolean isOnLineGame = false;
   static char ope;
   static boolean hasGotOpe = false;
   static boolean hasGotPlane = false;
@@ -31,6 +31,7 @@ public class Main {
   public static Color nowPlayer = RED;
   public static MainMenu mainMenu;
   public static boolean setOffInTurn = false;
+  public static boolean finishOneTurn = false;
   
   public static void playerWin(Player player) {
     player.setRank(nowRank);
@@ -47,71 +48,7 @@ public class Main {
   }
   
   public static void main(String[] args) {
-
-//    mainMenu = new MainMenu();
-//    if (!isOnLineGame) {
-//      players[0].setHuman();
-//      do {
-//        for (int i = 0; i < 4; i++) {
-//          Player p = players[i];
-//          if (p.isWined()) {
-//            continue;
-//          }
-//          roll1 = util.random(1, 6);
-//          roll2 = util.random(1, 6);
-//          big = Math.max(roll1, roll2);
-//          small = Math.min(roll1, roll2);
-//          sum = roll1 + roll2;
-//          product = roll1 * roll2;
-//          ableToProduct = product <= 12;
-//          sub = big - small;
-//          ableToQuotient = big % small == 0;
-//          quotient = ableToQuotient ? big / small : 0;
-//          if ((roll1 == 6 || roll2 == 6) && p.getToBeSetOff() > 0) {
-//            // 是否选择上飞机？
-//            if (p.getToBeSetOff() > 0)
-//              //如果选择 是  上飞机
-//
-//              continue;
-//            //如果选择否
-//          }
-//          //获取操作//此处考虑操作的不可行性
-//          if (hasGotOpe) {
-//            hasGotOpe = false;
-//            //更新chosenStep
-//            switch (ope) {
-//              case '+':
-//                chosenStep = sum;
-//                System.out.println("Got ope and chosenStep");
-//                break;
-//              case '-':
-//                chosenStep = sub;
-//                break;
-//              case '*':
-//                chosenStep = product;
-//                break;
-//              case '/':
-//                chosenStep = quotient;
-//                break;
-//            }
-//
-//            break;
-//          }
-//          System.out.println(66666);
-//          //获取plane 鼠标点击
-//        }
-//        //whether the game has finished
-//      } while (nowRank != 4);
-//      //显示结算框
-//      //更新 存储 账户数据
-//
-//      //关闭当前游戏界面
-//      //重启新的游戏界面
-//    }
-  }
-  
-  private void flyOneTime(Player player, int time) {
-  
+    
   }
   
   public static int getRoll1() {
@@ -177,7 +114,7 @@ public class Main {
    */
   public static void setHasGotOpe(boolean hasGotOpe) {
     Main.hasGotOpe = hasGotOpe;
-    System.out.println("setHasGotOpe " + hasGotOpe);
+//    System.out.println("setHasGotOpe " + hasGotOpe);
   }
   
   public static void setPlane(Plane plane) {
@@ -197,73 +134,9 @@ public class Main {
     return chosenStep;
   }
   
-  public static void gameStart() {
-    {
-      players[0].setHuman();
-      do {
-        for (int i = 0; i < 4; i++) {
-          Player p = players[i];
-          if (p.isWined()) {
-            continue;
-          }
-          roll1 = util.random(1, 6);
-          roll2 = util.random(1, 6);
-          big = Math.max(roll1, roll2);
-          small = Math.min(roll1, roll2);
-          sum = roll1 + roll2;
-          product = roll1 * roll2;
-          ableToProduct = product <= 12;
-          sub = big - small;
-          ableToQuotient = big % small == 0;
-          quotient = ableToQuotient ? big / small : 0;
-          if ((roll1 == 6 || roll2 == 6) && p.getToBeSetOff() > 0) {
-            // 是否选择上飞机？
-            if (p.getToBeSetOff() > 0)
-              //如果选择 是  上飞机
-              
-              continue;
-            //如果选择否
-          }
-          //获取操作//此处考虑操作的不可行性
-          if (hasGotOpe) {
-            hasGotOpe = false;
-            //更新chosenStep
-            switch (ope) {
-              case '+':
-                chosenStep = sum;
-                System.out.println("Got ope and chosenStep");
-                break;
-              case '-':
-                chosenStep = sub;
-                break;
-              case '*':
-                chosenStep = product;
-                break;
-              case '/':
-                chosenStep = quotient;
-                break;
-            }
-            
-            break;
-          }
-          System.out.println(6);
-          //获取plane 鼠标点击
-        }
-        //whether the game has finished
-      } while (nowRank != 4);
-      //显示结算框
-      //更新 存储 账户数据
-      //关闭当前游戏界面
-      //重启新的游戏界面
-    }
-  }
-  
   public static void playerTurnStart(Player player) {
     nowPlayer = player.color;
     System.out.println(nowPlayer + " Turn Started.");
-    roll();
-    hasGotOpe = false;
-    hasGotPlane = false;
   }
   
   public static void nextTurn() {

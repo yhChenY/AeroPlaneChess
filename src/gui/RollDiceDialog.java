@@ -91,8 +91,9 @@ public class RollDiceDialog extends JDialog {
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         if (launchPlaneButton.isEnabled()) {
-          Main.getPlayerByColor(Main.nowPlayer).setOffOnePlane();
-          Main.getMainMenu().getGame().flushGameFrame();
+          Main.setHasGotOpe(true);
+          Main.setOpe('+');
+          Main.getNowPlayer().setOffOnePlane();
           dispose();
         }
       }

@@ -18,6 +18,7 @@ public class Player {
   private int rank = 4;
   private Plane[] planes;
   private boolean isHuman = false;
+  public int toBeArrived = 0;
   
   public Player(Color color) {
     this.color = color;
@@ -44,10 +45,13 @@ public class Player {
   }
   
   public void setOffOnePlane() {
-    if (toBeSetOff <= 0) {
+    if (toBeSetOff > 0) {
+      toBeSetOff--;
+      toBeArrived++;
+      Main.setOffInTurn = true;
+    } else {
       return;
     }
-    toBeSetOff--;
     if (!planes[0].isHasSetOff()) {
       planes[0].setOff();
     } else if (!planes[1].isHasSetOff()) {
@@ -60,11 +64,13 @@ public class Player {
     System.out.println(color + " Set Off A Plane.");
   }
   
-  public void finishOnePlane(){
+  public void finishOnePlane() {
+    toBeArrived--;
     toBeFinished--;
   }
   
   public void killedOnePlane() {
+    toBeArrived--;
     toBeSetOff++;
   }
   
@@ -74,6 +80,10 @@ public class Player {
   
   public int getToBeFinished() {
     return toBeFinished;
+  }
+  
+  public int getToBeArrived() {
+    return toBeArrived;
   }
   
   public void win() {
@@ -117,7 +127,6 @@ public class Player {
     for (Plane plane : planes) {
       plane.initialize();
     }
-    isHuman = false;
   }
   
   @Override
@@ -147,7 +156,7 @@ public class Player {
     return ans;
   }
   
-  public void shortCutKill(){
+  public void shortCutKill() {
     switch (color) {
       case RED -> MapSystem.getNthBlock(66).killPlaneOnside();
       case YELLOW -> MapSystem.getNthBlock(72).killPlaneOnside();
