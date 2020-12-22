@@ -90,7 +90,7 @@ public class RankingListPanel extends JPanel{
       rankingPanel.add(subPanel, VerticalFlowLayout.TOP);
     }
 
-//    add(rankingPanel, BorderLayout.WEST)
+    add(rankingPanel, BorderLayout.WEST);
     JScrollPane rankingScrollPane = new JScrollPane(rankingPanel);
     rankingScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     rankingScrollPane.setPreferredSize(new Dimension(665,400));

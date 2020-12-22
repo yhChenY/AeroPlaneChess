@@ -91,14 +91,15 @@ public class MainMenu extends JFrame {
           while(!connectHostDialog.getConnectionStatus()) {
           }
           game = new Game(user, ipAddress);
+          gameMainThread mainThread = new gameMainThread("mainThread");
+          mainThread.start();
           dispose();
         } else {
           dispose();
           game = new Game(false, user);
+          gameMainThread mainThread = new gameMainThread("mainThread");
+          mainThread.start();
         }
-        gameMainThread mainThread = new gameMainThread("mainThread");
-//        mainThread.setClient(game.getChatRoom().getClient());
-        mainThread.start();
       }
     });
     startNew.setFocusPainted(false);
@@ -152,10 +153,10 @@ public class MainMenu extends JFrame {
               RankingListPanel rlp = new RankingListPanel();
               constraints.gridx = 1;
               constraints.gridy = 2;
-              constraints.gridwidth = 5;
-              constraints.gridheight = 1;
+              constraints.gridwidth = 3;
+              constraints.gridheight = 5;
               layeredPane.removeAll();
-//              layeredPane.repaint();
+              layeredPane.repaint();
               layeredPane.add(rlp, constraints);
               layeredPane.validate();
               JButton returnButton = rlp.getReturnButton();

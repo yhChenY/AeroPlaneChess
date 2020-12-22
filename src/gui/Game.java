@@ -298,10 +298,15 @@ public class Game extends JFrame {
       }
     }
 
-    if (thisPlayer == nowPlayer) {
+    /*if (thisPlayer == nowPlayer) {
       rollDiceButton.setEnabled(true);
       new YourTurnDialog();
-    }
+    }*/
+  }
+  
+  public void promptYourTurn() {
+    rollDiceButton.setEnabled(true);
+    new YourTurnDialog();
   }
 
   private void clearDragLayer() {
