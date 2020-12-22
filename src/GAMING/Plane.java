@@ -59,7 +59,6 @@ public class Plane {
       n = 79;
     }
     setPosition(MapSystem.getNthBlock(n));
-    father.setOffOnePlane();
   }
   
   public void inSetOff() {
