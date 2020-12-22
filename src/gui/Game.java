@@ -298,6 +298,8 @@ public class Game extends JFrame {
         layeredPane.add(planeButton, JLayeredPane.DRAG_LAYER);
       }
     }
+    layeredPane.repaint();
+    layeredPane.validate();
 
     layeredPane.repaint();
     layeredPane.validate();

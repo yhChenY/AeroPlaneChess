@@ -26,8 +26,12 @@ public class Account {
     return name;
   }
   
-  public String getPassword() {
-    return password;
+  public void setPassword(String password) {
+    this.password = password;
+  }
+  
+  protected void setUid(int uid) {
+    this.uid = uid;
   }
   
   public boolean setName(String name) {
@@ -73,4 +77,7 @@ public class Account {
     return temp;
   }
   
+  public boolean equals(Account account) {
+    return account.getName().equals(name) && account.password.equals(name);
+  }
 }
