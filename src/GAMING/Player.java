@@ -59,6 +59,10 @@ public class Player {
     System.out.println(color + " Set Off A Plane.");
   }
   
+  public void finishOnePlane(){
+    toBeFinished--;
+  }
+  
   public void killedOnePlane() {
     toBeSetOff++;
   }

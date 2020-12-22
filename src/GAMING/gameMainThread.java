@@ -55,7 +55,7 @@ public class gameMainThread extends Thread {
               }
               Main.getMainMenu().getGame().flushGameFrame();
             }
-            Thread.sleep(2000);
+            Thread.sleep(500);
             nextTurn();
           }
         }

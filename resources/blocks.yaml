@@ -35,7 +35,7 @@
  blockType: COMMON 
  blockColor: RED 
  x: 605 
- y: 209 
+ y: 209
  id: 4 
  nextId: 5 
  preId: 3 
@@ -392,7 +392,7 @@
  nextId: 49 
  preId: 47 
 - 
- blockType: CORNER
+ blockType: COMMON
  blockColor: YELLOW 
  x: 420 
  y: 30 
@@ -400,7 +400,7 @@
  nextId: 50 
  preId: 48 
 - 
- blockType: CORNER 
+ blockType: COMMON
  blockColor: BLUE 
  x: 465 
  y: 30 
@@ -408,12 +408,12 @@
  nextId: 51 
  preId: 49 
 - 
- blockType: CORNER 
+ blockType: COMMON
  blockColor: GREEN 
  x: 515 
  y: 45 
  id: 51 
- nextId: 50 
+ nextId: 70
  preId: 50 
 - 
  blockType: SPRINT 

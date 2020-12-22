@@ -123,8 +123,6 @@ public class Plane {
     System.out.println(color + "Plane Run Steps: " + n);
     Block dest = position.getNextNBlock(n, this);
     landOnBlock(dest);
-    //重绘
-    Main.getMainMenu().getGame().flushGameFrame();
   }
   
   public void initialize() {
@@ -144,6 +142,11 @@ public class Plane {
   
   private void landOnBlock(Block dest) {
     System.out.println(color + "land on " + dest.getId() + " " + dest.getColor() + " " + dest.getType());
+    if (dest.getType() == Block.Type.FINAL) {
+      hasFinished = true;
+      setPosition(MapSystem.shitBlock);
+      father.finishOnePlane();
+    }
     ArrayList<Plane> planesUpside = dest.getPlaneUpside();
     // whether crash ? or combine ?
     if (planesUpside.size() > 0) {
@@ -155,8 +158,8 @@ public class Plane {
         }
       }
     }
+    Block nextDest = dest;
     if (color == dest.getColor()) {
-      Block nextDest = MapSystem.shitBlock;
       if (dest.getType() == Block.Type.COMMON) {
         nextDest = dest.getNextNBlock(4, this);
       } else if (dest.getType() == Block.Type.CORNER) {
@@ -164,8 +167,10 @@ public class Plane {
       } else if (dest.getType() == Block.Type.FLY) {
         nextDest = dest.getFlyBlock();
       }
+      System.out.println("Jump to " + nextDest.getId());
       setPosition(nextDest);
     }
+    setPosition(nextDest);
     Main.mainMenu.getGame().flushGameFrame();
   }
   

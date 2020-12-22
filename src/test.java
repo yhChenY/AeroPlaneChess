@@ -17,7 +17,7 @@ public class test {
 //    blocks[7] = new Block(Color.GREEN, Block.Type.COMMON, 715, 272, 7, 8, 6);
 //
 //    blocks[8] = new Block(Color.RED, Block.Type.COMMON, 715, 315, 8, 9, 7);
-//    blocks[9] = new Block(Color.YELLOW, Block.Type.CORNER, 715, 359, 9, 10, 8);
+//    blocks[9] = new Block(Color.YELLOW, Block.Type.CORNER, 715, 359, 9, 10, 8); //
 //    blocks[10] = new Block(Color.BLUE, Block.Type.COMMON, 715, 404, 10, 11, 9);
 //    blocks[11] = new Block(Color.GREEN, Block.Type.COMMON, 715, 447, 11, 12, 10);
 //
@@ -33,7 +33,7 @@ public class test {
 //
 //    blocks[20] = new Block(Color.RED, Block.Type.COMMON, 465, 687, 20, 21, 19);
 //    blocks[21] = new Block(Color.YELLOW, Block.Type.COMMON, 419, 687, 21, 22, 20);
-//    blocks[22] = new Block(Color.BLUE, Block.Type.CORNER, 375, 687, 22, 23, 21);
+//    blocks[22] = new Block(Color.BLUE, Block.Type.CORNER, 375, 687, 22, 23, 21); //
 //    blocks[23] = new Block(Color.GREEN, Block.Type.COMMON, 329, 687, 23, 24, 22);
 //
 //    blocks[24] = new Block(Color.RED, Block.Type.COMMON, 282, 687, 24, 25, 23);
@@ -49,7 +49,7 @@ public class test {
 //    blocks[32] = new Block(Color.RED, Block.Type.COMMON, 51, 492, 32, 33, 31);
 //    blocks[33] = new Block(Color.YELLOW, Block.Type.COMMON, 30, 446, 33, 34, 32);
 //    blocks[34] = new Block(Color.BLUE, Block.Type.COMMON, 30, 403, 34, 35, 33);
-//    blocks[35] = new Block(Color.GREEN, Block.Type.CORNER, 30, 360, 35, 36, 34);
+//    blocks[35] = new Block(Color.GREEN, Block.Type.CORNER, 30, 360, 35, 36, 34); //
 //
 //    blocks[36] = new Block(Color.RED, Block.Type.COMMON, 30, 315, 36, 37, 35);
 //    blocks[37] = new Block(Color.YELLOW, Block.Type.COMMON, 30, 270, 37, 38, 36);

@@ -45,7 +45,7 @@ public class MapSystem {
     blocks.get(9).setAfterCornerBlock(blocks.get(58));
     blocks.get(22).setAfterCornerBlock(blocks.get(64));
     blocks.get(35).setAfterCornerBlock(blocks.get(70));
-    blocks.get(48).setAfterCornerBlock(blocks.get(52));
+    blocks.get(49).setAfterCornerBlock(blocks.get(52));
     blocks.get(3).setNextFlyBlock(blocks.get(15));
     blocks.get(16).setNextFlyBlock(blocks.get(28));
     blocks.get(29).setNextFlyBlock(blocks.get(41));
