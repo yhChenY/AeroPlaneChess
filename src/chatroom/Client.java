@@ -7,11 +7,13 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+import javax.net.ssl.HostnameVerifier;
 
 /**
  * client part of the socket
  */
 public class Client extends Thread{
+  private String HOST = "127.0.0.1";
   private final User user = new User();
   private Socket socket;
   private final List<String> talks = new ArrayList<>(); //储存用户发言
@@ -19,9 +21,9 @@ public class Client extends Thread{
   private final ArrayList<String> users = new ArrayList<>();
   private String teammate = null; // 记录队友名字
   private final ArrayList<String> blocks = new ArrayList<>();
-  private String newGameData = null; // 储存游戏最新数据
+  private String[] newGameData = new String[2]; // 储存游戏最新数据
 
-  public String getNewGameData() {
+  public String[] getNewGameData() {
     return newGameData;
   }
 
@@ -29,8 +31,13 @@ public class Client extends Thread{
     return users;
   }
 
-  public void setNewGameData(String newGameData) {
-    this.newGameData = newGameData;
+  public void setNewGameData(String formerPlayer, String gameData) {
+    newGameData[0] = formerPlayer;
+    newGameData[1] = gameData;
+  }
+
+  public void setHOST(String HOST) {
+    this.HOST = HOST;
   }
 
   public User getUser() {
@@ -61,8 +68,11 @@ public class Client extends Thread{
     return blocks;
   }
 
-  public Client(String username) {
+  public Client(String username, String HOST) {
     user.setUsername(username);
+    if (HOST!=null) {
+      this.HOST = HOST;
+    }
   }
 
   /**
@@ -74,7 +84,6 @@ public class Client extends Thread{
   }
 
   public void run() {
-    final String HOST = "127.0.0.1";
     final int PORT = 4320;
     final int TIME_OUT = 10000;  //10s
     final SocketAddress socketAddress = new InetSocketAddress(HOST, PORT);

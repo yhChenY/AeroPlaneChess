@@ -11,7 +11,6 @@ import gui.playerbase.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,7 +39,7 @@ public class Game extends JFrame {
   private JButton saveGameButton = new JButton("Save game");
   private JButton rollDiceButton = new JButton("Roll dice");
   private JButton toggleCheatingModeButton = new JButton("Cheating Mode");
-//  private JButton launchAPlaneButton = new JButton("Launch a plane");
+  //  private JButton launchAPlaneButton = new JButton("Launch a plane");
   private JButton nextTurnButton = new JButton("Next turn");
   private Player nowPlayer;
   private Player thisPlayer;
@@ -48,6 +47,7 @@ public class Game extends JFrame {
   private Player[] players = Main.getPlayers();
   private BackgroundMusicSystem bgm;
   private Thread backgroundMusicThread;
+  private ChatRoom chatRoom;
 
   /**
    * Start a new game.
@@ -100,6 +100,10 @@ public class Game extends JFrame {
     label.setIcon(image);
   }
 
+  public ChatRoom getChatRoom() {
+    return chatRoom;
+  }
+
   /**
    * Create components of a game frame.
    *
@@ -133,27 +137,13 @@ public class Game extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        if(rollDiceButton.isEnabled()) {
+        if (rollDiceButton.isEnabled()) {
           new RollDiceDialog(Main.getRoll1(), Main.getRoll2(), Main.isAbleToProduct(),
               Main.isAbleToQuotient(), cheatingMode);
-          rollDiceButton.setEnabled(false);
+          rollDiceButton.setEnabled(Main.getSum() >= 10 ? true : false);
         }
       }
     });
-
-/*    launchAPlaneButton.setBounds(1230, 95, 190, 50);
-    launchAPlaneButton.setFont(font);
-    launchAPlaneButton.addMouseListener(new gui.MouseAdapter() {
-      @Override
-      public void mouseClicked(MouseEvent e) {
-        super.mouseClicked(e);
-        if(launchAPlaneButton.isEnabled()) {
-        Main.getPlayerByColor(Main.nowPlayer).setOffOnePlane();
-        flushGameFrame();
-        //launchAPlane();
-        }
-      }
-    });*/
 
     nextTurnButton.setBounds(1230, 175, 190, 50);
     nextTurnButton.setFont(font);
@@ -161,15 +151,14 @@ public class Game extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        if(nextTurnButton.isEnabled()) {
+        if (nextTurnButton.isEnabled()) {
           Main.nextTurn();
         }
       }
     });
 
-    if(!nowPlayer.equals(thisPlayer)) {
+    if (!nowPlayer.equals(thisPlayer)) {
       rollDiceButton.setEnabled(false);
-//      launchAPlaneButton.setEnabled(false);
       nextTurnButton.setEnabled(false);
     }
 
@@ -179,9 +168,9 @@ public class Game extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        if(toggleCheatingModeButton.isEnabled()) {
-        cheatingMode = !cheatingMode;
-        toggleCheatingModeButton.setText(cheatingMode ? "Normal Mode" : "Cheating Mode");
+        if (toggleCheatingModeButton.isEnabled()) {
+          cheatingMode = !cheatingMode;
+          toggleCheatingModeButton.setText(cheatingMode ? "Normal Mode" : "Cheating Mode");
         }
       }
     });
@@ -193,7 +182,7 @@ public class Game extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        if(saveGameButton.isEnabled()) {
+        if (saveGameButton.isEnabled()) {
           //saveGame();
           //resetServer();
           new MainMenu();
@@ -207,7 +196,7 @@ public class Game extends JFrame {
       @Override
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
-        if(surrenderButton.isEnabled()) {
+        if (surrenderButton.isEnabled()) {
           bgm.stop();
           dispose();
           Main.initializeData();
@@ -223,8 +212,6 @@ public class Game extends JFrame {
     layeredPane.add(redBase, JLayeredPane.MODAL_LAYER);
     layeredPane.add(yellowBase, JLayeredPane.MODAL_LAYER);
     layeredPane.add(rollDiceButton, JLayeredPane.MODAL_LAYER);
-//    layeredPane.add(launchAPlaneButton, JLayeredPane.MODAL_LAYER);
-//    layeredPane.add(nextTurnButton, JLayeredPane.MODAL_LAYER);
     layeredPane.add(toggleCheatingModeButton, JLayeredPane.MODAL_LAYER);
     layeredPane.add(surrenderButton, JLayeredPane.MODAL_LAYER);
     layeredPane.add(saveGameButton, JLayeredPane.MODAL_LAYER);
@@ -252,7 +239,7 @@ public class Game extends JFrame {
    * @throws InterruptedException Thread related problems. Don't know how to handle.
    */
   private void addChatPanel(User user) throws InterruptedException {
-    ChatRoom chatRoom = new ChatRoom(user.getUsername());
+    chatRoom = new ChatRoom(user.getUsername(), null);
     Thread.sleep(500);
     JPanel chatRoomPanel = chatRoom.getGui().getChatRoomPanel();
     chatRoomPanel.setBounds(10, 75, 400, 600);
@@ -266,17 +253,18 @@ public class Game extends JFrame {
     nowPlayer = Main.getPlayerByColor(Main.nowPlayer);
 
     BasePanel.flushBasePanel();
-    Map<Player, Plane[]> planes = new HashMap<>(0);
+    Map<Player, Plane[]> planesOfPlayer = new HashMap<>(0);
     for (Player p : players) {
       ArrayList<Plane> planeArrayList = new ArrayList<>(0);
       for (Plane plane : p.getPlanes()) {
         planeArrayList.add(plane);
       }
-      planes.put(p, planeArrayList.toArray(new Plane[0]));
+      planesOfPlayer.put(p, planeArrayList.toArray(new Plane[0]));
     }
     clearDragLayer();
     for (Player p : players) {
-      for (Plane plane : planes.get(p)) {
+      Plane[] planes = planesOfPlayer.get(p);
+      for (Plane plane : planes) {
         JButton planeButton = plane.getButton();
         planeButton.setBounds(plane.getPosition().getX(), plane.getPosition().getY(),
             planeButton.getWidth(), planeButton.getHeight());
@@ -284,7 +272,7 @@ public class Game extends JFrame {
       }
     }
 
-    if(thisPlayer == nowPlayer) {
+    if (thisPlayer == nowPlayer) {
       rollDiceButton.setEnabled(true);
       new YourTurnDialog();
     }

@@ -1,6 +1,5 @@
 package gui;
 
-import GAMING.Main;
 import GAMING.gameMainThread;
 import chatroom.User;
 import gui.BackgroundMusicSystem.Status;
@@ -89,7 +88,7 @@ public class MainMenu extends JFrame {
         dispose();
         game = new Game(chooseIfOnline.isSelected(), user);
         gameMainThread mainThread = new gameMainThread("mainThread");
-        Main.getPlayers()[0].setHuman();
+        mainThread.setClient(game.getChatRoom().getClient());
         mainThread.start();
       }
     });

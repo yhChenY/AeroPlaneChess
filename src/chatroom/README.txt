@@ -17,6 +17,7 @@
 在需要传输数据的地方需要有Client对象（暂定由外往里传）
 （测试时可以在demo处（以demoVan为例），setClient（chatRoom1.getClient()）
 刚进行完自己轮的玩家调用client.transmit(String gameData, Socket socket)
-gameData = "[gameData] String\n" (String为目标游戏数据)
+gameData中各个数据用'分割
+gameData = "[gameData] SelfColor String\n" (String为目标游戏数据)
 socket: 刚进行完游戏的玩家对应的Client调用: client.getSocket()
 接收: 其他Client 调用getNewGameData(), 即可获得String(目标游戏数据)(注意先传输完再接收)

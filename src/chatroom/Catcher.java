@@ -98,7 +98,7 @@ public class Catcher extends Thread{
             }
             break;
           case "[gameData]":
-            client.setNewGameData(line.split(" ")[1]);
+            client.setNewGameData(line.split(" ")[1], line.split(" ")[2]);
             break;
           //  default为正常群聊
           default:

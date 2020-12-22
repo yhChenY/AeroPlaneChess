@@ -29,7 +29,7 @@ public class PrizeFrame extends JFrame{
   public void run() throws InterruptedException, IOException {
     setSize(500,400);
     setIconImage(ImageIO.read(this.getClass().getResource("/resources/props/drink.png")));
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     setLocationRelativeTo(null);
     setVisible(true);
     Prize prize = new Prize(this);
