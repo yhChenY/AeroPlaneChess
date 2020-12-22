@@ -93,6 +93,7 @@ public class RollDiceDialog extends JDialog {
         if(launchPlaneButton.isEnabled()) {
           Main.getPlayerByColor(Main.nowPlayer).setOffOnePlane();
           Main.getMainMenu().getGame().flushGameFrame();
+          dispose();
         }
       }
     });
@@ -185,9 +186,6 @@ public class RollDiceDialog extends JDialog {
               divideButton.setEnabled(false);
             }
           }
-          if(randomNumber[0] == 6 || randomNumber[1] == 6) {
-            launchPlaneButton.setEnabled(true);
-          }
         }
       });
       
@@ -252,6 +250,9 @@ public class RollDiceDialog extends JDialog {
     constraints.weighty = 0;
     add(divideButton, constraints);
 
+    if(randomNumber[0] == 6 || randomNumber[1] == 6) {
+      launchPlaneButton.setEnabled(true);
+    }
     constraints.gridx = 0;
     constraints.gridy = 3;
     constraints.gridwidth = 4;

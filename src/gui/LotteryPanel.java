@@ -90,7 +90,7 @@ public class LotteryPanel extends JPanel {
         nameLabel.setBackground(new Color(255, 200, 0));
         nameLabel.setOpaque(true);
         nameLabel.setIcon(new ImageIcon(filename));
-        nameLabel.setBounds(30, 3, 42, 55);
+        nameLabel.setBounds(120, 3, 42, 55);
         add(nameLabel);
       }
     }

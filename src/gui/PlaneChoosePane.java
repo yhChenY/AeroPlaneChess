@@ -20,6 +20,7 @@ public class PlaneChoosePane extends JLayeredPaneWithBack{
   }
 
   public void run() {
+    
     setPreferredSize(new Dimension(300,400));
     setLayout(new VerticalFlowLayout());
 

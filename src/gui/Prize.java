@@ -27,7 +27,7 @@ public class Prize extends Thread {
   }
 
   public void run() {
-    prizePanel.setPreferredSize(new Dimension(500,500));
+    prizePanel.setPreferredSize(new Dimension(300,500));
     LotteryPanel lotteryPanel = new LotteryPanel();
     prizePanel.add(lotteryPanel);
     while (!lotteryPanel.isLotteryDone()) {
