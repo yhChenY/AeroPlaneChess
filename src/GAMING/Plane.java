@@ -13,7 +13,7 @@ public class Plane {
   
   private final Color color;
   private Block position;
-  private boolean hasSetOff = false;
+  public boolean hasSetOff = false;
   private boolean hasFinished = false;
   private JButton button;
   private Player father;

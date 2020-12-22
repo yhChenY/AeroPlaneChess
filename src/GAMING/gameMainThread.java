@@ -16,7 +16,10 @@ public class gameMainThread extends Thread {
   public void run() {
     System.out.println("Running " + threadName);
     Main.initializeData();
-    Main.playerTurnStart(players[0]);
+    Main.playerTurnStart(getNowPlayer());
+    if(loaded){
+      loadData(datas);
+    }
     int roundCnt = 0;
     if (!isOnLineGame) {
       players[0].setHuman();

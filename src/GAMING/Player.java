@@ -44,6 +44,18 @@ public class Player {
     return toBeSetOff;
   }
   
+  public void setHasFinished(int hasFinished) {
+    this.hasFinished = hasFinished;
+  }
+  
+  public void setToBeSetOff(int toBeSetOff) {
+    this.toBeSetOff = toBeSetOff;
+  }
+  
+  public void setToBeFinished(int toBeFinished) {
+    this.toBeFinished = toBeFinished;
+  }
+  
   public void setOffOnePlane() {
     if (toBeSetOff > 0) {
       toBeSetOff--;
