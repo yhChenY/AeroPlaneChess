@@ -171,7 +171,7 @@ public class gameMainThread extends Thread {
 //                Thread.sleep(50);
 //              }
 //            }
-            if (cnt != 0 && cnt%12 == 0) {
+            if (cnt%12 == 0) {
               PrizeFrame prizeFrame = new PrizeFrame();
               Plane p = Main.getNowPlayer().tryGetOnePlane();
               if (p != null) {

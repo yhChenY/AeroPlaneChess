@@ -58,7 +58,6 @@ public class Game extends JFrame {
    */
   public Game(boolean ifOnline, User user) {
     thisPlayer = Main.getPlayerByColor(GAMING.Color.RED);
-    System.err.println("Using red as default color of player. Change it.");
     nowPlayer = Main.getPlayerByColor(Main.nowPlayer);
 
     setTitle("Rick and Morty's Gamble");
