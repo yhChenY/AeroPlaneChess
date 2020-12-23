@@ -38,6 +38,7 @@ public class LoadSavePane extends JOptionPane {
       Main.datas = datas.get(selectedNumber);
       gameMainThread mainThread = new gameMainThread("mainThread", null);
       mainThread.start();
+      Main.getMainMenu().getGame().flushGameFrame();
       Main.getMainMenu().setVisible(false);
     } catch (Exception e) {
       showMessageDialog(null, "Failed to load corrupted file!");

@@ -141,19 +141,19 @@ public class Game extends JFrame {
     ImageIcon laneImage = new ImageIcon(laneImageUrl);
     lane.setIcon(laneImage);
 
-    if (ifOnline) {
+/*    if (ifOnline) {
       lane.setBounds(430, 15, 780, 750);
       greenBase.setBounds(430, 15, 175, 165);
       blueBase.setBounds(430, 593, 175, 165);
       redBase.setBounds(1039, 15, 175, 165);
       yellowBase.setBounds(1039, 593, 175, 165);
-    } else {
+    } else {*/
       lane.setBounds(330, 15, 780, 750);
       greenBase.setBounds(330, 15, 175, 165);
       blueBase.setBounds(330, 593, 175, 165);
       redBase.setBounds(939, 15, 175, 165);
       yellowBase.setBounds(939, 593, 175, 165);
-    }
+//    }
 
     Font font = new Font("Ravie", Font.PLAIN, 16);
 
@@ -273,7 +273,7 @@ public class Game extends JFrame {
     chatRoom = new ChatRoom(user.getUsername(), hostIpAddress);
     Thread.sleep(500);
     JPanel chatRoomPanel = chatRoom.getGui().getChatRoomPanel();
-    chatRoomPanel.setBounds(10, 75, 400, 600);
+    chatRoomPanel.setBounds(10, 75, 300, 600);
     chatRoomPanel.setOpaque(true);
     chatRoomPanel.setVisible(true);
     layeredPane.add(chatRoomPanel, JLayeredPane.MODAL_LAYER);

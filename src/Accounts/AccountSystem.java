@@ -76,15 +76,9 @@ public class AccountSystem {
    * @param p account to be added
    * @return true : add successfully / fasle : add failed
    */
-  public static boolean addAccount(Account p) {
-    boolean temp = false;
-    if (isExisted(p.getUid()) || isExisted(p.getName())) {
-      return false;
-    } else {
+  public static void addAccount(Account p) {
       p.setUid(accountList.size());
       accountList.add(p);
-      return true;
-    }
   }
   
   public static void saveAccounts() {
@@ -95,7 +89,7 @@ public class AccountSystem {
       }
       FileWriter fw = new FileWriter(file);
       for (Account ac : accountList) {
-        
+        System.out.println("success");
         fw.write(ac.toString());
       }
       fw.close();

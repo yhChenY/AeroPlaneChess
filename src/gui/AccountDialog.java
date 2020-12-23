@@ -60,10 +60,12 @@ public class AccountDialog extends JDialog {
           account.setName(username);
           account.setPassword(password);
           AccountSystem.addAccount(account);
-          Main.hasRegisteredIn = true;
-          Main.myAccount = account;
-          Main.getMainMenu().setAccount(account);
-          dispose();
+            Main.hasRegisteredIn = true;
+            Main.myAccount = account;
+            Main.getMainMenu().setAccount(account);
+            AccountSystem.saveAccounts();
+            dispose();
+          
         }
       }
     });

@@ -146,7 +146,7 @@ public class gameMainThread extends Thread {
         //
         System.out.println("正式开始");
         //回合正式开始
-        
+
         try {
           sleep(7);
         } catch (InterruptedException e) {
