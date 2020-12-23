@@ -45,8 +45,8 @@ public class gameMainThread extends Thread {
             if (p != null) {
               switch (prizeFrame.getFinalPrize()) {
                 case "DRINK" -> p.run(5);
-                case "BOOK" -> p.run(-5);
-                case "MAGNET" -> p.run(-3);
+                case "BOOK" -> p.run(3);
+                case "MAGNET" -> p.run(2);
                 case "SWORD" -> p.run(1);
               }
             }
@@ -177,8 +177,8 @@ public class gameMainThread extends Thread {
               if (p != null) {
                 switch (prizeFrame.getFinalPrize()) {
                   case "DRINK" -> p.run(5);
-                  case "BOOK" -> p.run(-5);
-                  case "MAGNET" -> p.run(-3);
+                  case "BOOK" -> p.run(3);
+                  case "MAGNET" -> p.run(2);
                   case "SWORD" -> p.run(1);
                 }
               }
