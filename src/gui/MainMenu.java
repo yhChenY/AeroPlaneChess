@@ -2,6 +2,7 @@ package gui;
 
 import GAMING.Datas;
 import GAMING.gameMainThread;
+import chatroom.Client;
 import chatroom.User;
 import gui.BackgroundMusicSystem.Status;
 import java.awt.Color;
@@ -90,6 +91,7 @@ public class MainMenu extends JFrame {
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         bgm.stop();
+        Client client;
         if (chooseIfOnline.isSelected()) {
           ConnectHostDialog connectHostDialog = new ConnectHostDialog();
           while(!connectHostDialog.getConnectionStatus()) {
@@ -100,12 +102,14 @@ public class MainMenu extends JFrame {
           } catch (InterruptedException interruptedException) {
             interruptedException.printStackTrace();
           }
+          client = game.getChatRoom().getClient();
           dispose();
         } else {
           dispose();
           game = new Game(false, user);
+          client = null;
         }
-        gameMainThread mainThread = new gameMainThread("mainThread", game.getChatRoom().getClient());
+        gameMainThread mainThread = new gameMainThread("mainThread", client);
         mainThread.start();
       }
     });

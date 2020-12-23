@@ -18,7 +18,9 @@ public class gameMainThread extends Thread {
   public gameMainThread(String name, Client client) {
     threadName = name;
     this.client = client;
-    this.selfColor = client.getColor();
+    if (client != null) {
+      this.selfColor = client.getColor();
+    }
     System.out.println("Creating " + threadName);
   }
 
