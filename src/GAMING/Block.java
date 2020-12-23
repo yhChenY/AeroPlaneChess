@@ -85,14 +85,15 @@ public class Block {
   public Block getNextNBlock(int n, Plane plane) {
     if (n == 0) {
       return this;
-    }
-    if (n >= distance) {
+    } else if (n >= distance) {
       if (n == 2 * distance) return this;
       if (n > 2 * distance) return getPreNBlock(n - 2 * distance);
       return getNextNBlock(2 * distance - n, plane);
+    } else if (n == 1) {
+      return getNextBlock(plane);
+    } else {
+      return getNextBlock(plane).getNextNBlock(n - 1, plane);
     }
-    if (n == 1) return getNextBlock(plane);
-    else return getNextBlock(plane).getNextNBlock(n - 1, plane);
   }
   
   private Block getPreNBlock(int n) {

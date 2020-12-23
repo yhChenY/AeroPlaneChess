@@ -1,5 +1,6 @@
 package gui;
 
+import Accounts.Account;
 import GAMING.Datas;
 import GAMING.gameMainThread;
 import chatroom.User;
@@ -34,6 +35,7 @@ public class MainMenu extends JFrame {
   JDialog settings = new JDialog();
   Font font = new Font("Ravie", Font.PLAIN, 24);
   User user = new User();
+  Account account = new Account();
   Game game = null;
   private String ipAddress;
   GridBagLayout layout = new GridBagLayout();
@@ -46,6 +48,7 @@ public class MainMenu extends JFrame {
   private JButton exitButton = new JButton("Exit");
   private JCheckBox chooseIfOnline = new JCheckBox("Online Mode", false);
   private JDialog chooseTeamMate = new JDialog();
+  private JLabel usernameLabel;
   private BackgroundMusicSystem bgm;
   private Thread backgroundMusicThread;
 
@@ -97,7 +100,8 @@ public class MainMenu extends JFrame {
           game = new Game(user, ipAddress);
           gameMainThread mainThread = new gameMainThread("mainThread");
           mainThread.start();
-          dispose();
+          setVisible(false);
+//          dispose();
         } else {
           dispose();
           game = new Game(false, user);
@@ -133,7 +137,7 @@ public class MainMenu extends JFrame {
     signIn.addMouseListener(new gui.MouseAdapter() {
       @Override
       public void mouseClicked(MouseEvent e) {
-        JDialog account = new AccountDialog();
+        JDialog accountDialog = new AccountDialog();
       }
     });
     layeredPane.add(signIn, constraints, JLayeredPane.PALETTE_LAYER);
@@ -216,6 +220,18 @@ public class MainMenu extends JFrame {
       }
     });
     layeredPane.add(exitButton, constraints, JLayeredPane.PALETTE_LAYER);
+    
+    if(user.getUsername() != null) {
+      constraints.gridx = 2;
+      constraints.gridy = 8;
+      usernameLabel.setText("user.getUsername()");
+      usernameLabel.setHorizontalAlignment(JLabel.RIGHT);
+      usernameLabel.setFont(font);
+      usernameLabel.setForeground(new java.awt.Color(0xfbfe93));
+      usernameLabel.setOpaque(false);
+      usernameLabel.setVisible(true);
+      layeredPane.add(usernameLabel, constraints, JLayeredPane.PALETTE_LAYER);
+    }
 
     constraints.gridx = 1;
     constraints.gridy = 10;
@@ -250,5 +266,9 @@ public class MainMenu extends JFrame {
   
   public void setIpAddress(String ipAddress) {
     this.ipAddress = ipAddress;
+  }
+  
+  public void setAccount(Account account) {
+    this.account = account;
   }
 }

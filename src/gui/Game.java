@@ -209,9 +209,10 @@ public class Game extends JFrame {
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         if (saveGameButton.isEnabled()) {
-          //saveGame();
-          //resetServer();
-          new MainMenu();
+          Main.saveGameData();
+//          new MainMenu();
+          Main.getMainMenu().setVisible(true);
+          dispose();
         }
       }
     });
@@ -227,7 +228,8 @@ public class Game extends JFrame {
           dispose();
           Main.initializeData();
           //resetServer();
-          new MainMenu();
+          //new MainMenu();
+          Main.getMainMenu().setVisible(true);
         }
       }
     });

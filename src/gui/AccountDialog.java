@@ -55,9 +55,7 @@ public class AccountDialog extends JDialog {
           password = String.copyValueOf(passwordField.getPassword());
         }
         if (AccountSystem.isExisted(username)) {
-          JDialog dialog = new JDialog();
-          dialog.add(new JLabel("User exists!"));
-          dialog.setVisible(true);
+          JOptionPane.showMessageDialog(null, "Username already exist.");
         } else {
           account.setName(username);
           account.setPassword(password);
@@ -87,12 +85,13 @@ public class AccountDialog extends JDialog {
         ac.setPassword(password);
         Main.hasRegisteredIn = true;
         Main.myAccount = ac;
-        if (user.equals(targetUser)) {
-          dispose();
-        } else {
-          JDialog dialog = new JDialog();
-          dialog.add(new JLabel("Username or password incorrect!"));
-          dialog.setVisible(true);
+        if (targetUser != null) {
+          if (user.equals(targetUser)) {
+            Main.getMainMenu().setAccount(ac);
+            dispose();
+          } else {
+            JOptionPane.showMessageDialog(null, "Incorrect!");
+          }
         }
       }
     });
