@@ -31,12 +31,6 @@ public class gameMainThread extends Thread {
     }
     int roundCnt = 0;
     if (!isOnLineGame) {
-      //
-      System.out.println(client.getUser().getUsername());
-      System.out.println(client.getColor());
-      //
-      System.out.println("not online");
-      //
       players[0].setHuman();
       while (nowRank < 4) {
         try {
@@ -72,6 +66,9 @@ public class gameMainThread extends Thread {
         }
       }
     } else {
+      for (int i = 0; i < 4; i++) {
+        players[i].setHuman();
+      }
       //在线模式
       System.out.println("online mode");
       //
@@ -93,8 +90,12 @@ public class gameMainThread extends Thread {
         System.out.println("testing1");
         //
         String[] newGameData = client.getNewGameData();// 获取最新的游戏数据
-        if (!selfColor.equals("red") && newGameData[1] == null) { // 如果自己是红色，且还没新数据，证明是第一个人，不用等待
-          try {
+        //
+        System.out.println("the former player is " + newGameData[0]);
+        System.out.println("the game data is " + newGameData[1]);
+        //
+        if (!selfColor.equals("red") && newGameData[1] == null) { // 如果自己是红色，且还没新数据，证明是第一个人，直接开始
+          try { // 如果不是红色 还没数据 ，直接等待
             sleep(5000);
           } catch (InterruptedException e) {
             e.printStackTrace();
@@ -104,6 +105,7 @@ public class gameMainThread extends Thread {
         //
         System.out.println("testing2");
         //
+        // 如果开始有数据了
         if (newGameData[1] != null) {
           String[] newGameDataArray = newGameData[1].split("'");
         }
@@ -114,14 +116,14 @@ public class gameMainThread extends Thread {
           System.out.println("wait");
           //
           try {
-            sleep(5000);
+            sleep(2000);
           } catch (InterruptedException e) {
             e.printStackTrace();
           }
           continue;
         }
         //
-        System.out.println("testing3");
+        System.out.println("match, testing3");
         //
         if (newGameData[1] != null) {
           String[] newGameDataArray = newGameData[1].split("'");
@@ -131,37 +133,42 @@ public class gameMainThread extends Thread {
           }
         }
         //
-        System.out.println("gothere");
+        System.out.println("正式开始");
         //回合正式开始
-        PrizeFrame prizeFrame = new PrizeFrame();
-        Plane p = Main.getNowPlayer().tryGetOnePlane();
-        if (p != null) {
-          if (prizeFrame.getFinalPrize() == "SWORD") {
-            p.run(5);
-          }
+
+        try {
+          sleep(7);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
         }
         try {
           //dividing line
           if(!Main.getNowPlayer().isWined()){
-            new startATurn(nowPlayer, 1).start();
-            while (!finishOneTurn) {
-              Thread.sleep(50);
-            }
-            if (sum >= 10) {
-              new startATurn(nowPlayer, 2).start();
-              while (!finishOneTurn) {
-                Thread.sleep(50);
-              }
-            }
-            if (sum >= 10) {
-              new startATurn(nowPlayer, 3).start();
-              while (!finishOneTurn) {
-                Thread.sleep(50);
+//            new startATurn(nowPlayer, 1).start();
+//            while (!finishOneTurn) {
+//              Thread.sleep(50);
+//            }
+//            if (sum >= 10) {
+//              new startATurn(nowPlayer, 2).start();
+//              while (!finishOneTurn) {
+//                Thread.sleep(50);
+//              }
+//            }
+//            if (sum >= 10) {
+//              new startATurn(nowPlayer, 3).start();
+//              while (!finishOneTurn) {
+//                Thread.sleep(50);
+//              }
+//            }
+            PrizeFrame prizeFrame = new PrizeFrame();
+            Plane p = Main.getNowPlayer().tryGetOnePlane();
+            if (p != null) {
+              if (prizeFrame.getFinalPrize() == "SWORD") {
+                p.run(5);
               }
             }
             Thread.sleep(500);
           }
-          nextTurn();
           //dividing line
         } catch (InterruptedException e) {
           System.out.println("Thread " + threadName + " interrupted.");
@@ -169,8 +176,9 @@ public class gameMainThread extends Thread {
         String gameData = "o'k'k";
         try {
           // 传输格式为"[gameData] SelfColor String\n" (String为目标游戏数据)
+          System.out.print("the info is " + "[gameData]" + " " + selfColor + " " + gameData + "\n");
           client.transmit("[gameData]" + " " + selfColor + " " + gameData + "\n", client.getSocket());
-          sleep(2000); // 防止马上读取游戏数据又进一次游戏
+          sleep(10000); // 防止马上读取游戏数据又进一次游戏
         } catch (IOException | InterruptedException e) {
           e.printStackTrace();
         }
