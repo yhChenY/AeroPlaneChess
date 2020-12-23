@@ -49,7 +49,6 @@ public class MainMenu extends JFrame {
   private JButton exitButton = new JButton("Exit");
   private JCheckBox chooseIfOnline = new JCheckBox("Online Mode", false);
   private JDialog chooseTeamMate = new JDialog();
-  private JLabel usernameLabel;
   private BackgroundMusicSystem bgm;
   private Thread backgroundMusicThread;
 
@@ -226,18 +225,6 @@ public class MainMenu extends JFrame {
       }
     });
     layeredPane.add(exitButton, constraints, JLayeredPane.PALETTE_LAYER);
-    
-    if(user.getUsername() != null) {
-      constraints.gridx = 2;
-      constraints.gridy = 8;
-      usernameLabel.setText("user.getUsername()");
-      usernameLabel.setHorizontalAlignment(JLabel.RIGHT);
-      usernameLabel.setFont(font);
-      usernameLabel.setForeground(new java.awt.Color(0xfbfe93));
-      usernameLabel.setOpaque(false);
-      usernameLabel.setVisible(true);
-      layeredPane.add(usernameLabel, constraints, JLayeredPane.PALETTE_LAYER);
-    }
 
     constraints.gridx = 1;
     constraints.gridy = 10;
@@ -276,5 +263,7 @@ public class MainMenu extends JFrame {
   
   public void setAccount(Account account) {
     this.account = account;
+    user.setUsername(account.getName());
+    setTitle(user.getUsername() + ": " + getTitle());
   }
 }

@@ -60,6 +60,9 @@ public class AccountDialog extends JDialog {
           account.setName(username);
           account.setPassword(password);
           AccountSystem.addAccount(account);
+          Main.hasRegisteredIn = true;
+          Main.myAccount = account;
+          Main.getMainMenu().setAccount(account);
           dispose();
         }
       }
@@ -76,22 +79,21 @@ public class AccountDialog extends JDialog {
           password = String.copyValueOf(passwordField.getPassword());
         }
         super.mouseClicked(e);
-        Account user = new Account();
-        user.setName(username);
-        user.setPassword(password);
         Account targetUser = AccountSystem.findUserByName(username);
         Account ac = new Account();
         ac.setName(username);
         ac.setPassword(password);
-        Main.hasRegisteredIn = true;
-        Main.myAccount = ac;
         if (targetUser != null) {
-          if (user.equals(targetUser)) {
+          if (ac.equals(targetUser)) {
             Main.getMainMenu().setAccount(ac);
+            Main.hasRegisteredIn = true;
+            Main.myAccount = ac;
             dispose();
           } else {
             JOptionPane.showMessageDialog(null, "Incorrect!");
           }
+        } else {
+          JOptionPane.showMessageDialog(null, "User does not exist.");
         }
       }
     });

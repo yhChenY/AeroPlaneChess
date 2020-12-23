@@ -36,7 +36,7 @@ public class LoadSavePane extends JOptionPane {
       Main.loadData(datas.get(selectedNumber));
       Main.loaded = true;
       Main.datas = datas.get(selectedNumber);
-      gameMainThread mainThread = new gameMainThread("mainThread");
+      gameMainThread mainThread = new gameMainThread("mainThread", null);
       mainThread.start();
       Main.getMainMenu().setVisible(false);
     } catch (Exception e) {
