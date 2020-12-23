@@ -34,16 +34,24 @@ public class gameMainThread extends Thread {
     int roundCnt = 0;
     if (!isOnLineGame) {
       players[0].setHuman();
+      int cnt = 0;
       while (nowRank < 4) {
         try {
-          //dividing line
-          PrizeFrame prizeFrame = new PrizeFrame();
-          Plane p = Main.getNowPlayer().tryGetOnePlane();
-          if (p != null) {
-            if (prizeFrame.getFinalPrize() == "SWORD") {
-              p.run(5);
+//          dividing line
+//           每三轮一次prize
+          if (cnt != 0 && cnt%12 == 0) {
+            PrizeFrame prizeFrame = new PrizeFrame();
+            Plane p = Main.getNowPlayer().tryGetOnePlane();
+            if (p != null) {
+              switch (prizeFrame.getFinalPrize()) {
+                case "DRINK" -> p.run(5);
+                case "BOOK" -> p.run(-5);
+                case "MAGNET" -> p.run(-3);
+                case "SWORD" -> p.run(1);
+              }
             }
           }
+          cnt++;
           new startATurn(nowPlayer, 1).start();
           while (!finishOneTurn) {
             Thread.sleep(50);
@@ -86,6 +94,7 @@ public class gameMainThread extends Thread {
           e.printStackTrace();
         }
       }
+      int cnt = 0;
       while (nowRank < 4) {
         // 在线模式
         //
@@ -137,7 +146,7 @@ public class gameMainThread extends Thread {
         //
         System.out.println("正式开始");
         //回合正式开始
-
+        
         try {
           sleep(7);
         } catch (InterruptedException e) {
@@ -162,13 +171,19 @@ public class gameMainThread extends Thread {
 //                Thread.sleep(50);
 //              }
 //            }
-            PrizeFrame prizeFrame = new PrizeFrame();
-            Plane p = Main.getNowPlayer().tryGetOnePlane();
-            if (p != null) {
-              if (prizeFrame.getFinalPrize() == "SWORD") {
-                p.run(5);
+            if (cnt != 0 && cnt%12 == 0) {
+              PrizeFrame prizeFrame = new PrizeFrame();
+              Plane p = Main.getNowPlayer().tryGetOnePlane();
+              if (p != null) {
+                switch (prizeFrame.getFinalPrize()) {
+                  case "DRINK" -> p.run(5);
+                  case "BOOK" -> p.run(-5);
+                  case "MAGNET" -> p.run(-3);
+                  case "SWORD" -> p.run(1);
+                }
               }
             }
+            cnt++;
             Thread.sleep(500);
           }
           //dividing line
