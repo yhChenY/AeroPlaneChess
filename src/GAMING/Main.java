@@ -175,7 +175,7 @@ public class Main {
     ableToProduct = !(product == 0);
     quotient = big % small == 0 ? big / small : 0;
     ableToQuotient = !(quotient == 0);
-    isOnLineGame = false;
+//    isOnLineGame = false;
     ope = '+';
     hasGotOpe = false;
     hasGotPlane = false;

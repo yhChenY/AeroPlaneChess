@@ -10,7 +10,7 @@ import javax.swing.WindowConstants;
 public class ChatRoom extends Thread {
   private GUI gui = null;
   private Client client = null;
-  private String targetHOST;
+  private String targetHOST = "10.21.22.252";
   String username;
 
   public ChatRoom(String username, String targetHOST) {
@@ -28,11 +28,22 @@ public class ChatRoom extends Thread {
   }
 
   public void run() {
-    client = new Client(username, targetHOST);
-    gui = new GUI(client);
-    client.setGui(gui);
-    gui.start();
-
+//    //
+//    System.out.println("new chatroom");
+//    //
+//    System.out.println(username);
+//    if (username.equals("")) {
+//      return;
+//    }
+      client = new Client(username, targetHOST);
+      gui = new GUI(client);
+      client.setGui(gui);
+      gui.start();
+      try {
+        client.start();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
 ////      该段用于测试chatPanel在Frame上的效果
 //    JFrame mainFrame = new JFrame();
 //    mainFrame.setSize(new Dimension(400,600));
@@ -42,10 +53,5 @@ public class ChatRoom extends Thread {
 //
 //    mainFrame.setVisible(true);
     
-    try {
-      client.start();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
   }
 }

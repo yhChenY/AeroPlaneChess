@@ -3,6 +3,7 @@ package gui;
 import Accounts.Account;
 import GAMING.Datas;
 import GAMING.gameMainThread;
+import chatroom.Client;
 import chatroom.User;
 import gui.BackgroundMusicSystem.Status;
 import java.awt.Color;
@@ -93,21 +94,26 @@ public class MainMenu extends JFrame {
       public void mouseClicked(MouseEvent e) {
         super.mouseClicked(e);
         bgm.stop();
+        Client client;
         if (chooseIfOnline.isSelected()) {
           ConnectHostDialog connectHostDialog = new ConnectHostDialog();
           while(!connectHostDialog.getConnectionStatus()) {
           }
           game = new Game(user, ipAddress);
-          gameMainThread mainThread = new gameMainThread("mainThread");
-          mainThread.start();
+          try {// 防止用户还没拿到颜色
+            Thread.sleep(1000);
+          } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+          }
+          client = game.getChatRoom().getClient();
           setVisible(false);
-//          dispose();
         } else {
-          dispose();
+          setVisible(false);
           game = new Game(false, user);
-          gameMainThread mainThread = new gameMainThread("mainThread");
-          mainThread.start();
+          client = null;
         }
+        gameMainThread mainThread = new gameMainThread("mainThread", client);
+        mainThread.start();
       }
     });
     startNew.setFocusPainted(false);

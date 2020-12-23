@@ -23,6 +23,7 @@ public class Client extends Thread{
   private final ArrayList<String> blocks = new ArrayList<>();
   private String[] newGameData = new String[2]; // 储存游戏最新数据
   private String color;
+  private boolean start = false;
 
   public String[] getNewGameData() {
     return newGameData;
@@ -35,6 +36,14 @@ public class Client extends Thread{
   public void setNewGameData(String formerPlayer, String gameData) {
     newGameData[0] = formerPlayer;
     newGameData[1] = gameData;
+  }
+
+  public void setStart(boolean start) {
+    this.start = start;
+  }
+
+  public boolean isStart() {
+    return start;
   }
 
   public void setHOST(String HOST) {
@@ -91,6 +100,7 @@ public class Client extends Thread{
   }
 
   public void run() {
+//    System.out.println("run once");
     final int PORT = 4320;
     final int TIME_OUT = 10000;  //10s
     final SocketAddress socketAddress = new InetSocketAddress(HOST, PORT);

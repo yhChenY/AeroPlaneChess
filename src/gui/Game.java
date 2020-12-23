@@ -269,6 +269,7 @@ public class Game extends JFrame {
    */
   private void addChatPanel(User user) throws InterruptedException {
     System.out.println(hostIpAddress);
+//    chatRoom = new ChatRoom("Chen", hostIpAddress);
     chatRoom = new ChatRoom(user.getUsername(), hostIpAddress);
     Thread.sleep(500);
     JPanel chatRoomPanel = chatRoom.getGui().getChatRoomPanel();

@@ -39,7 +39,9 @@ public class ServerThread extends Thread {
       BufferedReader netIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       // 读取该用户username
       username = netIn.readLine();
+      //
       System.out.println("the name is: " + username);
+      //
       server.getUsers().add(new User(username, socket));
       //  通知其他人有新用户登录
       transmit2All("--" + username + " connected--", socket);
@@ -91,11 +93,20 @@ public class ServerThread extends Thread {
             //从server的users中找到对应的user， 只给目标user发送
             for (User user : server.getUsers()
             ) {
-              if (("["+user.getUsername()+"]").equals(line.split(" ")[1])) {
+              if (("[" + user.getUsername() + "]").equals(line.split(" ")[1])) {
                 soloTransmit(line, user.getSocket());
               }
             }
-          } else {
+          } else if (line.split(" ")[0].equals("[gameData]")) {
+            //
+            System.out.println(line);
+            //
+            transmit2All(line, null);
+          }else {
+            //
+            System.out.println(line);
+            System.out.println(line.split(" ")[0]);
+            //
             transmit2All(line,socket);
           }
         }
